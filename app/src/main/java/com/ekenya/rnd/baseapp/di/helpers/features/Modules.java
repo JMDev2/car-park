@@ -39,7 +39,8 @@ public final class Modules {
         modules = Arrays.asList(new FeatureModule[]{
                 FeatureTourism.INSTANCE,
                 FeatureSupport.INSTANCE,
-                FeatureDashboard.INSTANCE
+                FeatureDashboard.INSTANCE,
+                FeatureOnboarding.INSTANCE
                 }.clone()
         );
     }
@@ -146,42 +147,46 @@ public final class Modules {
 
     //***************************************************************
 
-//    public static final class FeatureOnborading implements FeatureModule, AddressableActivity {
-//
-//        public static final FeatureOnborading INSTANCE;
-//        private static final String name;
-//        private static final String injectorName;
-//        private static final String className;
-//
-//        static {
-//            FeatureOnborading var0 = new FeatureOnborading();
-//            INSTANCE = var0;
-//            name = "onborading";
-//            injectorName = Constants.BASE_PACKAGE_NAME+"."+name+".di.TourismInjector";
-//            className = Constants.BASE_PACKAGE_NAME +"."+name+".MainActivity";
-//        }
-//
-//        private FeatureOnborading() {
-//        }
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public String getInjectorName() {
-//            return injectorName;
-//        }
-//
-//        @Override
-//        public String getClassName()
-//
-//
-//        {
-//            -----------------------
-//        }
-//    }
+    public static final class FeatureOnboarding implements FeatureModule, AddressableActivity {
+
+        public static final FeatureOnboarding INSTANCE;
+        private static final String name;
+        private static final String injectorName;
+        private static final String className;
+
+        static {
+            FeatureOnboarding var0 = new FeatureOnboarding();
+            INSTANCE = var0;
+            name = "onboarding";
+            injectorName = Constants.BASE_PACKAGE_NAME+"."+name+".di.OnboardingInjector";
+            className = Constants.BASE_PACKAGE_NAME +"."+name+".ui.MainActivity";
+
+//            injectorName =  "com.ekenya.rnd.onboarding.di.OnboardingInjector";
+//            className =  "com.ekenya.rnd.onboarding.ui.MainActivity";
+        }
+
+        private FeatureOnboarding() {
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getInjectorName() {
+            return injectorName;
+        }
+
+        @Override
+        public String getClassName()
+
+
+        {
+            return className;
+        }
+
+    }
 
     //***************************************************************
 
-
+//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
 }

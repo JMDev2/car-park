@@ -11,3 +11,5 @@ include ':etourism'
 include ':support'
 include ':dashboard'
 
+include ':test'
+include ':onboarding'
