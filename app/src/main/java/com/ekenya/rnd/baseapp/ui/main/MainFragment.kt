@@ -63,11 +63,13 @@ class MainFragment : BaseDaggerFragment() {
                 activity?.let { SplitCompat.install(it) }
 
                 setStatus("${module.name} already installed\nPress start to continue ..")
+
+                showFeatureModule(module)
                 //
-                binding.startButton.visibility = View.VISIBLE
-                binding.startButton.setOnClickListener{
-                    showFeatureModule(module)
-                }
+//                binding.startButton.visibility = View.VISIBLE
+//                binding.startButton.setOnClickListener{
+//                    showFeatureModule(module)
+//                }
             }
             SplitInstallSessionStatus.FAILED -> {
                 setStatus("FAILED")

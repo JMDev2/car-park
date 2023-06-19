@@ -1,7 +1,11 @@
 package com.ekenya.rnd.baseapp.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -24,7 +28,7 @@ class SplashActivity : BaseActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val mViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+        ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
     }
 
 
@@ -39,18 +43,28 @@ class SplashActivity : BaseActivity() {
 
         Log.i("SplashActivity", "=> $data")
         //
-        if (savedInstanceState == null) {
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.container, MainFragment.newInstance())
+//                .commitNow()
+//        }
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAGS_CHANGED,
+            WindowManager.LayoutParams.FLAGS_CHANGED
+        )
+        Handler(Looper.getMainLooper()).postDelayed({
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
-        }
+        }, 7000) // 3000 is the delayed time in milliseconds.
+    }
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        // Fragment Injector should use the Application class
-        // If necessary, I will use AndroidInjector as well as App class (I have not done this time)
-        return (application as TourismApp).supportFragmentInjector()
-    }
+//    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+//        // Fragment Injector should use the Application class
+//        // If necessary, I will use AndroidInjector as well as App class (I have not done this time)
+//        return (application as TourismApp).supportFragmentInjector()
+//    }
 
 
-}

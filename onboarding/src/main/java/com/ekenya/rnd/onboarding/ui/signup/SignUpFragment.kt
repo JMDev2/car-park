@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.onboarding.R
+import com.ekenya.rnd.onboarding.databinding.FragmentLoginBinding
+import com.ekenya.rnd.onboarding.databinding.FragmentSignUpBinding
 
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseDaggerFragment() {
+    private lateinit var binding: FragmentSignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +24,8 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentSignUpBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
