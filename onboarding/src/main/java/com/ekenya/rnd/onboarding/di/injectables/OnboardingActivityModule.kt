@@ -3,7 +3,7 @@ package com.ekenya.rnd.onboarding.di.injectables
 import androidx.lifecycle.ViewModel
 import com.ekenya.rnd.baseapp.di.ViewModelKey
 import com.ekenya.rnd.onboarding.ui.MainActivity
-import com.ekenya.rnd.onboarding.ui.OnboardingViewModel
+import com.ekenya.rnd.onboarding.ui.onboarding.OnboardingViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

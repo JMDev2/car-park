@@ -1,4 +1,4 @@
-package com.ekenya.rnd.onboarding.ui
+package com.ekenya.rnd.onboarding.ui.onboarding
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

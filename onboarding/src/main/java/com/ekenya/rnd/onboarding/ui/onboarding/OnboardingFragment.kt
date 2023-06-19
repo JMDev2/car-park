@@ -1,7 +1,6 @@
-package com.ekenya.rnd.onboarding.ui
+package com.ekenya.rnd.onboarding.ui.onboarding
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.onboarding.R
 
 
-class MainFragment : BaseDaggerFragment() {
+class OnboardingFragment : BaseDaggerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
