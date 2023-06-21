@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import com.ekenya.rnd.baseapp.TourismApp
 import com.ekenya.rnd.baseapp.databinding.FragmentMainBinding
 import com.ekenya.rnd.baseapp.di.helpers.activities.ActivityHelperKt
@@ -21,27 +22,24 @@ import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainFragment : BaseDaggerFragment() {
 
     private lateinit var binding: FragmentMainBinding
+
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private var mApp: TourismApp? = null
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val mViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
-    }
+    private lateinit var mApp: TourismApp
 
     /*
    installs the onboarding module
     */
-    private val module by lazy{
+    private val module by lazy {
         Modules.FeatureOnboarding.INSTANCE
     }
 
@@ -54,25 +52,36 @@ class MainFragment : BaseDaggerFragment() {
             SplitInstallSessionStatus.DOWNLOADING -> {
                 setStatus("DOWNLOADING")
             }
+
             SplitInstallSessionStatus.INSTALLING -> {
                 setStatus("INSTALLING")
             }
+
             SplitInstallSessionStatus.INSTALLED -> {
 
                 // Enable module immediately
                 activity?.let { SplitCompat.install(it) }
 
                 setStatus("${module.name} already installed\nPress start to continue ..")
+                lifecycleScope.launch{
+                    delay(3000)
+                    showFeatureModule(module)
+                }
 
-                showFeatureModule(module)
                 //
 //                binding.startButton.visibility = View.VISIBLE
 //                binding.startButton.setOnClickListener{
 //                    showFeatureModule(module)
 //                }
             }
+
             SplitInstallSessionStatus.FAILED -> {
                 setStatus("FAILED")
+            }
+
+            else -> {
+                setStatus("Something went wrong. Please try again.")
+
             }
         }
     }
@@ -83,42 +92,27 @@ class MainFragment : BaseDaggerFragment() {
         mApp = activity?.application as TourismApp
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return FragmentMainBinding.inflate(inflater, container, false).also {
+            binding = it
+            val request = SplitInstallRequest
+                .newBuilder()
+                .addModule(module.name)
+                .build()
 
-        //
-        return binding.root
+            splitInstallManager.startInstall(request)
+
+            setStatus("Start install for ${module.name}")
+
+        }.root
+
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        val data = mViewModel.getData()
-
-        Log.i("MainFragment", "=> $data")
-
-        if (splitInstallManager.installedModules.contains(module.toString())) {
-            showFeatureModule(module)
-//            setStatus("${module.name} already installed\nPress start to continue ..")
-//            //
-//            binding.startButton.visibility = View.VISIBLE
-//            binding.startButton.setOnClickListener{
-//                showFeatureModule(module)
-//            }
-            return
-        }
-
-        val request = SplitInstallRequest
-            .newBuilder()
-            .addModule(module.name)
-            .build()
-
-        splitInstallManager.startInstall(request)
-        setStatus("Start install for ${module.name}")
-    }
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         splitInstallManager.registerListener(listener)
     }
 
@@ -127,21 +121,26 @@ class MainFragment : BaseDaggerFragment() {
         super.onPause()
     }
 
-    private fun setStatus(label: String){
+    private fun setStatus(label: String) {
         //binding.status.text = label
-        Toast.makeText(context,label,Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, label, Toast.LENGTH_SHORT).show()
     }
+
     /**
      *
      */
-    private fun showFeatureModule(module: FeatureModule)
-    {
+    private fun showFeatureModule(module: FeatureModule) {
         try {
             //Inject
-            mApp!!.addModuleInjector(module)
+            mApp.addModuleInjector(module)
             //
 
-            this.startActivity(ActivityHelperKt.intentTo(requireActivity(), module as AddressableActivity))
+            this.startActivity(
+                ActivityHelperKt.intentTo(
+                    requireActivity(),
+                    module as AddressableActivity
+                )
+            )
             //finish();
         } catch (e: Exception) {
             e.message?.let { Log.d("MainFragment", it) };

@@ -1,12 +1,10 @@
 package com.example.main.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.ekenya.rnd.baseapp.R
 import com.ekenya.rnd.common.abstractions.BaseActivity
 import com.example.main.databinding.ActivityMainBinding
-
 
 
 class MainActivity : BaseActivity() {

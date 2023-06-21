@@ -15,8 +15,6 @@
             <option value="$PROJECT_DIR$/dashboard" />
             <option value="$PROJECT_DIR$/etourism" />
             <option value="$PROJECT_DIR$/onboarding" />
-            <option value="$PROJECT_DIR$/support" />
-            <option value="$PROJECT_DIR$/test" />
           </set>
         </option>
       </GradleProjectSettings>

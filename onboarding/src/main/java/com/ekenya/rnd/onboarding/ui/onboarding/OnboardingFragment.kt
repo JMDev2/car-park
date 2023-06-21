@@ -74,8 +74,7 @@ class OnboardingFragment : BaseDaggerFragment() {
 //            Log.d("skip button click", SharedPreferences.getOnboardingStatus(requireActivity()).toString())
 //            findNavController().navigate(R.id.SignUpFragment)
 
-//            val action = OnboardingFragmentDirections.actionOnboardingFragmentToSignUpFragment()
-//            findNavController().navigate(action)
+
 
         }
     }
@@ -94,27 +93,26 @@ class OnboardingFragment : BaseDaggerFragment() {
 
             @SuppressLint("LongLogTag")
             override fun onPageSelected(position: Int) {
+                binding.moveNext.setOnClickListener(null) // Remove existing click listener
+
                 if (position == onBoardingViewPagerAdapter!!.count - 1) {
                     binding.moveNext.text = "Get Started"
                     binding.moveNext.setOnClickListener {
-//                        Log.d("get started button click", SharedPreferences.getOnboardingStatus(requireActivity()).toString())
-//                        SharedPreferences.setOnboardingStatus(requireActivity(), true)
-
                         Toast.makeText(requireActivity(), "clicked", Toast.LENGTH_SHORT).show()
-
                         findNavController().navigate(R.id.signUpFragment)
-//                        val action = OnboardingFragmentDirections.actionOnboardingFragmentToSignUpFragment()
-//                        findNavController().navigate(action)
                     }
                 } else {
                     binding.moveNext.text = "Next"
                     binding.moveNext.setOnClickListener {
-//                        Log.d("next button click","new $SharedPreferences.getOnboardingStatus(requireActivity()).toString()")
-//                        SharedPreferences.setOnboardingStatus(requireActivity(), true)
-                        binding.viewPager.currentItem += 1
+                        val currentPosition = binding.viewPager.currentItem
+                        binding.viewPager.post {
+                            binding.viewPager.currentItem = currentPosition + 1
+                        }
                     }
                 }
             }
+
+
 
             override fun onPageScrollStateChanged(state: Int) {
 
