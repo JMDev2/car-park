@@ -2,7 +2,7 @@ package com.example.main.di
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
-import com.ekenya.rnd.baseapp.TourismApp
+import com.ekenya.rnd.baseapp.MyApp
 import com.ekenya.rnd.baseapp.di.BaseModuleInjector
 import dagger.android.DispatchingAndroidInjector
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class DashboardInjector : BaseModuleInjector{
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
-    override fun inject(app: TourismApp) {
+    override fun inject(app: MyApp) {
         DaggerDashboardComponent.builder()
             .appComponent(app.appComponent)
             .build()

@@ -1,21 +1,17 @@
 package com.ekenya.rnd.baseapp.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.ekenya.rnd.baseapp.R
-import com.ekenya.rnd.baseapp.TourismApp
+import com.ekenya.rnd.baseapp.MyApp
 import com.ekenya.rnd.baseapp.databinding.ActivitySplashBinding
 import com.ekenya.rnd.baseapp.ui.main.MainFragment
 import com.ekenya.rnd.baseapp.ui.main.MainViewModel
 import com.ekenya.rnd.common.abstractions.BaseActivity
-import dagger.android.AndroidInjector
 import javax.inject.Inject
 
 
@@ -23,7 +19,7 @@ class SplashActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySplashBinding
 
-    private var mApp: TourismApp? = null
+    private var mApp: MyApp? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -35,7 +31,7 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //
-        mApp = application as TourismApp
+        mApp = application as MyApp
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

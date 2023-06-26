@@ -1,14 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.login.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="login fragment" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="84dp"
+        android:text="Login"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Email" />
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:background="@drawable/signing"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/loginEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/white"
+                android:hint="johndoe@gmail.com"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="password" />
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:background="@drawable/signing"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/loginPassword"
+                android:layout_width="320dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/white"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:passwordToggleEnabled="true" />
+
+            <ImageView
+                android:id="@+id/imageToggle3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/baseline_visibility_24" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="124dp"
+        android:background="@drawable/onboarding_text"
+        android:paddingStart="66dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="66dp"
+        android:paddingBottom="16dp"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgot_password" />
+
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="235dp"
+        android:text="Forgot password?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+    <TextView
+        android:id="@+id/navogate_to_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="166dp"
+        android:text="Don’t have an account, Sign up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sign_button"
+        app:layout_constraintStart_toStartOf="@+id/sign_button"
+        app:layout_constraintTop_toBottomOf="@+id/sign_button" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/pb"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="@+id/sign_button"
+        app:layout_constraintTop_toTopOf="@+id/sign_button"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_button"
+        android:layout_marginEnd="8dp"
+        android:visibility="invisible" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

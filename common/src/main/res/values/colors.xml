@@ -17,4 +17,6 @@
     <color name="greentop1">#005f87</color>
     <color name="profile">#3A9A6E</color>
     <color name="background">#FAFAFA</color>
+    <color name="search_background">#D9D9D9</color>
+    D9D9D9
 </resources>
