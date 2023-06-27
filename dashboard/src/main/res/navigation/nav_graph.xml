@@ -11,7 +11,15 @@
         android:label="DashboardMainFragment"
         tools:layout="@layout/fragment_main_dashboard">
 
+        <action
+            android:id="@+id/action_dashboardMainFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.main.ui.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
 
 </navigation>
 

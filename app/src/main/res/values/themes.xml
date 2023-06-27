@@ -22,4 +22,7 @@
     <style name="Theme.ETourism.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ETourism.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
 </resources>
