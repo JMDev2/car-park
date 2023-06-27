@@ -57,10 +57,10 @@ dependencies {
     api 'androidx.navigation:navigation-ui-ktx:'+ rootProject.navigationUIVersion
 
     //test frameworks
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:'+ rootProject.espressoVersion
-    androidTestImplementation 'androidx.annotation:annotation:'+ rootProject.supportLibVersion
+    api 'junit:junit:4.+'
+    api 'androidx.test.ext:junit:1.1.3'
+    api 'androidx.test.espresso:espresso-core:'+ rootProject.espressoVersion
+    api 'androidx.annotation:annotation:'+ rootProject.supportLibVersion
 
     // This dependency is downloaded from the Google’s Maven repository.
     // So, make sure you also include that repository in your project's build.gradle file.
@@ -72,5 +72,21 @@ dependencies {
     api "com.google.dagger:dagger:" + rootProject.googleDaggerVersion
     api "com.google.dagger:dagger-android:" + rootProject.googleDaggerVersion
     api "com.google.dagger:dagger-android-support:" + rootProject.googleDaggerVersion
+
+    //retrofit
+    api 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+
+    //gson converter for retrofit
+    api 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
+
+    //okhttp
+    api 'com.squareup.okhttp3:okhttp:' + rootProject.okHttpVersion
+    api 'com.squareup.okhttp3:logging-interceptor:' + rootProject.okHttpVersion
+
+    //Picasso
+    api 'com.squareup.picasso:picasso:' + rootProject.picassoVersion
+
+    //Material
+    api 'com.google.android.material:material:' + rootProject.materialVersion
 
 }

@@ -30,20 +30,22 @@ dependencies {
     //Shared Library
     implementation  project(":common")
     //
-    implementation 'androidx.core:core-ktx:'+ rootProject.kotlinCoreVersion
-    //
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
-    implementation 'androidx.navigation:navigation-fragment:'+ rootProject.navigationUIVersion
-    implementation 'androidx.navigation:navigation-ui:'+ rootProject.navigationUIVersion
-    implementation 'androidx.appcompat:appcompat:' + rootProject.supportLibVersion
-    implementation 'com.google.android.material:material:' + rootProject.materialVersion
-    implementation 'androidx.constraintlayout:constraintlayout:'+rootProject.constraintLayoutVersion
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+//    implementation 'androidx.core:core-ktx:'+ rootProject.kotlinCoreVersion
+//    //
+//    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
+//    implementation 'androidx.navigation:navigation-fragment:'+ rootProject.navigationUIVersion
+//    implementation 'androidx.navigation:navigation-ui:'+ rootProject.navigationUIVersion
+//    implementation 'androidx.appcompat:appcompat:' + rootProject.supportLibVersion
+//    implementation 'com.google.android.material:material:' + rootProject.materialVersion
+//    implementation 'androidx.constraintlayout:constraintlayout:'+rootProject.constraintLayoutVersion
+//    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     //
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:' + rootProject.testVersion
     androidTestImplementation 'androidx.test:rules:' + rootProject.testVersion
     androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.espressoVersion
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
     //Java
     annotationProcessor "com.google.dagger:dagger-android-processor:" + rootProject.googleDaggerVersion
@@ -51,6 +53,9 @@ dependencies {
     //Kotlin
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.googleDaggerVersion
     kapt 'com.google.dagger:dagger-android-processor:' + rootProject.googleDaggerVersion
+
+
+
 
     //Encryption Lib
 //    debugImplementation 'com.ekenya.android.encryptionlib.debug:encryptionlib:'+rootProject.ekenyeEntryptionLibVersion

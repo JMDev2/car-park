@@ -71,6 +71,15 @@ ext {
     //
     googleDaggerVersion = "2.19"
 
+    //retrofit
+    retrofitVersion = "2.9.0"
+
+    //okhttp
+    okHttpVersion = "4.9.1"
+
+    //Picasso
+    picassoVersion = "2.71828"
+
     //ekenya Libs
     ekenyeEntryptionLibVersion = "1.0.2" // Data Encryption Library
     ekenyaValidationsLibVersion = "1.0" //Input Validations Library

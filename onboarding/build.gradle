@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.dynamic-feature'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+android {
+    namespace 'com.ekenya.rnd.onboarding'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 21
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(":app")
+    //Shared Library
+    implementation  project(":common")
+
+    annotationProcessor "com.google.dagger:dagger-android-processor:" + rootProject.googleDaggerVersion
+    annotationProcessor "com.google.dagger:dagger-compiler:" + rootProject.googleDaggerVersion
+    //Kotlin
+    kapt 'com.google.dagger:dagger-compiler:' + rootProject.googleDaggerVersion
+    kapt 'com.google.dagger:dagger-android-processor:' + rootProject.googleDaggerVersion
+
+    //Encryption Lib
+//    debugImplementation 'com.ekenya.android.encryptionlib.debug:encryptionlib:'+rootProject.ekenyeEntryptionLibVersion
+//    releaseImplementation'com.ekenya.android:encryptionlib:'+rootProject.ekenyeEntryptionLibVersion
+//    //Validations Lib
+//    debugImplementation 'co.ke.ekenya.lib.validationslib.debug:validationslib:'+rootProject.ekenyaValidationsLibVersion
+//    releaseImplementation 'co.ke.ekenya.lib.validationslib:validationslib:'+rootProject.ekenyaValidationsLibVersion
+//    //Networking Lib
+//    debugImplementation 'co.ke.ekenya.networkLib.networklib.debug:networklib:'+rootProject.ekenyaNetworkLibVersion
+//    releaseImplementation 'co.ke.ekenya.networkLib.networklib:networklib:'+rootProject.ekenyaNetworkLibVersion
+//    //Data Repo Lib
+//    debugImplementation'devops.mobile.datarepolib.debug:datarepolib:'+rootProject.ekenyaDataRepoLibVersion
+//    releaseImplementation 'devops.mobile.datarepolib:datarepolib:'+rootProject.ekenyaDataRepoLibVersion
+//    //Logging Lib
+//    debugImplementation 'ekenya.rnd.logginglibraryImp.logginglib.debug:logginglib:'+rootProject.ekenyaLoggingLibVersion
+//    releaseImplementation 'ekenya.rnd.logginglibraryImp.logginglib:logginglib:'+rootProject.ekenyaLoggingLibVersion
+}

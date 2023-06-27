@@ -9,4 +9,6 @@ public class Constants {
      */
     public static String BASE_PACKAGE_NAME = "com.ekenya.rnd";
     public static String MAIN_PACKAGE_NAME = "com.example.main";
+    public static String BASE_URL = "https://hotel-app-7pcg.onrender.com/";
+
 }

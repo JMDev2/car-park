@@ -1,14 +1,14 @@
 package com.example.main.ui
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.example.main.R
 
 
-class MainDashboardFragment : BaseDaggerFragment() {
+class BlankFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,8 @@ class MainDashboardFragment : BaseDaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_blank, container, false)
     }
+
 
 }
