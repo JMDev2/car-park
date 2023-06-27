@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.main.R
 
 import com.example.main.databinding.FragmentMainDashboardBinding
 
@@ -35,6 +37,12 @@ class DashboardMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.searchView.queryHint = "Would you like to Park here?"
+
+        //open navigation drawer
+//        binding.openNavCardView.setOnClickListener {
+//            findNavController().navigate(R.id.navigationDrawerFragment)
+//        }
+
 
 
 

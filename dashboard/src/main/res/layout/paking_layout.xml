@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="154dp"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
             app:cardCornerRadius="12dp">
 
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Uhuru Highway, nairobi"
-                android:textColor="@color/black"
+                android:textColor="@color/text_opacity"
                 android:textSize="16dp"
                 android:layout_marginBottom="8dp"
                />
