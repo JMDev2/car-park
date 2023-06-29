@@ -14,7 +14,6 @@ import dagger.android.support.AndroidSupportInjectionModule
     modules = [
         DashboardFragmentModule::class,
         DashboardActivityModule::class,
-        //MainViewModelModule::class,
         AndroidSupportInjectionModule::class,
         ViewModelModule::class
     ]

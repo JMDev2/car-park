@@ -3,7 +3,7 @@ package com.example.main.di.injectables
 import androidx.lifecycle.ViewModel
 import com.ekenya.rnd.baseapp.di.ViewModelKey
 import com.example.main.ui.MainActivity
-import com.example.main.ui.MainDashboardViewModel
+import com.example.main.ui.dashboard.MainDashboardViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

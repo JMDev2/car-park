@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.parking.ParkingFragment">
+
+        <ImageView
+            android:id="@+id/parking_image"
+            android:layout_width="wrap_content"
+            android:layout_height="230dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/parking_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            style="@style/text_features"
+            android:id="@+id/parking_title"
+            android:text="Highway Mall"
+            android:layout_marginTop="13dp"
+            app:layout_constraintTop_toBottomOf="@id/parking_image"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/parking_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uhuru Highway, Nairobi"
+            android:layout_marginStart="24dp"
+            android:textSize="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/parking_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/parking_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KSH 150"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="13dp"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/parking_image"
+            app:layout_constraintEnd_toStartOf="@+id/per_hour_text" />
+
+        <TextView
+            android:id="@+id/per_hour_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per hour"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="13dp"
+            android:textSize="15dp"
+            app:layout_constraintTop_toBottomOf="@id/parking_image"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            style="@style/description"
+            android:id="@+id/parking_description"
+            android:text="Secure and affordable parking spaces at First Church Of Christ near Nyerere Rd, Nairobi. Available from Monday to Saturday, from 6 am to 6 pm. BOOK LONGER AND PAY LESS!"
+            app:layout_constraintTop_toBottomOf="@id/parking_location"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View style="@style/HorizontalLine"
+            android:id="@+id/view"
+            app:layout_constraintTop_toBottomOf="@id/parking_description"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/parking_available_spots"
+            style="@style/text_features"
+            android:text="Available Spots"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/choose_spot_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose a spot that will suit your needs"
+            android:layout_marginStart="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/parking_available_spots"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/slot_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/slots_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/choose_spot_text" />
+
+
+        <View style="@style/HorizontalLine"
+            android:id="@+id/view1"
+            app:layout_constraintTop_toBottomOf="@id/slot_recyclerview"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Parking Features"
+            android:textColor="@color/black"
+            android:layout_marginTop="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/image_features"
+                    android:id="@+id/surveilance_image"
+                    android:src="@drawable/surveilance_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/title_features"
+                    android:id="@+id/surveilance_text"
+                    android:text="24/7 Surveillance"
+                    app:layout_constraintStart_toEndOf="@id/surveilance_image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/desc_features"
+                    android:layout_marginStart="8dp"
+                    android:text="100% of recent guests gave the location a 5-star rating"
+                    app:layout_constraintStart_toEndOf="@id/surveilance_image"
+                    app:layout_constraintTop_toBottomOf="@id/surveilance_text"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/image_features"
+                    android:id="@+id/location_image"
+                    android:src="@drawable/location_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/title_features"
+                    android:id="@+id/location_text"
+                    android:text="Great Location"
+                    app:layout_constraintStart_toEndOf="@id/location_image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/desc_features"
+                    android:layout_width="0dp"
+                    android:text="100% of recent guests gave the location a 5-star rating"
+                    app:layout_constraintStart_toEndOf="@id/location_image"
+                    app:layout_constraintTop_toBottomOf="@id/location_text"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/proceed_to_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppButton"
+            android:text="Proceed to Book"
+            app:layout_constraintTop_toBottomOf="@+id/linearLout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

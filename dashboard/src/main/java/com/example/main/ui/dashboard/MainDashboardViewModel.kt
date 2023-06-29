@@ -1,4 +1,4 @@
-package com.example.main.ui
+package com.example.main.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
