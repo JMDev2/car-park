@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="A1 SPORT"
         android:padding="12dp"
-        android:textColor="@color/black"
+        android:textColor="@color/slot"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

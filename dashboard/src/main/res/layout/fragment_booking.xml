@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.booking.BookingFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:title="book parking"
+            app:navigationIcon="@drawable/keyboard_backspace"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_scrollFlags="scroll|enterAlways" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="12dp">
+
+            <ImageView
+                android:id="@+id/book_parking_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/parking_img" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/book_titleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/inter"
+                android:text="Highway Mall"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/book_locationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/inter"
+                android:text="Uhuru Highway, nairobi"
+                android:textColor="@color/text_opacity"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/book_amountTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/inter"
+                android:text="KSH 140/ per Hour"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        style="@style/HorizontalLine"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearlayout1" />
+
+    <TextView
+        android:id="@+id/parking_pot"
+        style="@style/text_features"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter"
+        android:text="Parking Spot"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view"
+
+        />
+
+    <TextView
+        android:id="@+id/book_parking_slotTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/inter"
+        android:text="A1 SPOT"
+        android:textColor="@color/slot"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/parking_pot" />
+
+
+    <View
+        android:id="@+id/view1"
+        style="@style/HorizontalLine"
+        android:layout_marginTop="19dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/book_parking_slotTv" />
+
+    <TextView
+        android:id="@+id/book_time_text"
+        style="@style/text_features"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/inter"
+        android:text="Parking time and duration"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/date_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/book_time_text">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bookDateInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date"
+            android:fontFamily="@font/inter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/calendar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/clickOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/bookDateInput"
+            app:layout_constraintTop_toTopOf="@+id/bookDateInput" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/time_from_constraint"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_constraint">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_time_from_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="From"
+            android:fontFamily="@font/inter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_clock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/clickTimeFromOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/book_time_from_input"
+            app:layout_constraintTop_toTopOf="@+id/book_time_from_input" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/time_to_constraint"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_constraint">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_time_to_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="To"
+            android:fontFamily="@font/inter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_clock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/click_time_toOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/book_time_to_input"
+            app:layout_constraintTop_toTopOf="@+id/book_time_to_input" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        android:id="@+id/view3"
+        style="@style/HorizontalLine"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_from_constraint" />
+
+
+    <TextView
+        android:id="@+id/total_text"
+        style="@style/text_features"
+        android:layout_marginTop="20dp"
+        android:text="Total"
+        android:fontFamily="@font/inter"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/ksh_text"
+        style="@style/text_features"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:text="KSH"
+        android:fontFamily="@font/inter"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/totalTv"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/totalTv"
+        style="@style/text_features"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:text="500"
+        android:fontFamily="@font/inter"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/hoursTv"
+        style="@style/description"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="hours"
+        android:fontFamily="@font/inter"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/totalTv"
+        app:layout_constraintStart_toStartOf="@+id/ksh_text"
+        app:layout_constraintTop_toBottomOf="@+id/totalTv" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/procced_to_pay_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        style="@style/CustomButton"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Proceed to pay"
+        android:fontFamily="@font/inter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hoursTv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

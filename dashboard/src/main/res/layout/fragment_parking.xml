@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="40dp"
+        android:layout_marginTop="10dp"
+        android:background="#00FFFFFF"
+        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:title="book parking"
+            app:navigationIcon="@drawable/keyboard_backspace"
+            android:background="@drawable/rounded_toolbar_background"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_scrollFlags="scroll|enterAlways" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardView">
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,6 +57,7 @@
             style="@style/text_features"
             android:id="@+id/parking_title"
             android:text="Highway Mall"
+            android:fontFamily="@font/inter"
             android:layout_marginTop="13dp"
             app:layout_constraintTop_toBottomOf="@id/parking_image"
             app:layout_constraintStart_toStartOf="parent" />
@@ -31,6 +66,7 @@
             android:id="@+id/parking_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
             android:text="Uhuru Highway, Nairobi"
             android:layout_marginStart="24dp"
             android:textSize="14dp"
@@ -42,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="KSH 150"
+            android:fontFamily="@font/inter"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="13dp"
             android:textSize="16dp"
@@ -55,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Per hour"
+            android:fontFamily="@font/inter"
             android:layout_marginEnd="24dp"
             android:layout_marginTop="13dp"
             android:textSize="15dp"
@@ -62,11 +100,11 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            style="@style/description"
             android:id="@+id/parking_description"
+            style="@style/description"
             android:text="Secure and affordable parking spaces at First Church Of Christ near Nyerere Rd, Nairobi. Available from Monday to Saturday, from 6 am to 6 pm. BOOK LONGER AND PAY LESS!"
-            app:layout_constraintTop_toBottomOf="@id/parking_location"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parking_location" />
 
         <View style="@style/HorizontalLine"
             android:id="@+id/view"
@@ -84,6 +122,7 @@
         <TextView
             android:id="@+id/choose_spot_text"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/inter"
             android:layout_height="wrap_content"
             android:text="Choose a spot that will suit your needs"
             android:layout_marginStart="24dp"
@@ -113,6 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="Parking Features"
+            android:fontFamily="@font/inter"
             android:textColor="@color/black"
             android:layout_marginTop="18dp"
             android:textStyle="bold"
@@ -147,6 +187,7 @@
                     style="@style/title_features"
                     android:id="@+id/surveilance_text"
                     android:text="24/7 Surveillance"
+                    android:fontFamily="@font/inter"
                     app:layout_constraintStart_toEndOf="@id/surveilance_image"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,6 +218,7 @@
                     style="@style/title_features"
                     android:id="@+id/location_text"
                     android:text="Great Location"
+                    android:fontFamily="@font/inter"
                     app:layout_constraintStart_toEndOf="@id/location_image"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -192,16 +234,49 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/proceed_to_booking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppButton"
-            android:text="Proceed to Book"
-            app:layout_constraintTop_toBottomOf="@+id/linearLout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+    </ScrollView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@android:color/white"
+        android:padding="12dp"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/proceed_to_book_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="Proceed to book"
+            style="@style/CustomButton"
+            android:fontFamily="@font/inter" />
+
+
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
