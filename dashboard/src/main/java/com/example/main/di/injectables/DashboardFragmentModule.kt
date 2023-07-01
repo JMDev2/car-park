@@ -2,12 +2,15 @@ package com.example.main.di.injectables
 
 import androidx.lifecycle.ViewModel
 import com.ekenya.rnd.baseapp.di.ViewModelKey
+import com.example.main.ui.payment.SelectPaymentFragment
 import com.example.main.ui.booking.BookingFragment
 import com.example.main.ui.booking.BookingViewModel
 import com.example.main.ui.dashboard.DashboardMainFragment
 import com.example.main.ui.dashboard.MainDashboardViewModel
 import com.example.main.ui.parking.ParkingFragment
 import com.example.main.ui.parking.ParkingViewModel
+import com.example.main.ui.payment.MpesaFragment
+import com.example.main.ui.payment.PaymentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -49,4 +52,18 @@ abstract class DashboardFragmentModule {
         abstract fun bindBookingViewModel(viewModel: BookingViewModel): ViewModel
     }
 
+    //payment fragment
+    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
+    abstract fun contributeSelectPaymentFragment(): SelectPaymentFragment
+    @Module
+    abstract class PaymentViewModelModule {
+        @Binds
+        @IntoMap
+        @ViewModelKey(PaymentViewModel::class)
+        abstract fun bindBookingViewModel(viewModel: PaymentViewModel): ViewModel
+    }
+
+    //mpesa fragment using the selectmpesa fragment
+    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
+    abstract fun contributeMpesaFragment(): MpesaFragment
 }
