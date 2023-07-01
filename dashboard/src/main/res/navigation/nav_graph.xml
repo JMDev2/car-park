@@ -7,19 +7,33 @@
 
     <fragment
         android:id="@+id/dashboardMainFragment"
-        android:name="com.example.main.ui.DashboardMainFragment"
+        android:name="com.example.main.ui.dashboard.DashboardMainFragment"
         android:label="DashboardMainFragment"
         tools:layout="@layout/fragment_main_dashboard">
 
         <action
-            android:id="@+id/action_dashboardMainFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
+            android:id="@+id/action_dashboardMainFragment_to_parkingFragment"
+            app:destination="@id/parkingFragment" />
     </fragment>
     <fragment
         android:id="@+id/blankFragment"
         android:name="com.example.main.ui.BlankFragment"
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" />
+    <fragment
+        android:id="@+id/parkingFragment"
+        android:name="com.example.main.ui.parking.ParkingFragment"
+        android:label="fragment_parking"
+        tools:layout="@layout/fragment_parking" >
+        <action
+            android:id="@+id/action_parkingFragment_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.example.main.ui.booking.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" />
 
 </navigation>
 

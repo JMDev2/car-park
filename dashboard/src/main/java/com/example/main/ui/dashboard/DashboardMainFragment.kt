@@ -1,4 +1,4 @@
-package com.example.main.ui
+package com.example.main.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,6 +28,11 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //TODO:to be removed
+        binding.btn.setOnClickListener {
+            findNavController().navigate(R.id.parkingFragment)
+        }
+
         binding.searchView.queryHint="Where would you want to Park?"
         binding.navView.setNavigationItemSelectedListener(this)
 
@@ -55,9 +60,6 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
                 findNavController().navigate(R.id.blankFragment)
             }
             R.id.nav_settings -> {
-                findNavController().navigate(R.id.blankFragment)
-            }
-            R.id.nav_pricing_policy -> {
                 findNavController().navigate(R.id.blankFragment)
             }
             R.id.nav_logout -> {
