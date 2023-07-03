@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.utils.toast
 import com.example.main.R
@@ -49,7 +50,7 @@ class BookingFragment : BaseDaggerFragment() {
         // Set the toolbar as the support action bar
 
 
-        textOutline()
+
 
 
         binding.clickOverlay.setOnClickListener {
@@ -63,6 +64,9 @@ class BookingFragment : BaseDaggerFragment() {
         }
         binding.proccedToPayBtn.setOnClickListener {
             validateDateTimeInputs()
+        }
+        binding.proccedToPayBtn.setOnClickListener {
+            findNavController().navigate(R.id.selectPaymentFragment)
         }
 
         // Rest of your code...
@@ -137,23 +141,24 @@ class BookingFragment : BaseDaggerFragment() {
 
 
 
+    //TODo: to remove this code
     //text outline
-    private fun textOutline() {
-        binding.bookDateInput.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val date = s?.toString()
-                if (!date.isNullOrEmpty()) {
-                    binding.bookDateInput.editText?.hint = "Date: $date"
-                } else {
-                    binding.bookDateInput.editText?.hint = "Date"
-                }
-            }
-        })
-    }
+//    private fun textOutline() {
+//        binding.bookDateInput.editText?.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                val date = s?.toString()
+//                if (!date.isNullOrEmpty()) {
+//                    binding.bookDateInput.editText?.hint = "Date: $date"
+//                } else {
+//                    binding.bookDateInput.editText?.hint = "Date"
+//                }
+//            }
+//        })
+//    }
 
     //validating date, time inputs
 

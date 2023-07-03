@@ -33,7 +33,29 @@
         android:id="@+id/bookingFragment"
         android:name="com.example.main.ui.booking.BookingFragment"
         android:label="fragment_booking"
-        tools:layout="@layout/fragment_booking" />
+        tools:layout="@layout/fragment_booking" >
+        <action
+            android:id="@+id/action_bookingFragment_to_selectPaymentFragment"
+            app:destination="@id/selectPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectPaymentFragment"
+        android:name="com.example.main.ui.payment.SelectPaymentFragment"
+        android:label="fragment_select_payment"
+        tools:layout="@layout/fragment_select_payment" >
+        <action
+            android:id="@+id/action_selectPaymentFragment_to_mpesaFragment"
+            app:destination="@id/mpesaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mpesaFragment"
+        android:name="com.example.main.ui.payment.MpesaFragment"
+        android:label="fragment_mpesa"
+        tools:layout="@layout/fragment_mpesa" >
+        <action
+            android:id="@+id/action_mpesaFragment_to_selectPaymentFragment"
+            app:destination="@id/selectPaymentFragment" />
+    </fragment>
 
 </navigation>
 
