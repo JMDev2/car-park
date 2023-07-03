@@ -37,78 +37,11 @@ public final class Modules {
         Modules var0 = new Modules();
         INSTANCE = var0;
         modules = Arrays.asList(new FeatureModule[]{
-                FeatureTourism.INSTANCE,
-                FeatureSupport.INSTANCE,
                 FeatureDashboard.INSTANCE,
                 FeatureOnboarding.INSTANCE
                 }.clone()
         );
     }
-
-    //***************************************************************
-    public static final class FeatureTourism implements FeatureModule, AddressableActivity {
-
-        private static final String name;
-
-        private static final String injectorName;
-
-        private static final String className;
-
-        public static final FeatureTourism INSTANCE;
-
-        public String getName() {
-            return name;
-        }
-
-        public String getInjectorName() {
-            return injectorName;
-        }
-
-        private FeatureTourism() {
-        }
-
-        static {
-            FeatureTourism var0 = new FeatureTourism();
-            INSTANCE = var0;
-            name = "etourism";
-            injectorName = Constants.BASE_PACKAGE_NAME+"."+name+".di.TourismInjector";
-            className = Constants.BASE_PACKAGE_NAME +"."+name+".MainActivity";
-        }
-
-        @Override
-        public String getClassName() {
-            return className;
-        }
-    }
-
-    //***************************************************************
-    public static final class FeatureSupport implements FeatureModule {
-
-        private static final String name;
-
-        private static final String injectorName;
-
-        public static final FeatureSupport INSTANCE;
-
-        public String getName() {
-            return name;
-        }
-
-        public String getInjectorName() {
-            return injectorName;
-        }
-
-        private FeatureSupport() {
-        }
-
-        static {
-            FeatureSupport var0 = new FeatureSupport();
-            INSTANCE = var0;
-            name = "support";
-            injectorName = Constants.BASE_PACKAGE_NAME+".support.di.SupportInjector";
-        }
-    }
-    //***************************************************************
 
     public static final class FeatureDashboard implements FeatureModule, AddressableActivity {
 

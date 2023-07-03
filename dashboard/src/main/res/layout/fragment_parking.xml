@@ -75,15 +75,11 @@
 
         <TextView
             android:id="@+id/parking_payment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text_features"
             android:text="KSH 150"
             android:fontFamily="@font/inter"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="13dp"
-            android:textSize="16dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/parking_image"
             app:layout_constraintEnd_toStartOf="@+id/per_hour_text" />
 
@@ -148,14 +144,10 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            style="@style/text_features"
             android:text="Parking Features"
             android:fontFamily="@font/inter"
-            android:textColor="@color/black"
             android:layout_marginTop="18dp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1" />
 
