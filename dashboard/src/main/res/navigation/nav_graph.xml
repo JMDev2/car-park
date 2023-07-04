@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_dashboardMainFragment_to_parkingFragment"
             app:destination="@id/parkingFragment" />
+        <action
+            android:id="@+id/action_dashboardMainFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
     <fragment
         android:id="@+id/blankFragment"
@@ -56,6 +59,11 @@
             android:id="@+id/action_mpesaFragment_to_selectPaymentFragment"
             app:destination="@id/selectPaymentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bookingHistoryFragment"
+        android:name="com.example.main.ui.booking.BookingHistoryFragment"
+        android:label="fragment_booking_history"
+        tools:layout="@layout/fragment_booking_history" />
 
 </navigation>
 
