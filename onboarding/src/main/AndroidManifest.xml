@@ -17,7 +17,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_main"
+            android:label=""
             android:theme="@style/Theme.ETourism"/>
     </application>
 

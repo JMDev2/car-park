@@ -8,8 +8,11 @@ import com.ekenya.rnd.onboarding.ui.login.LoginViewModel
 import com.ekenya.rnd.onboarding.ui.login.PasswordFragment
 import com.ekenya.rnd.onboarding.ui.onboarding.OnboardingFragment
 import com.ekenya.rnd.onboarding.ui.onboarding.OnboardingViewModel
+import com.ekenya.rnd.onboarding.ui.signup.IntroFragment
 import com.ekenya.rnd.onboarding.ui.signup.SignUpFragment
+import com.ekenya.rnd.onboarding.ui.signup.SignUpVerificationFragment
 import com.ekenya.rnd.onboarding.ui.signup.SignUpViewModel
+import com.ekenya.rnd.onboarding.ui.signup.UserDetailsFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -47,7 +50,16 @@ abstract class OnboardingFragmentModule {
         abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
     }
 
-    //signup
+    //signup fragments
+    @ContributesAndroidInjector(modules = [OnboardingSignUpFragmentModule::class])
+    abstract fun contributeIntroFragment(): IntroFragment
+
+    @ContributesAndroidInjector(modules = [OnboardingSignUpFragmentModule::class])
+    abstract fun contributeSignUpVerificationFragment(): SignUpVerificationFragment
+
+    @ContributesAndroidInjector(modules = [OnboardingSignUpFragmentModule::class])
+    abstract fun contributeUserDetailsFragment(): UserDetailsFragment
+
     @ContributesAndroidInjector(modules = [OnboardingSignUpFragmentModule::class])
     abstract fun contributeSignUpFragment(): SignUpFragment
     @Module

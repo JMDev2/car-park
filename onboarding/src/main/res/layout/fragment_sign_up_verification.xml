@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.signup.SignUpFragment">
+    tools:context=".ui.signup.SignUpVerificationFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -27,17 +27,17 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/signup_text"
+        android:id="@+id/signup_verification_text"
         style="@style/text_features"
         android:layout_marginTop="19dp"
         android:fontFamily="@font/inter"
-        android:text="Sign up to E-gesha"
+        android:text="Enter the verification code"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_phone_number_input"
+        android:id="@+id/signup_verification_input"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,9 +45,9 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/inter"
-        android:hint="Phone number"
+        android:hint="Verification code"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_text">
+        app:layout_constraintTop_toBottomOf="@+id/signup_verification_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -59,21 +59,22 @@
 
 
     <TextView
-        android:id="@+id/signup_text_desc"
+        android:id="@+id/signup_verification_text_desc"
         style="@style/LoginTextDescStyle"
-        android:text="We’ll text you to confirm if this is your number. Standard data and message rates apply"
-        app:layout_constraintTop_toBottomOf="@+id/signup_phone_number_input"
+        android:text="Not yet received the code? Resend it in 45 sec"
+        app:layout_constraintTop_toBottomOf="@+id/signup_verification_input"
         app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signup_continue_btn"
+        android:id="@+id/signup_verification_continue_btn"
         style="@style/CustomButton"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/inter"
         android:text="Continue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_text_desc" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_verification_text_desc" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
