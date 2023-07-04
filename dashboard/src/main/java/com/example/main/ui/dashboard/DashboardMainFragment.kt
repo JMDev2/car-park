@@ -66,7 +66,11 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
                 findNavController().navigate(R.id.blankFragment)
             }
             R.id.nav_payment -> {
-                findNavController().navigate(R.id.blankFragment)
+                findNavController().navigate(R.id.selectPaymentFragment)
+            }
+
+            R.id.nav_profile -> {
+                findNavController().navigate(R.id.profileFragment)
             }
         }
         return true

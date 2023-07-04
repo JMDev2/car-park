@@ -17,6 +17,12 @@
         <action
             android:id="@+id/action_dashboardMainFragment_to_blankFragment"
             app:destination="@id/blankFragment" />
+        <action
+            android:id="@+id/action_dashboardMainFragment_to_bookingHistoryFragment"
+            app:destination="@id/bookingHistoryFragment" />
+        <action
+            android:id="@+id/action_dashboardMainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/blankFragment"
@@ -64,6 +70,11 @@
         android:name="com.example.main.ui.booking.BookingHistoryFragment"
         android:label="fragment_booking_history"
         tools:layout="@layout/fragment_booking_history" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.main.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>
 
