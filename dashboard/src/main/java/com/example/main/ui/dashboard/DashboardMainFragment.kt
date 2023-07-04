@@ -57,7 +57,7 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_bookings -> {
-                findNavController().navigate(R.id.blankFragment)
+                findNavController().navigate(R.id.bookingHistoryFragment)
             }
             R.id.nav_settings -> {
                 findNavController().navigate(R.id.blankFragment)

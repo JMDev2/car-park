@@ -7,7 +7,6 @@ dependencyResolutionManagement {
 rootProject.name = "Car Parking"
 include ':app'
 include ':common'
-include ':etourism'
 include ':dashboard'
 
 include ':onboarding'
