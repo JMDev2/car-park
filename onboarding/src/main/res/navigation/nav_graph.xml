@@ -3,21 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/onboardingFragment"
-        android:name="com.ekenya.rnd.onboarding.ui.onboarding.OnboardingFragment"
-        android:label="fragment_onboarding"
-        tools:layout="@layout/fragment_onboarding" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.ekenya.rnd.onboarding.ui.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_loginVerificationFragment"
+            app:destination="@id/loginVerificationFragment" />
+    </fragment>
+
+
     <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.ekenya.rnd.onboarding.ui.signup.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        android:id="@+id/loginVerificationFragment"
+        android:name="com.ekenya.rnd.onboarding.ui.login.LoginVerificationFragment"
+        android:label="fragment_login_verification"
+        tools:layout="@layout/fragment_login_verification" >
+        <action
+            android:id="@+id/action_loginVerificationFragment_to_passwordFragment"
+            app:destination="@id/passwordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="com.ekenya.rnd.onboarding.ui.login.PasswordFragment"
+        android:label="fragment_password"
+        tools:layout="@layout/fragment_password" />
 </navigation>

@@ -53,8 +53,7 @@ abstract class DashboardFragmentModule {
     }
 
     //payment fragment
-    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
-    abstract fun contributeSelectPaymentFragment(): SelectPaymentFragment
+
     @Module
     abstract class PaymentViewModelModule {
         @Binds
@@ -66,4 +65,7 @@ abstract class DashboardFragmentModule {
     //mpesa fragment using the selectmpesa fragment
     @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
     abstract fun contributeMpesaFragment(): MpesaFragment
+
+    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
+    abstract fun contributeSelectPaymentFragment(): SelectPaymentFragment
 }

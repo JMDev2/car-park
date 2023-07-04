@@ -15,7 +15,8 @@ import com.example.main.databinding.FragmentParkingBinding
 import com.example.main.databinding.FragmentSelectPaymentBinding
 
 
-class SelectPaymentFragment : BaseDaggerFragment() {
+class
+SelectPaymentFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentSelectPaymentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

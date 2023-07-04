@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import com.ekenya.rnd.onboarding.R
-import com.ekenya.rnd.onboarding.databinding.FragmentLoginBinding
+import com.ekenya.rnd.onboarding.databinding.FragmentPasswordBinding
 
-class LoginFragment : Fragment() {
-    private lateinit var binding: FragmentLoginBinding
+
+class PasswordFragment : Fragment() {
+    private lateinit var binding: FragmentPasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,12 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
+        binding = FragmentPasswordBinding.inflate(layoutInflater, container, false)
+
+
+        val text = "<font color='#505353'>Forgot your Password?</font> <font color='#DE7500'>Resend it</font>"
+        binding.loginPasswordDesc.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         // Enable the back arrow in the toolbar
@@ -34,14 +39,6 @@ class LoginFragment : Fragment() {
             NavHostFragment.findNavController(this).popBackStack()
         }
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.loginContinueBtn.setOnClickListener {
-            findNavController().navigate(R.id.loginVerificationFragment)
-        }
     }
 
 

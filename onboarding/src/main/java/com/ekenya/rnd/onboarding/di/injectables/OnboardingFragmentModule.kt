@@ -3,7 +3,9 @@ package com.ekenya.rnd.onboarding.di.injectables
 import androidx.lifecycle.ViewModel
 import com.ekenya.rnd.baseapp.di.ViewModelKey
 import com.ekenya.rnd.onboarding.ui.login.LoginFragment
+import com.ekenya.rnd.onboarding.ui.login.LoginVerificationFragment
 import com.ekenya.rnd.onboarding.ui.login.LoginViewModel
+import com.ekenya.rnd.onboarding.ui.login.PasswordFragment
 import com.ekenya.rnd.onboarding.ui.onboarding.OnboardingFragment
 import com.ekenya.rnd.onboarding.ui.onboarding.OnboardingViewModel
 import com.ekenya.rnd.onboarding.ui.signup.SignUpFragment
@@ -30,6 +32,12 @@ abstract class OnboardingFragmentModule {
     //login
     @ContributesAndroidInjector(modules = [OnboardingLoginFragmentModule::class])
     abstract fun contributeLoginFragment(): LoginFragment
+
+    @ContributesAndroidInjector(modules = [OnboardingLoginFragmentModule::class])
+    abstract fun contributeVerificationFragment(): LoginVerificationFragment
+
+    @ContributesAndroidInjector(modules = [OnboardingLoginFragmentModule::class])
+    abstract fun contributePasswordFragment(): PasswordFragment
 
     @Module
     abstract class OnboardingLoginFragmentModule{
