@@ -47,8 +47,22 @@ class SignUpVerificationFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        validateUserInput()
+    }
+
+
+    private fun validateUserInput() {
         binding.signupVerificationContinueBtn.setOnClickListener {
-            findNavController().navigate(R.id.userDetailsFragment)
+            val verificationCode = binding.signupVerificationInput.editText?.text.toString().trim()
+
+            if (verificationCode.isEmpty()) {
+                binding.signupVerificationInput.error = "Please provide a verification code"
+            } else if (!verificationCode.matches(Regex("^\\d+$"))) {
+                binding.signupVerificationInput.error = "Invalid verification code. Code should only contain digits."
+            } else {
+                // Input is valid, navigate to the next fragment
+                findNavController().navigate(R.id.userDetailsFragment)
+            }
         }
     }
 

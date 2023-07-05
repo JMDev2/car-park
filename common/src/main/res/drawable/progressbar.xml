@@ -1,0 +1,15 @@
+<!-- custom_round_progress.xml -->
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="270"
+    android:toDegrees="270">
+    <shape
+        android:innerRadiusRatio="2.3"
+        android:shape="ring"
+        android:thicknessRatio="12"
+        android:useLevel="true">
+        <gradient
+            android:endColor="#FFFFFF"
+            android:startColor="#00FF00"
+            android:type="sweep" />
+    </shape>
+</rotate>

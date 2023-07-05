@@ -145,5 +145,18 @@
 
 
 
+    <!-- Your layout XML file -->
+    <ProgressBar
+        android:id="@+id/roundProgressBar"
+        android:layout_width="179dp"
+        android:layout_height="162dp"
+        android:indeterminateOnly="false"
+        android:progressDrawable="@drawable/progressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/procced_to_book_mpesa_btn" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

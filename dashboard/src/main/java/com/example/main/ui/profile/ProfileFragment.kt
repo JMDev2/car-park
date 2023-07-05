@@ -3,10 +3,7 @@ package com.example.main.ui.profile
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.NavHostFragment
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
-import com.ekenya.rnd.common.utils.toast
-import com.example.main.R
-import com.example.main.databinding.FragmentMpesaBinding
 import com.example.main.databinding.FragmentProfileBinding
 
 
@@ -51,7 +45,7 @@ class ProfileFragment : BaseDaggerFragment() {
 
     private fun setupSaveButton() {
         val saveButton = binding.profileSaveBtn
-        saveButton.visibility = View.VISIBLE // Set the button initially visible
+        saveButton.visibility = View.VISIBLE // Initially hide the save button
 
         // Set click listener for the save button
         saveButton.setOnClickListener {
@@ -62,7 +56,6 @@ class ProfileFragment : BaseDaggerFragment() {
             }
         }
     }
-
 
     private fun setupInputValidation() {
         val firstNameInput = binding.profileFirstNameInput

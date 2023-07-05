@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.ekenya.rnd.onboarding.R
 import com.ekenya.rnd.onboarding.databinding.FragmentPasswordBinding
 
 
@@ -40,6 +42,29 @@ class PasswordFragment : Fragment() {
         }
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        validateUserInput()
+    }
+
+    private fun validateUserInput() {
+        binding.loginPasswordContinueBtn.setOnClickListener {
+            val password = binding.loginPasswordInput.editText?.text.toString().trim()
+
+            if (password.isEmpty()) {
+                binding.loginPasswordInput.error = "Please provide a password"
+            } else if (password.length < 6) {
+                binding.loginPasswordInput.error = "Password must be at least 6 characters long"
+            } else {
+                // Input is valid, navigate to the next fragment
+              //  findNavController().navigate(R.id.nextFragment)
+                //TODO: move to the next module
+            }
+        }
+    }
+
 
 
 }

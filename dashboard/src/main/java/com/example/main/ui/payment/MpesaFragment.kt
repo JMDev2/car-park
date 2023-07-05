@@ -42,10 +42,25 @@ class MpesaFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.confirmMpesaPhoneNumber.setOnClickListener {
-            findNavController().navigate(R.id.selectPaymentFragment)
-        }
+        validateUserInput()
     }
 
 
+    private fun validateUserInput() {
+        binding.confirmMpesaPhoneNumber.setOnClickListener {
+            val phoneNumber = binding.mpesaPhoneNumber.editText?.text.toString().trim()
+
+            if (phoneNumber.isEmpty()) {
+                binding.mpesaPhoneNumber.error = "Please provide a valid phone number"
+            } else if (!phoneNumber.matches(Regex("^\\d{10}$"))) {
+                binding.mpesaPhoneNumber.error =
+                    "Invalid phone number. Phone number should be 10 digits long."
+            } else {
+                // Input is valid, navigate to the next fragment
+                findNavController().navigate(R.id.selectPaymentFragment)
+            }
+        }
+
+
+    }
 }
