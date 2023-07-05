@@ -99,7 +99,7 @@ class OnboardingFragment : BaseDaggerFragment() {
                     binding.moveNext.text = "Get Started"
                     binding.moveNext.setOnClickListener {
                         Toast.makeText(requireActivity(), "clicked", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.signUpFragment)
+                       // findNavController().navigate(R.id.signUpFragment)
                     }
                 } else {
                     binding.moveNext.text = "Next"

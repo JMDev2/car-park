@@ -11,6 +11,8 @@ import com.example.main.ui.parking.ParkingFragment
 import com.example.main.ui.parking.ParkingViewModel
 import com.example.main.ui.payment.MpesaFragment
 import com.example.main.ui.payment.PaymentViewModel
+import com.example.main.ui.profile.ProfileFragment
+import com.example.main.ui.profile.ProfileViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -18,6 +20,17 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class DashboardFragmentModule {
+
+    //user profile
+    @ContributesAndroidInjector(modules = [ProfileViewModelModule::class])
+    abstract fun contributeProfileFragment(): ProfileFragment
+    @Module
+    abstract class ProfileViewModelModule {
+        @Binds
+        @IntoMap
+        @ViewModelKey(ProfileViewModel::class)
+        abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
+    }
 
     //dashboard fragment
     @ContributesAndroidInjector(modules = [MainDashboardFragmentModule::class])
@@ -53,8 +66,7 @@ abstract class DashboardFragmentModule {
     }
 
     //payment fragment
-    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
-    abstract fun contributeSelectPaymentFragment(): SelectPaymentFragment
+
     @Module
     abstract class PaymentViewModelModule {
         @Binds
@@ -66,4 +78,8 @@ abstract class DashboardFragmentModule {
     //mpesa fragment using the selectmpesa fragment
     @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
     abstract fun contributeMpesaFragment(): MpesaFragment
+
+    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
+    abstract fun contributeSelectPaymentFragment(): SelectPaymentFragment
 }
+
