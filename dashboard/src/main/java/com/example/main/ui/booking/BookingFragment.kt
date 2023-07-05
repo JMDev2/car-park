@@ -2,25 +2,21 @@ package com.example.main.ui.booking
 
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.text.Editable
 import android.text.SpannableStringBuilder
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isNotEmpty
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
-import com.ekenya.rnd.common.utils.toast
 import com.example.main.R
 import com.example.main.databinding.FragmentBookingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+
 class BookingFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentBookingBinding
     private var isDatePickerOpen = false
@@ -138,28 +134,6 @@ class BookingFragment : BaseDaggerFragment() {
 //l3tm31n@h0m3
 
 
-
-
-
-    //TODo: to remove this code
-    //text outline
-//    private fun textOutline() {
-//        binding.bookDateInput.editText?.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                val date = s?.toString()
-//                if (!date.isNullOrEmpty()) {
-//                    binding.bookDateInput.editText?.hint = "Date: $date"
-//                } else {
-//                    binding.bookDateInput.editText?.hint = "Date"
-//                }
-//            }
-//        })
-//    }
-
     //validating date, time inputs
 
     private fun validateDateTimeInputs(){
@@ -169,13 +143,13 @@ class BookingFragment : BaseDaggerFragment() {
 
 
         if (date.isEmpty()) {
-            binding.bookDateInput.error = "User name is required"
+            binding.bookDateInput.error = "Date is required"
         }
         if (timeFrom.isEmpty()) {
-            binding.bookTimeFromInput.error = "User name is required"
+            binding.bookTimeFromInput.error = "Starting time is required"
         }
         if (timeTo.isEmpty()) {
-            binding.bookTimeToInput.error = "User name is required"
+            binding.bookTimeToInput.error = "Ending time is required"
         }
 
     }
