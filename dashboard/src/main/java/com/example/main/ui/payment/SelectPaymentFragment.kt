@@ -7,18 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.example.main.R
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import com.example.main.databinding.FragmentBlankBinding
 import com.example.main.databinding.FragmentParkingBinding
 import com.example.main.databinding.FragmentSelectPaymentBinding
+import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
 
 class
 SelectPaymentFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentSelectPaymentBinding
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel by lazy{
+        ViewModelProvider(requireActivity(),factory)[PaymentViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +58,10 @@ SelectPaymentFragment : BaseDaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         progressBarr()
+        observeUserInput()
+
+
+
         binding.proccedToBookMpesaBtn.setOnClickListener {
             findNavController().navigate(R.id.mpesaFragment)
         }
@@ -54,6 +70,19 @@ SelectPaymentFragment : BaseDaggerFragment() {
             findNavController().navigate(R.id.mpesaFragment)
         }
     }
+
+    private fun observeUserInput() {
+        // Create a CoroutineScope using the viewLifecycleOwner's lifecycle
+        val coroutineScope = viewLifecycleOwner.lifecycleScope
+
+        // Launch a coroutine within the created scope
+        coroutineScope.launch(Dispatchers.Main) {
+            viewModel.userInput.collect { userInput ->
+                binding.userPhoneNumberTv.text = userInput
+            }
+        }
+    }
+
 
 
     private fun progressBarr() {

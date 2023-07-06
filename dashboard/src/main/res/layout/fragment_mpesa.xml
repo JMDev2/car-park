@@ -30,14 +30,14 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/mpesa_phone_number"
+            android:id="@+id/mpesa_phone_number_input"
             style="@style/OutlinedBoxWithCustomBorder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:hint="Phone number"
+            android:hint="+254"
             android:fontFamily="@font/inter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appbar"
@@ -52,7 +52,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/toggle_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mpesa_phone_number" />
+        app:layout_constraintTop_toBottomOf="@+id/mpesa_phone_number_input" />
 
 
     <com.google.android.material.button.MaterialButton
