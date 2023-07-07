@@ -1,11 +1,14 @@
 package com.example.main.ui.booking
 
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -16,6 +19,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class BookingFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentBookingBinding
@@ -46,6 +50,7 @@ class BookingFragment : BaseDaggerFragment() {
         // Set the toolbar as the support action bar
 
 
+        validateDateTimeInputs()
 
 
 
@@ -58,12 +63,10 @@ class BookingFragment : BaseDaggerFragment() {
         binding.clickTimeToOverlay.setOnClickListener {
                 openTimeToPicker()
         }
-        binding.proccedToPayBtn.setOnClickListener {
-            validateDateTimeInputs()
-        }
-        binding.proccedToPayBtn.setOnClickListener {
-            findNavController().navigate(R.id.selectPaymentFragment)
-        }
+
+
+
+
 
         // Rest of your code...
     }
@@ -83,23 +86,40 @@ class BookingFragment : BaseDaggerFragment() {
 
     //date picker
     private fun showDatePicker() {
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select Date")
-            .build()
+        val calendar = Calendar.getInstance()
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-        datePicker.addOnPositiveButtonClickListener { selection ->
-            val calendar = Calendar.getInstance()
-            calendar.timeInMillis = selection
+        val datePickerDialog = DatePickerDialog(requireContext(), { _, year, month, day ->
+            calendar.set(year, month, day)
 
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
+            val selectedTimeInMillis = calendar.timeInMillis
+            val currentTimeInMillis = System.currentTimeMillis()
+            val minTimeInMillis = currentTimeInMillis - TimeUnit.DAYS.toMillis(1) // 24 hours ago
+            val maxTimeInMillis = currentTimeInMillis + TimeUnit.DAYS.toMillis(1) // 24 hours from now
 
-            binding.bookDateInput.editText?.text = SpannableStringBuilder("Date: $formattedDate")
+            /*
+            check the selected date
+             */
+            if (selectedTimeInMillis < minTimeInMillis || selectedTimeInMillis > maxTimeInMillis) {
+                Toast.makeText(requireContext(), "Please select a valid date", Toast.LENGTH_SHORT).show()
+            } else {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val formattedDate = dateFormat.format(calendar.time)
 
-        }
+                binding.bookDateInput.editText?.text = SpannableStringBuilder("Date: $formattedDate")
+                Log.d("BookingFragment", "date: ${formattedDate}")
+            }
+        }, currentYear, currentMonth, currentDay)
 
-        datePicker.show(childFragmentManager, datePicker.toString())
+        datePickerDialog.datePicker.minDate = calendar.timeInMillis - TimeUnit.DAYS.toMillis(1) // 24 hours ago
+        datePickerDialog.datePicker.maxDate = calendar.timeInMillis + TimeUnit.DAYS.toMillis(1) // 24 hours from now
+
+        datePickerDialog.show()
     }
+
+
 
 
     //time from picker
@@ -108,27 +128,56 @@ class BookingFragment : BaseDaggerFragment() {
         val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
         val currentMinute = calendar.get(Calendar.MINUTE)
 
+        val minHour = currentHour // Minimum allowed hour
+        val maxHour = 23 // Maximum allowed hour
+
         val timePickerDialog = TimePickerDialog(requireContext(), { _, hourOfDay, minute ->
-            val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
-            binding.bookTimeFromInput.editText?.setText(selectedTime)
+            if (hourOfDay < minHour || hourOfDay > maxHour) {
+                Toast.makeText(requireContext(), "Please select a valid time", Toast.LENGTH_SHORT).show()
+            } else {
+                val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
+                binding.bookTimeFromInput.editText?.setText(selectedTime)
+                Log.d("BookingFragment", "time from: $selectedTime")
+            }
         }, currentHour, currentMinute, true)
 
         timePickerDialog.show()
     }
 
+
+
+
     //time to picker
-   private fun openTimeToPicker(){
+    private fun openTimeToPicker() {
         val calendar = Calendar.getInstance()
         val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
         val currentMinute = calendar.get(Calendar.MINUTE)
 
-        val timePickerDialog = TimePickerDialog(requireContext(), { _, hourOfDay, minute ->
-            val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
-            binding.bookTimeToInput.editText?.setText(selectedTime)
-        }, currentHour, currentMinute, true)
+        val minHour = (currentHour + 2) % 24 // Minimum allowed hour (current hour + 2, with wrapping around 24-hour format)
+        val maxHour = 23 // Maximum allowed hour
 
+        val timePickerDialog = TimePickerDialog(
+            requireContext(),
+            { _, hourOfDay, minute ->
+                if (hourOfDay < minHour || hourOfDay > maxHour) {
+                    Toast.makeText(requireContext(), "Selected time should not be less than 2 hours", Toast.LENGTH_SHORT).show()
+                } else {
+                    val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
+                    binding.bookTimeToInput.editText?.setText(selectedTime)
+                    Log.d("BookingFragment", "Time to: $selectedTime")
+                }
+            },
+            currentHour,
+            currentMinute,
+            true // Set is24HourView to true for 24-hour format
+        )
+
+        timePickerDialog.updateTime(currentHour, currentMinute) // Set the initial time to the current hour and minute
         timePickerDialog.show()
-   }
+    }
+
+
+
 
 
 //l3tm31n@h0m3
@@ -136,23 +185,36 @@ class BookingFragment : BaseDaggerFragment() {
 
     //validating date, time inputs
 
-    private fun validateDateTimeInputs(){
-        val date = binding.bookDateInput.editText?.text.toString().trim()
-        val timeFrom = binding.bookTimeFromInput.editText?.text.toString().trim()
-        val timeTo = binding.bookTimeToInput.editText?.text.toString().trim()
+    private fun validateDateTimeInputs() {
+        binding.proccedToPayBtn.setOnClickListener {
+            val date = binding.bookDateInput.editText?.text.toString().trim()
+            val timeFrom = binding.bookTimeFromInput.editText?.text.toString().trim()
+            val timeTo = binding.bookTimeToInput.editText?.text.toString().trim()
 
-
-        if (date.isEmpty()) {
-            binding.bookDateInput.error = "Date is required"
+            if (date.isEmpty()) {
+                binding.bookDateInput.error = "Date is required"
+            } else if (timeFrom.isEmpty()) {
+                binding.bookTimeFromInput.error = "Starting time is required"
+            } else if (timeTo.isEmpty()) {
+                binding.bookTimeToInput.error = "Ending time is required"
+            } else {
+                // All inputs are validated, save and move to the next fragment
+               // saveDateTimeInputs(date, timeFrom, timeTo)
+                moveToNextFragment()
+            }
         }
-        if (timeFrom.isEmpty()) {
-            binding.bookTimeFromInput.error = "Starting time is required"
-        }
-        if (timeTo.isEmpty()) {
-            binding.bookTimeToInput.error = "Ending time is required"
-        }
-
     }
+
+//    private fun saveDateTimeInputs(date: String, timeFrom: String, timeTo: String) {
+//        // Save the input values in your ViewModel or any other appropriate storage mechanism
+//        viewModel.saveDateTimeInputs(date, timeFrom, timeTo)
+//    }
+
+    private fun moveToNextFragment() {
+        // Move to the next fragment using Navigation Component or any other navigation mechanism
+        findNavController().navigate(R.id.selectPaymentFragment)
+    }
+
 
 
 

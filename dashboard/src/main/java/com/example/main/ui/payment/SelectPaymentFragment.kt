@@ -2,6 +2,7 @@ package com.example.main.ui.payment
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +60,7 @@ SelectPaymentFragment : BaseDaggerFragment() {
 
         progressBarr()
         observeUserInput()
+        setupRadioGroup()
 
 
 
@@ -70,6 +72,32 @@ SelectPaymentFragment : BaseDaggerFragment() {
             findNavController().navigate(R.id.mpesaFragment)
         }
     }
+
+
+    /*
+    checking the radio groups
+
+     */
+    private fun setupRadioGroup() {
+        val mpesaRadioButton = binding.paymentRadioMpesa
+        val cardRadioButton = binding.paymentRadioCard
+
+        mpesaRadioButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                cardRadioButton.isChecked = false // Uncheck the Card radio button
+                Log.d("RadioGroup", "Mpesa is checked")
+            }
+        }
+
+        cardRadioButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                mpesaRadioButton.isChecked = false // Uncheck the Mpesa radio button
+                Log.d("RadioGroup", "Card is checked")
+            }
+        }
+    }
+
+
 
     private fun observeUserInput() {
         // Create a CoroutineScope using the viewLifecycleOwner's lifecycle
