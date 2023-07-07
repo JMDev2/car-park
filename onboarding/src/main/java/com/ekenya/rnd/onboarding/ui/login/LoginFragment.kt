@@ -39,8 +39,24 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        validateUserInput()
+
+
+    }
+
+    private fun validateUserInput() {
         binding.loginContinueBtn.setOnClickListener {
-            findNavController().navigate(R.id.loginVerificationFragment)
+            val phoneNumber = binding.loginPhoneNumberInput.editText?.text.toString().trim()
+
+            if (phoneNumber.isEmpty()) {
+                binding.loginPhoneNumberInput.error = "Please provide a valid phone number"
+            } else if (!phoneNumber.matches(Regex("^\\d{10}$"))) {
+                binding.loginPhoneNumberInput.error =
+                    "Invalid phone number. Phone number should be 10 digits long."
+            } else {
+                // Input is valid, navigate to the next fragment
+                findNavController().navigate(R.id.loginVerificationFragment)
+            }
         }
     }
 

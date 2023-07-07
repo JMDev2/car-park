@@ -1,10 +1,9 @@
 package com.example.main.ui.profile
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.NavHostFragment
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
-import com.ekenya.rnd.common.utils.toast
-import com.example.main.R
-import com.example.main.databinding.FragmentMpesaBinding
 import com.example.main.databinding.FragmentProfileBinding
 
 
@@ -49,7 +45,7 @@ class ProfileFragment : BaseDaggerFragment() {
 
     private fun setupSaveButton() {
         val saveButton = binding.profileSaveBtn
-        saveButton.visibility = View.INVISIBLE // Initially hide the save button
+        saveButton.visibility = View.VISIBLE // Initially hide the save button
 
         // Set click listener for the save button
         saveButton.setOnClickListener {
@@ -156,7 +152,6 @@ class ProfileFragment : BaseDaggerFragment() {
         val email = binding.profileEmailInput.editText?.text.toString().trim()
         val password = binding.profilePassowordInput.editText?.text.toString()
 
-
         // Log the inputs
         Log.d("ProfileFragment", "First Name: $firstName")
         Log.d("ProfileFragment", "Last Name: $lastName")
@@ -171,11 +166,14 @@ class ProfileFragment : BaseDaggerFragment() {
         val isValidPassword = password.isNotEmpty() && password.length >= 6
 
         if (isValidFirstName && isValidLastName && isValidEmail && isValidPassword) {
-            saveButton.visibility = View.VISIBLE // Show the button if all fields are filled and validated
+            saveButton.isEnabled = true // Enable the button
+            saveButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FB8500")) // Set the button's background color to #FB8500
         } else {
-            saveButton.visibility = View.INVISIBLE // Hide the button if any field is empty or validation fails
+            saveButton.isEnabled = false // Disable the button
+            saveButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D8DADB")) // Set the button's background color to #D8DADB
         }
     }
+
 
     // Set up field validations and toggle save button visibility
     private fun setupFieldValidations() {

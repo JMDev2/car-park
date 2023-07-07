@@ -49,12 +49,26 @@ class SignUpFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        validateUserInput()
+
+
+
+    }
+
+    private fun validateUserInput() {
         binding.signupContinueBtn.setOnClickListener {
-            findNavController().navigate(R.id.signUpVerificationFragment)
+            val phoneNumber = binding.signupPhoneNumberInput.editText?.text.toString().trim()
+
+            if (phoneNumber.isEmpty()) {
+                binding.signupPhoneNumberInput.error = "Please provide a valid phone number"
+            } else if (!phoneNumber.matches(Regex("^\\d{10}$"))) {
+                binding.signupPhoneNumberInput.error =
+                    "Invalid phone number. Phone number should be 10 digits long."
+            } else {
+                // Input is valid, navigate to the next fragment
+                findNavController().navigate(R.id.signUpVerificationFragment)
+            }
         }
-
-
-
     }
 
 
