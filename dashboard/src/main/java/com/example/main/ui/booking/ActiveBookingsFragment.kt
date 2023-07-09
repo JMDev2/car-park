@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.example.main.R
+import com.example.main.databinding.FragmentActiveBookingsBinding
 
 
-class ActiveBookingsFragment : Fragment() {
+class ActiveBookingsFragment : BaseDaggerFragment() {
+    private lateinit var binding: FragmentActiveBookingsBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +24,9 @@ class ActiveBookingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_active_bookings, container, false)
+        binding = FragmentActiveBookingsBinding.inflate(layoutInflater, container, false)
+
+        return binding.root
     }
 
 }

@@ -1,12 +1,16 @@
 package com.example.main.ui.dashboard
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.main.R
@@ -51,6 +55,10 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
         toggle.isDrawerIndicatorEnabled = true
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+
+
+
     }
 
     //on navigations items click
@@ -62,16 +70,16 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
             R.id.nav_settings -> {
                 findNavController().navigate(R.id.blankFragment)
             }
-            R.id.nav_logout -> {
-                findNavController().navigate(R.id.blankFragment)
-            }
+
             R.id.nav_payment -> {
                 findNavController().navigate(R.id.selectPaymentFragment)
             }
 
-            R.id.nav_profile -> {
-                findNavController().navigate(R.id.profileFragment)
+            R.id.nav_logout -> {
+                findNavController().navigate(R.id.blankFragment)
             }
+
+
         }
         return true
     }

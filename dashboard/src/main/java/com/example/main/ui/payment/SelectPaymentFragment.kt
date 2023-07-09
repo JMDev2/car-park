@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.utils.toast
 import com.example.main.R
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -70,6 +71,10 @@ SelectPaymentFragment : BaseDaggerFragment() {
 
         binding.paymentArrowMpesa.setOnClickListener {
             findNavController().navigate(R.id.mpesaFragment)
+        }
+
+        binding.paymentRadioCard.setOnClickListener {
+            toast("The method selected is not available at the moment")
         }
     }
 

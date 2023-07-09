@@ -5,9 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.example.main.R
+import com.example.main.databinding.FragmentActiveBookingsBinding
+import com.example.main.databinding.FragmentCompletedBookingsBinding
 
-class CompletedBookingsFragment : Fragment() {
+class CompletedBookingsFragment : BaseDaggerFragment() {
+    private lateinit var binding: FragmentCompletedBookingsBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +24,9 @@ class CompletedBookingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_completed_bookings, container, false)
+        binding = FragmentCompletedBookingsBinding.inflate(layoutInflater, container, false)
+
+        return binding.root
     }
 
 

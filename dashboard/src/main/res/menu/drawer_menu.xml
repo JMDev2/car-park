@@ -6,23 +6,23 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_bookings"
             android:icon="@drawable/ic_directions_img"
-            android:title="Bookings"/>
+            android:title="Bookings"
+            android:textColor="@drawable/checkable_behavior"
+            />
 
         <item android:id="@+id/nav_payment"
             android:icon="@drawable/ic_payments_img"
-            android:title="Payments"/>
+            android:title="Payments"
+            android:textColor="@drawable/checkable_behavior"/>
 
         <item android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_img"
-            android:title="Settings"/>
+            android:title="Settings"
+            android:textColor="@drawable/checkable_behavior"/>
 
-        <item android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_profile_24"
-            android:title="Profile"/>
 
         <item android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout_img"
-            android:iconTint="#BA1A1A"
             android:title="Log Out"/>
 
     </group>

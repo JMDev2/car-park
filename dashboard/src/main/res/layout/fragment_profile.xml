@@ -70,7 +70,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_first_name_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/OutlinedBoxWithCustomBorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -90,8 +90,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_last_name_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        style="@style/OutlinedBoxWithCustomBorder"        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="14dp"
@@ -112,8 +111,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_email_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        style="@style/OutlinedBoxWithCustomBorder"        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="14dp"
@@ -134,8 +132,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_passoword_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        style="@style/OutlinedBoxWithCustomBorder"        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="14dp"
