@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.example.main.R
 import com.example.main.databinding.FragmentParkingBinding
 
 
-class ParkingFragment : Fragment() {
+class ParkingFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentParkingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

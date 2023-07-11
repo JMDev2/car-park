@@ -5,6 +5,7 @@ import com.ekenya.rnd.baseapp.di.ModuleScope
 import com.ekenya.rnd.baseapp.di.injectables.ViewModelModule
 import com.example.main.di.injectables.DashboardActivityModule
 import com.example.main.di.injectables.DashboardFragmentModule
+import com.example.main.di.injectables.NetworkModule
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 
@@ -15,7 +16,8 @@ import dagger.android.support.AndroidSupportInjectionModule
         DashboardFragmentModule::class,
         DashboardActivityModule::class,
         AndroidSupportInjectionModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        NetworkModule::class
     ]
 )
 

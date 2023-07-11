@@ -2,24 +2,40 @@ package com.example.main.ui.dashboard
 
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.utils.Status
 import com.example.main.R
+import com.example.main.adapter.ParkingAdaptor
 import com.example.main.databinding.FragmentMainDashboardBinding
 import com.google.android.material.navigation.NavigationView
+import javax.inject.Inject
 
 
-class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
+class DashboardMainFragment : BaseDaggerFragment(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: FragmentMainDashboardBinding
+
+    private lateinit var parkingAdaptor: ParkingAdaptor
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel by lazy {
+        ViewModelProvider(this, factory)[MainDashboardViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +72,8 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        observeParkingData()
+
 
 
 
@@ -82,6 +100,52 @@ class DashboardMainFragment : Fragment(), NavigationView.OnNavigationItemSelecte
 
         }
         return true
+    }
+
+    /*
+    setup the recyclerview
+     */
+    private fun setRecyclerView(){
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            adapter = parkingAdaptor
+        }
+    }
+
+
+    /*
+    observe api data
+     */
+
+    private fun observeParkingData(){
+        viewModel.observeParkingsLivedata().observe(
+            viewLifecycleOwner)
+        { parkingResponse ->
+            when (parkingResponse.status){
+                Status.SUCCESS ->{
+                    //TODO: Dismiss the progress bar
+                    val parking = parkingResponse.data
+                    Log.d("ParkingData", "observeParking: ${parkingResponse.data}")
+
+                    parking?.let {
+                        parkingAdaptor = ParkingAdaptor(it)
+                        setRecyclerView()
+                      //  onClickParking
+
+                    }
+
+
+                }
+                Status.ERROR ->{
+
+                }
+                Status.LOADING ->{
+
+                }
+
+            }
+
+        }
     }
 
 }
