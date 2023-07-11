@@ -22,7 +22,7 @@
             app:cardCornerRadius="12dp">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/parking_layout_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -39,6 +39,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/parking_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Highway Mall"
@@ -48,6 +49,7 @@
                 android:layout_gravity="start"/>
 
             <TextView
+                android:id="@+id/parking_location_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Uhuru Highway, nairobi"
@@ -57,6 +59,7 @@
                />
 
             <TextView
+                android:id="@+id/parking_cost_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="KSH 140/ per Hour"
