@@ -1,6 +1,7 @@
 package com.ekenya.rnd.common.api.getparkings
 
 import com.ekenya.rnd.common.model.ParkingResponse
+import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.utils.Resource
 import javax.inject.Inject
 
@@ -10,7 +11,19 @@ class ParkingImpl @Inject constructor(private val api: ParkingService) {
         return if (response.isSuccessful){
             Resource.success(response.body())
         }else{
-            Resource.error("No Campaigns found. Check your network connection", null)
+            Resource.error("No Response found. Check your network connection", null)
+        }
+    }
+
+    /*
+    a single parking
+     */
+    suspend fun getParkingItem() : Resource<ParkingResponseItem?>{
+        val response = api.getParkingItem()
+        return if (response.isSuccessful){
+            Resource.success(response.body())
+        }else{
+            Resource.error("No response found", null)
         }
     }
 }

@@ -25,7 +25,7 @@ RecyclerView.Adapter<ParkingAdaptor.ParkingViewHolder>(){
                 parkingLocationTv.text = parking.location
                 parkingCostTv.text = parking.price.toString()
 
-                if (parking.image.isNotEmpty()){
+                if (parking.image?.isNotEmpty() == true){
                     Picasso.get().load(parking.image).into(binding.parkingLayoutImg)
                 }else {
                     binding.parkingLayoutImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.parking_img))
