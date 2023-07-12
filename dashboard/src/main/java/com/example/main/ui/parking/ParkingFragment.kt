@@ -5,17 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
+import com.ekenya.rnd.common.model.SlotsResponseItem
 import com.ekenya.rnd.common.utils.Status
+import com.ekenya.rnd.common.utils.toast
 import com.example.main.R
+import com.example.main.adapter.SlotsAdapter
 import com.example.main.databinding.FragmentParkingBinding
 import com.example.main.ui.booking.BookingFragment
+import com.example.main.ui.booking.BookingViewModel
 import com.example.main.ui.dashboard.MainDashboardViewModel
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
@@ -23,15 +29,20 @@ import javax.inject.Inject
 
 class ParkingFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentParkingBinding
+    private var selectedSlot: SlotsResponseItem? = null
+
+    private lateinit var slotsAdapter: SlotsAdapter
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
     private val viewModel by lazy {
-        ViewModelProvider(this, factory)[MainDashboardViewModel::class.java]
+        ViewModelProvider(this, factory)[ParkingViewModel::class.java]
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -55,18 +66,26 @@ class ParkingFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        slotsAdapter = SlotsAdapter(ArrayList()) // Initialize the adapter with an empty list
+
+
         // observeParkingItems()
         receivingParkingItem()
+        observeSlotsData()
+        proceedToBook()
 
 
         binding.proceedToBookButton.setOnClickListener {
             findNavController().navigate(R.id.bookingFragment)
         }
 
-
+        // Set the click listener for the button
         binding.proceedToBookButton.setOnClickListener {
-            findNavController().navigate(R.id.bookingFragment)
+            proceedToBook()
         }
+
+
+
     }
 
     private fun receivingParkingItem() {
@@ -83,18 +102,79 @@ class ParkingFragment : BaseDaggerFragment() {
         }
 
         // Pass the item to another fragment
-        val bundle = Bundle().apply {
-            putParcelable("item", item)
-        }
-        val bookingFragment = BookingFragment()
-        bookingFragment.arguments = bundle
 
-     // Perform the fragment transaction
-        requireView().findNavController().navigate(
-            R.id.bookingFragment,
-            bundle
-        )
         // navOptions
+    }
+
+    /*
+    clicking the slots views
+     */
+
+
+    private fun onSlotItemClick() {
+        slotsAdapter.onSlotItemClick = { clickedSlot ->
+            // Update the selected item
+            selectedSlot = clickedSlot
+            slotsAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun proceedToBook() {
+        // Check if a slot is selected
+        // Check if a slot is selected
+        if (selectedSlot != null) {
+            // Create the bundle with the selected slot
+            val bundle = Bundle()
+            bundle.putParcelable("slot", selectedSlot)
+
+            // Navigate to the next fragment with the bundle
+            findNavController().navigate(
+                R.id.bookingFragment,
+                bundle
+            )
+        } else {
+            // Show a toast message indicating that no slot is selected
+            Toast.makeText(requireContext(), "Please select a slot", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
+
+    /*
+    observing the data
+     */
+    private fun setRecyclerView() {
+        binding.slotRecyclerview.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = slotsAdapter
+        }
+    }
+
+    private fun observeSlotsData(){
+        viewModel.observeSlotsLivedata().observe(
+            viewLifecycleOwner
+        ){
+                slotsResponse ->
+            when (slotsResponse.status){
+                Status.SUCCESS ->{
+                    //TODO: dismiss the progress bar
+                    val slots = slotsResponse.data
+
+                    slots?.let {
+                        slotsAdapter = SlotsAdapter(it)
+                        setRecyclerView()
+                        onSlotItemClick()
+                    }
+                }
+                Status.ERROR ->{
+
+                }
+                Status.LOADING ->{
+
+                }
+            }
+        }
     }
 }
 

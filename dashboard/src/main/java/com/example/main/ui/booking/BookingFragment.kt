@@ -10,29 +10,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
+import com.ekenya.rnd.common.model.SlotsResponseItem
+import com.ekenya.rnd.common.utils.Status
 import com.example.main.R
+import com.example.main.adapter.ParkingAdaptor
+import com.example.main.adapter.SlotsAdapter
 import com.example.main.databinding.FragmentBookingBinding
+import com.example.main.ui.dashboard.MainDashboardViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class BookingFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentBookingBinding
     private var isDatePickerOpen = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBookingBinding.inflate(inflater, container, false)
-
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         // Enable the back arrow in the toolbar
@@ -49,20 +56,8 @@ class BookingFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set the toolbar as the support action bar
-        val receivedItem = arguments?.getParcelable<ParkingResponseItem>("item")
-        receivedItem?.let { parkingItem ->
-            binding.bookTitleTv.text = parkingItem.title
-            binding.bookLocationTv.text = parkingItem.location
-            binding.bookAmountTv.text = parkingItem.description
-
-            Picasso.get().load(parkingItem.image).into(binding.bookParkingImage)
-        }
-
-
-
         validateDateTimeInputs()
-
+        receiveSlotParcelable()
 
 
         binding.clickOverlay.setOnClickListener {
@@ -74,12 +69,13 @@ class BookingFragment : BaseDaggerFragment() {
         binding.clickTimeToOverlay.setOnClickListener {
                 openTimeToPicker()
         }
+    }
 
-
-
-
-
-        // Rest of your code...
+    private fun receiveSlotParcelable(){
+        val slot = requireArguments().getParcelable<SlotsResponseItem>("slot")
+        slot?.let {
+            binding.bookParkingSlotTv.text = slot.name
+        }
     }
 
     private fun toggleDatePicker() {
@@ -130,9 +126,6 @@ class BookingFragment : BaseDaggerFragment() {
         datePickerDialog.show()
     }
 
-
-
-
     //time from picker
     private fun openTimeFromPicker() {
         val calendar = Calendar.getInstance()
@@ -154,9 +147,6 @@ class BookingFragment : BaseDaggerFragment() {
 
         timePickerDialog.show()
     }
-
-
-
 
     //time to picker
     private fun openTimeToPicker() {
@@ -187,15 +177,7 @@ class BookingFragment : BaseDaggerFragment() {
         timePickerDialog.show()
     }
 
-
-
-
-
-//l3tm31n@h0m3
-
-
     //validating date, time inputs
-
     private fun validateDateTimeInputs() {
         binding.proccedToPayBtn.setOnClickListener {
             val date = binding.bookDateInput.editText?.text.toString().trim()
@@ -227,8 +209,6 @@ class BookingFragment : BaseDaggerFragment() {
     }
 
 
-
-
-
-
 }
+
+

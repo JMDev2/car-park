@@ -34,13 +34,13 @@
         android:name="com.example.main.ui.parking.ParkingFragment"
         android:label="fragment_parking"
         tools:layout="@layout/fragment_parking" >
-        <action
-            android:id="@+id/action_parkingFragment_to_bookingFragment"
-            app:destination="@id/bookingFragment" />
         <argument
             android:name="itemId"
             app:argType="string"
             android:defaultValue="" />
+        <action
+            android:id="@+id/action_parkingFragment_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookingFragment"

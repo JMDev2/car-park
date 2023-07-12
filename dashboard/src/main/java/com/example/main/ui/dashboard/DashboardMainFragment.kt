@@ -51,10 +51,6 @@ class DashboardMainFragment : BaseDaggerFragment(), NavigationView.OnNavigationI
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO:to be removed
-        binding.btn.setOnClickListener {
-            findNavController().navigate(R.id.parkingFragment)
-        }
 
         binding.searchView.queryHint="Where would you want to Park?"
         binding.navView.setNavigationItemSelectedListener(this)
