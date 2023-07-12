@@ -37,6 +37,10 @@
         <action
             android:id="@+id/action_parkingFragment_to_bookingFragment"
             app:destination="@id/bookingFragment" />
+        <argument
+            android:name="itemId"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
     <fragment
         android:id="@+id/bookingFragment"

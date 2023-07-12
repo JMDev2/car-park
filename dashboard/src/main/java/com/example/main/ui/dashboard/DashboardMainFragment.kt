@@ -15,9 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.utils.Status
 import com.example.main.R
 import com.example.main.adapter.ParkingAdaptor
@@ -103,6 +106,24 @@ class DashboardMainFragment : BaseDaggerFragment(), NavigationView.OnNavigationI
     }
 
     /*
+    Navigating to parking fragment
+     */
+
+    private fun onClickParking() {
+        parkingAdaptor.onItemClick = { ParkingResponseItem ->
+            val bundle = Bundle()
+            bundle.putParcelable("item", ParkingResponseItem)
+
+            requireView().findNavController().navigate(
+                R.id.parkingFragment,
+                bundle,
+               // navOptions
+            )
+        }
+    }
+
+
+    /*
     setup the recyclerview
      */
     private fun setRecyclerView(){
@@ -130,7 +151,7 @@ class DashboardMainFragment : BaseDaggerFragment(), NavigationView.OnNavigationI
                     parking?.let {
                         parkingAdaptor = ParkingAdaptor(it)
                         setRecyclerView()
-                      //  onClickParking
+                        onClickParking()
 
                     }
 

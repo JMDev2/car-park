@@ -13,9 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.example.main.R
 import com.example.main.databinding.FragmentBookingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -48,6 +50,15 @@ class BookingFragment : BaseDaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set the toolbar as the support action bar
+        val receivedItem = arguments?.getParcelable<ParkingResponseItem>("item")
+        receivedItem?.let { parkingItem ->
+            binding.bookTitleTv.text = parkingItem.title
+            binding.bookLocationTv.text = parkingItem.location
+            binding.bookAmountTv.text = parkingItem.description
+
+            Picasso.get().load(parkingItem.image).into(binding.bookParkingImage)
+        }
+
 
 
         validateDateTimeInputs()

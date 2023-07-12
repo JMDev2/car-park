@@ -37,8 +37,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/cardView">
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +53,7 @@
 
         <TextView
             style="@style/text_features"
-            android:id="@+id/parking_title"
+            android:id="@+id/parking_title_tv"
             android:text="Highway Mall"
             android:fontFamily="@font/inter"
             android:layout_marginTop="13dp"
@@ -63,18 +61,18 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/parking_location"
+            android:id="@+id/parking_location_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
             android:text="Uhuru Highway, Nairobi"
             android:layout_marginStart="24dp"
             android:textSize="14dp"
-            app:layout_constraintTop_toBottomOf="@+id/parking_title"
+            app:layout_constraintTop_toBottomOf="@+id/parking_title_tv"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/parking_payment"
+            android:id="@+id/parking_price_tv"
             style="@style/text_features"
             android:text="KSH 150"
             android:fontFamily="@font/inter"
@@ -96,15 +94,15 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            android:id="@+id/parking_description"
+            android:id="@+id/parking_description_tv"
             style="@style/description"
             android:text="Secure and affordable parking spaces at First Church Of Christ near Nyerere Rd, Nairobi. Available from Monday to Saturday, from 6 am to 6 pm. BOOK LONGER AND PAY LESS!"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/parking_location" />
+            app:layout_constraintTop_toBottomOf="@id/parking_location_tv" />
 
         <View style="@style/HorizontalLine"
             android:id="@+id/view"
-            app:layout_constraintTop_toBottomOf="@id/parking_description"
+            app:layout_constraintTop_toBottomOf="@id/parking_description_tv"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -184,6 +182,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/security_feature_tv"
                     style="@style/desc_features"
                     android:layout_marginStart="8dp"
                     android:text="100% of recent guests gave the location a 5-star rating"
@@ -215,6 +214,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/about_feature_tv"
                     style="@style/desc_features"
                     android:layout_width="0dp"
                     android:text="100% of recent guests gave the location a 5-star rating"
@@ -243,27 +243,24 @@
         app:layout_constraintEnd_toEndOf="parent">
 
 
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white"
-        android:padding="12dp"
-        >
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/proceed_to_book_button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:text="Proceed to book"
-            style="@style/CustomButton"
-            android:fontFamily="@font/inter" />
+            android:layout_height="80dp"
+            android:padding="12dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardElevation="4dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/proceed_to_book_button"
+                style="@style/CustomButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="@font/inter"
+                android:gravity="center"
+                android:text="Proceed to book" />
 
 
-    </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
