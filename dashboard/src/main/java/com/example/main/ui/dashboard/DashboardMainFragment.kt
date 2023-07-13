@@ -118,16 +118,13 @@ class DashboardMainFragment : BaseDaggerFragment(),
                 findNavController().navigate(R.id.bookingHistoryFragment)
             }
 
-            R.id.nav_settings -> {
-                findNavController().navigate(R.id.blankFragment)
-            }
 
             R.id.nav_payment -> {
-                findNavController().navigate(R.id.selectPaymentFragment)
+                findNavController().navigate(R.id.addPaymentFragment)
             }
 
             R.id.nav_logout -> {
-                findNavController().navigate(R.id.blankFragment)
+
             }
         }
         return true

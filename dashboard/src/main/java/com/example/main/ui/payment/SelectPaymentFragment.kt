@@ -62,20 +62,29 @@ SelectPaymentFragment : BaseDaggerFragment() {
         progressBarr()
         observeUserInput()
         setupRadioGroup()
+        updateButtonVisibility()
+
 
 
 
         binding.proccedToBookMpesaBtn.setOnClickListener {
-            findNavController().navigate(R.id.mpesaFragment)
+            findNavController().navigate(R.id.dashboardMainFragment)
         }
 
+
         binding.paymentArrowMpesa.setOnClickListener {
-            findNavController().navigate(R.id.mpesaFragment)
+            if (binding.paymentRadioMpesa.isChecked) {
+                findNavController().navigate(R.id.mpesaFragment)
+            }else{
+                toast("Please check the payment method")
+            }
         }
 
         binding.paymentRadioCard.setOnClickListener {
             toast("The method selected is not available at the moment")
+            binding.paymentArrowMpesa.isEnabled = false // Disable the arrow button
         }
+
     }
 
 
@@ -90,6 +99,7 @@ SelectPaymentFragment : BaseDaggerFragment() {
         mpesaRadioButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 cardRadioButton.isChecked = false // Uncheck the Card radio button
+                binding.paymentArrowMpesa.isEnabled = true // Enable the arrow button
                 Log.d("RadioGroup", "Mpesa is checked")
             }
         }
@@ -97,12 +107,11 @@ SelectPaymentFragment : BaseDaggerFragment() {
         cardRadioButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 mpesaRadioButton.isChecked = false // Uncheck the Mpesa radio button
+                binding.paymentArrowMpesa.isEnabled = false // Disable the arrow button
                 Log.d("RadioGroup", "Card is checked")
             }
         }
     }
-
-
 
     private fun observeUserInput() {
         // Create a CoroutineScope using the viewLifecycleOwner's lifecycle
@@ -112,9 +121,19 @@ SelectPaymentFragment : BaseDaggerFragment() {
         coroutineScope.launch(Dispatchers.Main) {
             viewModel.userInput.collect { userInput ->
                 binding.userPhoneNumberTv.text = userInput
+                updateButtonVisibility()
             }
         }
     }
+
+    private fun updateButtonVisibility() {
+        if (binding.userPhoneNumberTv.text.isNullOrEmpty()) {
+            binding.proccedToBookMpesaBtn.visibility = View.GONE // Hide the button
+        } else {
+            binding.proccedToBookMpesaBtn.visibility = View.VISIBLE // Show the button
+        }
+    }
+
 
 
 
@@ -125,12 +144,12 @@ SelectPaymentFragment : BaseDaggerFragment() {
         val countDownTimer = object : CountDownTimer(totalDuration, interval) {
             override fun onTick(millisUntilFinished: Long) {
                 val progress = ((totalDuration - millisUntilFinished) / interval).toInt()
-                binding.roundProgressBar.progress = progress
+               // binding.roundProgressBar.progress = progress
             }
 
             override fun onFinish() {
                 // Timer finished
-                binding.roundProgressBar.progress = 0 // Reset the progress bar to the initial state
+              //  binding.roundProgressBar.progress = 0 // Reset the progress bar to the initial state
                 start() // Start the timer again to repeat the progress bar
 
             }

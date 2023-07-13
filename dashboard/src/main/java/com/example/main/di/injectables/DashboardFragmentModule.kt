@@ -10,6 +10,7 @@ import com.example.main.ui.dashboard.DashboardMainFragment
 import com.example.main.ui.dashboard.MainDashboardViewModel
 import com.example.main.ui.parking.ParkingFragment
 import com.example.main.ui.parking.ParkingViewModel
+import com.example.main.ui.payment.AddPaymentFragment
 import com.example.main.ui.payment.MpesaFragment
 import com.example.main.ui.payment.PaymentViewModel
 import com.example.main.ui.profile.ProfileFragment
@@ -71,8 +72,7 @@ abstract class DashboardFragmentModule {
         abstract fun bindBookingViewModel(viewModel: BookingViewModel): ViewModel
     }
 
-    //payment fragment
-
+    //payment fragments
     @Module
     abstract class PaymentViewModelModule {
         @Binds
@@ -87,5 +87,8 @@ abstract class DashboardFragmentModule {
 
     @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
     abstract fun contributeSelectPaymentFragment(): SelectPaymentFragment
+
+    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
+    abstract fun contributeAddPaymentFragment(): AddPaymentFragment
 }
 

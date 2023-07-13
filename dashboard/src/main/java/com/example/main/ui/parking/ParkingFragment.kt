@@ -116,8 +116,10 @@ class ParkingFragment : BaseDaggerFragment() {
                 R.id.bookingFragment,
                 bundle
             )
+
         } else {
             // Show a toast message indicating that no slot is selected
+
             Toast.makeText(requireContext(), "Please select a slot", Toast.LENGTH_SHORT).show()
         }
     }
