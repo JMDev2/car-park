@@ -1,14 +1,12 @@
 package com.example.main.ui.parking
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,13 +14,9 @@ import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.model.SlotsResponseItem
 import com.ekenya.rnd.common.utils.Status
-import com.ekenya.rnd.common.utils.toast
 import com.example.main.R
 import com.example.main.adapter.SlotsAdapter
 import com.example.main.databinding.FragmentParkingBinding
-import com.example.main.ui.booking.BookingFragment
-import com.example.main.ui.booking.BookingViewModel
-import com.example.main.ui.dashboard.MainDashboardViewModel
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
@@ -38,7 +32,6 @@ class ParkingFragment : BaseDaggerFragment() {
     private val viewModel by lazy {
         ViewModelProvider(this, factory)[ParkingViewModel::class.java]
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,9 +76,6 @@ class ParkingFragment : BaseDaggerFragment() {
         binding.proceedToBookButton.setOnClickListener {
             proceedToBook()
         }
-
-
-
     }
 
     private fun receivingParkingItem() {
@@ -100,17 +90,11 @@ class ParkingFragment : BaseDaggerFragment() {
             binding.aboutFeatureTv.text = parkingItem.about
             Picasso.get().load(parkingItem.image).into(binding.parkingImage)
         }
-
-        // Pass the item to another fragment
-
-        // navOptions
     }
 
     /*
     clicking the slots views
      */
-
-
     private fun onSlotItemClick() {
         slotsAdapter.onSlotItemClick = { clickedSlot ->
             // Update the selected item
@@ -137,9 +121,6 @@ class ParkingFragment : BaseDaggerFragment() {
             Toast.makeText(requireContext(), "Please select a slot", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
 
     /*
     observing the data
@@ -179,37 +160,5 @@ class ParkingFragment : BaseDaggerFragment() {
 }
 
 
-//    private fun observeParkingItems() {
-//        viewModel.observeParkingsLivedata().observe(
-//            viewLifecycleOwner
-//        ) { parking ->
-//            when (parking.status) {
-//                Status.SUCCESS -> {
-//                    //TODo: Dismiss progress dialog
-//                    val response = parking.data
-//
-//                    response?.let {
-//                        binding.parkingTitleTv.text = response[6]
-//                        binding.locationText.text = response.location
-//                        binding.parkingDescriptionTv.text = response.description
-//                        binding.parkingPriceTv.text = response.price.toString()
-//                        binding.aboutFeatureTv.text = response.about
-//                        binding.securityFeatureTv.text = response.security
-//                        Picasso.get().load(response.image).into(binding.parkingImage)
-//
-//                    }
-//
-//                }
-//
-//                Status.ERROR -> {
-//
-//                }
-//
-//                Status.LOADING -> {
-//
-//                }
-//            }
-//        }
-//    }
 
 
