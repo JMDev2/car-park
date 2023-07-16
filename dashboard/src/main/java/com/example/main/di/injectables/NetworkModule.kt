@@ -1,5 +1,8 @@
 package com.example.main.di.injectables
 
+import android.app.Application
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.ekenya.rnd.baseapp.di.ModuleScope
 import com.ekenya.rnd.common.Constants
 import com.ekenya.rnd.common.api.getparkings.ParkingService
@@ -13,12 +16,21 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 @Module
 class NetworkModule {//provide HttpLogginInterceptor
 @Provides
 @ModuleScope
 fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
+    }
+
+
+
+    @Provides
+    @ModuleScope
+    fun provideSharedPreferences(application: Application): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(application)
     }
 
     //provide GsonConverterFactory
