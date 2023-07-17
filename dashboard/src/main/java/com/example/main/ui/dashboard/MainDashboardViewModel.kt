@@ -16,7 +16,6 @@ class MainDashboardViewModel @Inject constructor(private val repository: Parking
     private var parkingLiveData = MutableLiveData<Resource<ParkingResponse?>>()
 
     init {
-
         getAllTheParkings()
     }
 

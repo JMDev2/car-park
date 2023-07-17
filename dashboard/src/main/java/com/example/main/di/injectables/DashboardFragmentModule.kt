@@ -3,8 +3,8 @@ package com.example.main.di.injectables
 import androidx.lifecycle.ViewModel
 import com.ekenya.rnd.baseapp.di.ViewModelKey
 import com.example.main.ui.booking.ActiveBookingsFragment
-import com.example.main.ui.payment.SelectPaymentFragment
 import com.example.main.ui.booking.BookingFragment
+import com.example.main.ui.payment.SelectPaymentFragment
 import com.example.main.ui.booking.BookingViewModel
 import com.example.main.ui.dashboard.DashboardMainFragment
 import com.example.main.ui.dashboard.MainDashboardViewModel

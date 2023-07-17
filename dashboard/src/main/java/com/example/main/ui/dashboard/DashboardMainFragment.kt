@@ -19,6 +19,7 @@ import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.utils.Status
 import com.example.main.R
+import com.example.main.adapter.ConfirmExitDialogFragment
 import com.example.main.adapter.ParkingAdaptor
 import com.example.main.databinding.FragmentMainDashboardBinding
 import com.google.android.material.navigation.NavigationView
@@ -124,13 +125,20 @@ class DashboardMainFragment : BaseDaggerFragment(),
             }
 
             R.id.nav_logout -> {
+                showConfirmExitDialog()
 
             }
         }
         return true
     }
 
-  //  Navigating to parking fragment
+    private fun showConfirmExitDialog() {
+        val confirmExitDialog = ConfirmExitDialogFragment()
+        confirmExitDialog.show(parentFragmentManager, "ConfirmExitDialog")
+    }
+
+
+    //  Navigating to parking fragment
     private fun onClickParking() {
         parkingAdaptor.onItemClick = { ParkingResponseItem ->
             val bundle = Bundle()

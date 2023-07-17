@@ -32,7 +32,19 @@
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+
        >
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/dilog"
+           android:layout_width="356dp"
+           android:layout_height="188dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent">
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
        <TextView
            android:id="@+id/home"
            android:layout_width="wrap_content"
@@ -119,7 +131,6 @@
             app:menu="@menu/drawer_menu"
             tools:ignore="MissingConstraints"
             tools:openDrawer="start"/>
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

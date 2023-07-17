@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.example.main.OpenCameraFragment
+import com.example.main.R
 import com.example.main.databinding.FragmentProfileBinding
 
 
@@ -33,6 +36,7 @@ class ProfileFragment : BaseDaggerFragment() {
         setupToolbar()
         setupSaveButton()
         setupInputValidation()
+        showSelectImageDialog()
     }
 
     private fun setupToolbar() {
@@ -214,6 +218,17 @@ class ProfileFragment : BaseDaggerFragment() {
 
     private fun toast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+
+
+    private fun showSelectImageDialog() {
+        binding.chageProfilePictureTv.setOnClickListener {
+            val openCameraFragment = OpenCameraFragment()
+            val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.container, openCameraFragment)
+            transaction.commit()
+        }
     }
 }
 

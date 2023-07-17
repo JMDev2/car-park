@@ -69,7 +69,7 @@ class ParkingFragment : BaseDaggerFragment() {
 
 
         binding.proceedToBookButton.setOnClickListener {
-            findNavController().navigate(R.id.bookingFragment)
+            findNavController().navigate(R.id.BookingFragment)
         }
 
         // Set the click listener for the button
@@ -113,7 +113,7 @@ class ParkingFragment : BaseDaggerFragment() {
 
             // Navigate to the next fragment with the bundle
             findNavController().navigate(
-                R.id.bookingFragment,
+                R.id.BookingFragment,
                 bundle
             )
 

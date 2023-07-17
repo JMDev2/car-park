@@ -98,11 +98,4 @@ class AddPaymentFragment : BaseDaggerFragment() {
             binding.constraint.visibility = View.GONE
         }
     }
-
-    //onItem click
-    //onItem click
-
-
-
-
 }
