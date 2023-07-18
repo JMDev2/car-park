@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.model.SlotsResponseItem
@@ -21,6 +22,7 @@ import com.example.main.R
 import com.example.main.adapter.ParkingAdaptor
 import com.example.main.adapter.SlotsAdapter
 import com.example.main.databinding.FragmentBookingBinding
+import com.example.main.ui.MainActivity
 import com.example.main.ui.dashboard.MainDashboardViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.squareup.picasso.Picasso
@@ -41,14 +43,8 @@ class BookingFragment : BaseDaggerFragment() {
     ): View? {
         binding = FragmentBookingBinding.inflate(inflater, container, false)
 
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        // Enable the back arrow in the toolbar
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // Set the click listener for the back arrow
-        binding.toolbar.setNavigationOnClickListener {
-            NavHostFragment.findNavController(this).popBackStack()
-        }
 
+        // Set the click listener for the back arrow
         return binding.root
 
     }
@@ -56,8 +52,20 @@ class BookingFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbar)
+        // Enable the back arrow in the toolbar
+        (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
+        binding.toolbar.setNavigationOnClickListener {
+           findNavController().popBackStack(R.id.parkingFragment, false)
+            //requireActivity().onBackPressed()
+        }
+
         validateDateTimeInputs()
         receiveSlotParcelable()
+        receiveParkingItem()
 
 
         binding.clickOverlay.setOnClickListener {
@@ -77,6 +85,17 @@ class BookingFragment : BaseDaggerFragment() {
             binding.bookParkingSlotTv.text = slot.name
         }
     }
+    private fun receiveParkingItem() {
+        val parkingItem = requireArguments().getParcelable<ParkingResponseItem>("item")
+        parkingItem?.let {
+            binding.bookTitleTv.text = parkingItem.title
+            binding.bookLocationTv.text = parkingItem.location
+            binding.bookAmountTv.text = parkingItem.price.toString()
+            Picasso.get().load(parkingItem.image).into(binding.bookParkingImage)
+
+        }
+    }
+
 
     private fun toggleDatePicker() {
         if (isDatePickerOpen) {

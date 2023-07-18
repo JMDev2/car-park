@@ -2,13 +2,20 @@ package com.example.main.ui
 
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import com.ekenya.rnd.baseapp.R
+import androidx.navigation.fragment.NavHostFragment
+
 import com.ekenya.rnd.common.abstractions.BaseActivity
+import com.example.main.R
 import com.example.main.databinding.ActivityMainBinding
 
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    val navController by lazy {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_ContainerView) as NavHostFragment
+        navHostFragment.navController
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -18,5 +25,9 @@ class MainActivity : BaseActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)
 
         supportActionBar?.hide()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+         return  navController.navigateUp()|| super.onSupportNavigateUp()
     }
 }

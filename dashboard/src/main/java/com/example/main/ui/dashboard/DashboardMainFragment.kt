@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 
 import androidx.navigation.findNavController
@@ -69,6 +71,7 @@ class DashboardMainFragment : BaseDaggerFragment(),
         toggle.syncState()
 
         observeParkingData()
+        headerViews()
 
         //perfoming search
         val searchView = binding.searchView
@@ -83,6 +86,16 @@ class DashboardMainFragment : BaseDaggerFragment(),
                 return true
             }
         })
+    }
+
+    //manipulating the header layout views
+    private fun headerViews(){
+        val header = binding.navView.getHeaderView(0)
+        val viewProfile = header.findViewById<TextView>(R.id.nav_view_profile_tv)
+
+        viewProfile.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
     }
 
     //filtering the search and handling the item onclick after search
@@ -118,7 +131,6 @@ class DashboardMainFragment : BaseDaggerFragment(),
             R.id.nav_bookings -> {
                 findNavController().navigate(R.id.bookingHistoryFragment)
             }
-
 
             R.id.nav_payment -> {
                 findNavController().navigate(R.id.addPaymentFragment)

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/dashboardMainFragment">
 
     <fragment
         android:id="@+id/dashboardMainFragment"
@@ -64,7 +64,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.main.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_openCameraFragment"
+            app:destination="@id/openCameraFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addPaymentFragment"
         android:name="com.example.main.ui.payment.AddPaymentFragment"
@@ -80,8 +84,17 @@
         android:label="fragment_booking"
         tools:layout="@layout/fragment_booking" >
         <action
-            android:id="@+id/action_slotBookingFragment_to_selectPaymentFragment"
+            android:id="@+id/action_BookingFragment_to_selectPaymentFragment"
             app:destination="@id/selectPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openCameraFragment"
+        android:name="com.example.main.ui.profile.OpenCameraFragment"
+        android:label="fragment_open_camera"
+        tools:layout="@layout/fragment_open_camera" >
+        <action
+            android:id="@+id/action_openCameraFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
 </navigation>

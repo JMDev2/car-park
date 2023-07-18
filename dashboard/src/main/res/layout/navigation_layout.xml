@@ -53,8 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="View Profile"
-        android:textColor="#DE7500"
-
-        />
+        android:textColor="#DE7500" />
 
 </LinearLayout>

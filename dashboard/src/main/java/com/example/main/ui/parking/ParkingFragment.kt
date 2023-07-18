@@ -25,6 +25,7 @@ class ParkingFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentParkingBinding
     private var selectedSlot: SlotsResponseItem? = null
 
+
     private lateinit var slotsAdapter: SlotsAdapter
 
     @Inject
@@ -65,12 +66,10 @@ class ParkingFragment : BaseDaggerFragment() {
         // observeParkingItems()
         receivingParkingItem()
         observeSlotsData()
-        proceedToBook()
 
 
-        binding.proceedToBookButton.setOnClickListener {
-            findNavController().navigate(R.id.BookingFragment)
-        }
+
+
 
         // Set the click listener for the button
         binding.proceedToBookButton.setOnClickListener {
@@ -89,6 +88,9 @@ class ParkingFragment : BaseDaggerFragment() {
             binding.securityFeatureTv.text = parkingItem.security
             binding.aboutFeatureTv.text = parkingItem.about
             Picasso.get().load(parkingItem.image).into(binding.parkingImage)
+
+
+
         }
     }
 
@@ -104,12 +106,14 @@ class ParkingFragment : BaseDaggerFragment() {
     }
 
     private fun proceedToBook() {
-        // Check if a slot is selected
+        val parkingItem = requireArguments().getParcelable<ParkingResponseItem>("item")
         // Check if a slot is selected
         if (selectedSlot != null) {
             // Create the bundle with the selected slot
             val bundle = Bundle()
             bundle.putParcelable("slot", selectedSlot)
+            bundle.putParcelable("item", parkingItem)
+
 
             // Navigate to the next fragment with the bundle
             findNavController().navigate(

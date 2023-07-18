@@ -1,4 +1,4 @@
-package com.example.main.ui
+package com.example.main.ui.navigation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -32,6 +32,9 @@ class NavigationDrawerFragment : BaseDaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.navViewProfileTv.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
 
 
     }

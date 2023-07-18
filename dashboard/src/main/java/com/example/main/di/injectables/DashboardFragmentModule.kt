@@ -13,6 +13,7 @@ import com.example.main.ui.parking.ParkingViewModel
 import com.example.main.ui.payment.AddPaymentFragment
 import com.example.main.ui.payment.MpesaFragment
 import com.example.main.ui.payment.PaymentViewModel
+import com.example.main.ui.profile.OpenCameraFragment
 import com.example.main.ui.profile.ProfileFragment
 import com.example.main.ui.profile.ProfileViewModel
 import dagger.Binds
@@ -24,6 +25,8 @@ import dagger.multibindings.IntoMap
 abstract class DashboardFragmentModule {
 
     //user profile
+    @ContributesAndroidInjector(modules = [ProfileViewModelModule::class])
+    abstract fun contributeOpenCameraFragment(): OpenCameraFragment
     @ContributesAndroidInjector(modules = [ProfileViewModelModule::class])
     abstract fun contributeProfileFragment(): ProfileFragment
     @Module
