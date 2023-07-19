@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ekenya.rnd.common.LottieDialogFragment
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.utils.Status
@@ -34,6 +35,8 @@ class DashboardMainFragment : BaseDaggerFragment(),
     private lateinit var binding: FragmentMainDashboardBinding
 
     private lateinit var parkingAdaptor: ParkingAdaptor
+    private var lottieDialogFragment: LottieDialogFragment? = null
+
 
     //search parkings
     var filteredParkings: List<ParkingResponseItem> = ArrayList()
@@ -89,7 +92,7 @@ class DashboardMainFragment : BaseDaggerFragment(),
     }
 
     //manipulating the header layout views
-    private fun headerViews(){
+    private fun headerViews() {
         val header = binding.navView.getHeaderView(0)
         val viewProfile = header.findViewById<TextView>(R.id.nav_view_profile_tv)
 
@@ -100,7 +103,8 @@ class DashboardMainFragment : BaseDaggerFragment(),
 
     //filtering the search and handling the item onclick after search
     private fun filterParking(parking: String) {
-        val filteredList = filteredParkings.filter { it.title?.contains(parking, ignoreCase = true) ?: false }
+        val filteredList =
+            filteredParkings.filter { it.title?.contains(parking, ignoreCase = true) ?: false }
         val theFilteredParkings = ArrayList(filteredList)
 
         if (theFilteredParkings.isEmpty()) {
@@ -164,7 +168,7 @@ class DashboardMainFragment : BaseDaggerFragment(),
         }
     }
 
-   // setup the recyclerview
+    // setup the recyclerview
     private fun setRecyclerView() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -172,12 +176,27 @@ class DashboardMainFragment : BaseDaggerFragment(),
         }
     }
 
+    private fun showProgressDialog() {
+        LottieDialogFragment.newInstance().show(requireFragmentManager(), "")
+    }
 
-  //  observe api data
+
+    //  observe api data
+
     private fun observeParkingData() {
-        viewModel.observeParkingsLivedata().observe(
-            viewLifecycleOwner
-        ) { parkingResponse ->
+        val lottieDialogFragment = LottieDialogFragment.newInstance()
+
+        viewModel.observeLoadingState().observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                // Show the progress dialog
+                lottieDialogFragment.setProgressBarVisible(true)
+            } else {
+                // Hide the progress dialog
+                lottieDialogFragment.setProgressBarVisible(false)
+            }
+        }
+
+        viewModel.observeParkingsLivedata().observe(viewLifecycleOwner) { parkingResponse ->
             when (parkingResponse.status) {
                 Status.SUCCESS -> {
                     //TODO: Dismiss the progress bar
@@ -185,28 +204,23 @@ class DashboardMainFragment : BaseDaggerFragment(),
                     Log.d("ParkingData", "observeParking: ${parkingResponse.data}")
 
                     parking?.let {
-
                         filteredParkings = parking //filter the search
                         parkingAdaptor = ParkingAdaptor(it)
                         setRecyclerView()
                         onClickParking()
-
                     }
-
-
                 }
 
                 Status.ERROR -> {
-
+                    // Handle error case
                 }
 
                 Status.LOADING -> {
-
+                    // Already handled in the observeLoadingState().observe block
                 }
-
             }
-
         }
     }
 
 }
+

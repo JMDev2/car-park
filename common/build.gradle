@@ -89,4 +89,8 @@ dependencies {
     //Material
     api 'com.google.android.material:material:' + rootProject.materialVersion
 
+    //lottie
+    api 'com.airbnb.android:lottie:4.2.0'
+
+
 }

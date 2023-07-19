@@ -15,6 +15,11 @@ class MainDashboardViewModel @Inject constructor(private val repository: Parking
 
     private var parkingLiveData = MutableLiveData<Resource<ParkingResponse?>>()
 
+    //loading progressbar
+    private val loadingStateLiveData = MutableLiveData<Boolean>()
+    fun observeLoadingState(): LiveData<Boolean> = loadingStateLiveData
+
+
     init {
         getAllTheParkings()
     }
@@ -24,10 +29,13 @@ class MainDashboardViewModel @Inject constructor(private val repository: Parking
     get all parkings
      */
     fun getAllTheParkings() = viewModelScope.launch {
-        repository.getParkings().collect(){
+        loadingStateLiveData.value = true // Show the progress dialog
+        repository.getParkings().collect {
+            loadingStateLiveData.value = false // Hide the progress dialog
             parkingLiveData.postValue(it)
         }
     }
+
 
     fun observeParkingsLivedata(): LiveData<Resource<ParkingResponse?>>{
         return parkingLiveData
