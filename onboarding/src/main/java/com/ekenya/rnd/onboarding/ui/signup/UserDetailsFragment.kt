@@ -4,7 +4,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,27 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.model.User
+import com.ekenya.rnd.common.utils.Status
+import com.ekenya.rnd.onboarding.R
 import com.ekenya.rnd.onboarding.databinding.FragmentUserDetailsBinding
+import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 
 class UserDetailsFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentUserDetailsBinding
 
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel by lazy {
+        ViewModelProvider(this, factory)[SignUpViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +61,8 @@ class UserDetailsFragment : BaseDaggerFragment() {
         setupToolbar()
         setupSaveButton()
         setupInputValidation()
+        captureUserInput()
+        observeRespose()
     }
 
     private fun setupToolbar() {
@@ -65,10 +79,13 @@ class UserDetailsFragment : BaseDaggerFragment() {
 
         // Set click listener for the save button
         saveButton.setOnClickListener {
+            val user = validateFieldsAndToggleSaveButtonVisibility()
             if (isInputValid()) {
-                toast("Input is valid. Saving...")
+                viewModel.registerUser(user)
+                findNavController().navigate(R.id.introFragment)
+                showToast("Successs")
             } else {
-                toast("Please fill all fields correctly.")
+                toast("Something went wrong.")
             }
         }
     }
@@ -76,7 +93,7 @@ class UserDetailsFragment : BaseDaggerFragment() {
     private fun setupInputValidation() {
         val firstNameInput = binding.firstNameInput
         val lastNameInput = binding.secondNameInput
-        val birthday = binding.birthdayInput
+        val phoneNumber = binding.phonNumberInput
         val emailInput = binding.emailInput
         val passwordInput = binding.passwordInput
 
@@ -90,6 +107,12 @@ class UserDetailsFragment : BaseDaggerFragment() {
         lastNameInput.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 validateLastName()
+            }
+        }
+
+        phoneNumber.editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                validatePhonNumber()
             }
         }
 
@@ -109,7 +132,6 @@ class UserDetailsFragment : BaseDaggerFragment() {
     private fun validateFirstName() {
         val firstNameInput = binding.firstNameInput
         val firstName = firstNameInput.editText?.text.toString().trim()
-
         if (firstName.isEmpty()) {
             firstNameInput.error = "First name is required"
         } else {
@@ -133,6 +155,18 @@ class UserDetailsFragment : BaseDaggerFragment() {
     }
 
     //TODO: birthday
+    private fun validatePhonNumber() {
+        val phonNumberInput = binding.phonNumberInput
+        val phonNumber = phonNumberInput.editText?.text.toString().trim()
+
+        if (phonNumber.isEmpty()) {
+            phonNumberInput.error = "Last name is required"
+        } else {
+            phonNumberInput.error = null
+        }
+
+        validateFieldsAndToggleSaveButtonVisibility()
+    }
 
     private fun validateEmail() {
         val emailInput = binding.emailInput
@@ -165,16 +199,17 @@ class UserDetailsFragment : BaseDaggerFragment() {
     }
 
     //checking the user input fields and if valid it displays the button
-    private fun validateFieldsAndToggleSaveButtonVisibility() {
+    private fun validateFieldsAndToggleSaveButtonVisibility(): User {
         val firstName = binding.firstNameInput.editText?.text.toString().trim()
         val lastName = binding.secondNameInput.editText?.text.toString().trim()
-        val birthDay = binding.birthdayInput.editText?.text.toString().trim()
+        val phoneNumber = binding.phonNumberInput.editText?.text.toString().trim()
         val email = binding.emailInput.editText?.text.toString().trim()
         val password = binding.passwordInput.editText?.text.toString()
 
         // Log the inputs
         Log.d("ProfileFragment", "First Name: $firstName")
         Log.d("ProfileFragment", "Last Name: $lastName")
+        Log.d("ProfileFragment", "Phone Number: $phoneNumber")
         Log.d("ProfileFragment", "Email: $email")
         Log.d("ProfileFragment", "Password: $password")
 
@@ -182,18 +217,27 @@ class UserDetailsFragment : BaseDaggerFragment() {
 
         val isValidFirstName = firstName.isNotEmpty()
         val isValidLastName = lastName.isNotEmpty()
-        val isValidBirthDay = birthDay.isNotEmpty()
+        val isValidPhoneNumber = phoneNumber.isNotEmpty()
         val isValidEmail = email.isNotEmpty() && isValidEmail(email)
         val isValidPassword = password.isNotEmpty() && password.length >= 6
 
-        if (isValidFirstName && isValidLastName && isValidEmail && isValidPassword) {
+        if (isValidFirstName && isValidLastName && isValidPhoneNumber && isValidEmail && isValidPassword) {
             saveButton.isEnabled = true // Enable the button
             saveButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FB8500")) // Set the button's background color to #FB8500
         } else {
             saveButton.isEnabled = false // Disable the button
             saveButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D8DADB")) // Set the button's background color to #D8DADB
         }
+
+        return User(
+            email = email,
+            firstName = firstName,
+            lastName = lastName,
+            password = password,
+            phoneNumber = phoneNumber
+        )
     }
+
 
 
     // Set up field validations and toggle save button visibility
@@ -206,7 +250,7 @@ class UserDetailsFragment : BaseDaggerFragment() {
             validateFieldsAndToggleSaveButtonVisibility()
         }
 
-        binding.birthdayInput.editText?.doOnTextChanged { _, _, _, _ ->
+        binding.phonNumberInput.editText?.doOnTextChanged { _, _, _, _ ->
             validateFieldsAndToggleSaveButtonVisibility()
         }
 
@@ -220,16 +264,14 @@ class UserDetailsFragment : BaseDaggerFragment() {
     }
 
 
-
-
     private fun isInputValid(): Boolean {
         val firstName = binding.firstNameInput.editText?.text.toString().trim()
         val lastName = binding.secondNameInput.editText?.text.toString().trim()
-        val birthDay = binding.birthdayInput.editText?.text.toString().trim()
+        val phoneNumber = binding.phonNumberInput.editText?.text.toString().trim()
         val email = binding.emailInput.editText?.text.toString().trim()
         val password = binding.passwordInput.editText?.text.toString()
 
-        return firstName.isNotEmpty() && lastName.isNotEmpty() && birthDay.isNotEmpty() && email.isNotEmpty() &&
+        return firstName.isNotEmpty() && lastName.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty() &&
                 isValidEmail(email) && password.isNotEmpty() && password.length >= 6
     }
 
@@ -241,5 +283,42 @@ class UserDetailsFragment : BaseDaggerFragment() {
     private fun toast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
+    private fun captureUserInput(){
+
+    }
+
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+
+    private fun observeRespose(){
+        viewModel.observeRegisterUserLiveData().observe(
+            viewLifecycleOwner
+        ){ userresponse ->
+            when(userresponse.status){
+                Status.SUCCESS -> {
+
+                    //TODO: Dismiss the progress bar
+                    val response = userresponse.data
+                    response.let {
+
+                    }
+                }
+                Status.ERROR ->{
+
+                }
+                Status.LOADING ->{
+
+                }
+            }
+
+        }
+    }
+
+
+
 }
 

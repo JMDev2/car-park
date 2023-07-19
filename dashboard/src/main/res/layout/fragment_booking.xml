@@ -6,25 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".ui.booking.BookingFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+    <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:navigationIcon="@drawable/keyboard_backspace">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:title="Book Parking"
-            app:navigationIcon="@drawable/keyboard_backspace"
-            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_scrollFlags="scroll|enterAlways" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking"/>
+    </com.google.android.material.appbar.MaterialToolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/appbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <com.google.android.material.appbar.MaterialToolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="@color/white"-->
+<!--            app:title="Book Parking"-->
+<!--            app:navigationIcon="@drawable/keyboard_backspace"-->
+<!--            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+<!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways" />-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
 
     <LinearLayout
@@ -37,7 +52,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.cardview.widget.CardView
             android:layout_width="140dp"
@@ -321,11 +336,11 @@
         style="@style/CustomButton"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="10dp"
         android:text="Proceed to pay"
         android:fontFamily="@font/inter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hoursTv" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

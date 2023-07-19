@@ -16,8 +16,16 @@ class ParkingRepository @Inject constructor(private val api: ParkingImpl){
     }.flowOn(Dispatchers.IO)
 
 
-    suspend fun getParkingItem() = flow {
+//    suspend fun getParkingItem() = flow {
+//        emit(Resource.loading(null))
+//        emit(api.getParkingItem())
+//    }.flowOn(Dispatchers.IO)
+
+    /*
+    get slots
+     */
+    suspend fun getTheSlots() = flow {
         emit(Resource.loading(null))
-        emit(api.getParkingItem())
+        emit(api.getSlots())
     }.flowOn(Dispatchers.IO)
 }

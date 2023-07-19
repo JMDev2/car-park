@@ -1,7 +1,9 @@
 package com.example.main.ui.profile
 
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,29 +12,46 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.model.ImageData
+import com.example.main.R
 import com.example.main.databinding.FragmentProfileBinding
 
 
 class ProfileFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentProfileBinding
+    companion object {
+        const val REQUEST_IMAGE_CAPTURE = 1
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Retrieve the image URI from the arguments
+        val imageUriString = arguments?.getString("imageUri")
+
+        if (imageUriString != null) {
+            // Convert the image URI string back to a Uri object
+            val imageUri = Uri.parse(imageUriString)
+           binding.profileImage.setImageURI(imageUri)
+        }
+
         setupFieldValidations()
         setupToolbar()
         setupSaveButton()
         setupInputValidation()
+        showSelectImageDialog()
     }
 
     private fun setupToolbar() {
@@ -214,6 +233,17 @@ class ProfileFragment : BaseDaggerFragment() {
 
     private fun toast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+
+
+    private fun showSelectImageDialog() {
+        binding.chageProfilePictureTv.setOnClickListener {
+            val openCameraFragment = OpenCameraFragment()
+            val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.container, openCameraFragment)
+            transaction.commit()
+        }
     }
 }
 

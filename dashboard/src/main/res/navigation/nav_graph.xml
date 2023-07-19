@@ -15,41 +15,27 @@
             android:id="@+id/action_dashboardMainFragment_to_parkingFragment"
             app:destination="@id/parkingFragment" />
         <action
-            android:id="@+id/action_dashboardMainFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
-        <action
             android:id="@+id/action_dashboardMainFragment_to_bookingHistoryFragment"
             app:destination="@id/bookingHistoryFragment" />
         <action
             android:id="@+id/action_dashboardMainFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_dashboardMainFragment_to_addPaymentFragment"
+            app:destination="@id/addPaymentFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.example.main.ui.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
     <fragment
         android:id="@+id/parkingFragment"
         android:name="com.example.main.ui.parking.ParkingFragment"
         android:label="fragment_parking"
         tools:layout="@layout/fragment_parking" >
-        <action
-            android:id="@+id/action_parkingFragment_to_bookingFragment"
-            app:destination="@id/bookingFragment" />
         <argument
             android:name="itemId"
             app:argType="string"
             android:defaultValue="" />
-    </fragment>
-    <fragment
-        android:id="@+id/bookingFragment"
-        android:name="com.example.main.ui.booking.BookingFragment"
-        android:label="fragment_booking"
-        tools:layout="@layout/fragment_booking" >
         <action
-            android:id="@+id/action_bookingFragment_to_selectPaymentFragment"
-            app:destination="@id/selectPaymentFragment" />
+            android:id="@+id/action_parkingFragment_to_slotBookingFragment"
+            app:destination="@id/BookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectPaymentFragment"
@@ -78,7 +64,38 @@
         android:id="@+id/profileFragment"
         android:name="com.example.main.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_openCameraFragment"
+            app:destination="@id/openCameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPaymentFragment"
+        android:name="com.example.main.ui.payment.AddPaymentFragment"
+        android:label="fragment_add_payment"
+        tools:layout="@layout/fragment_add_payment" >
+        <action
+            android:id="@+id/action_addPaymentFragment_to_selectPaymentFragment"
+            app:destination="@id/selectPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/BookingFragment"
+        android:name="com.example.main.ui.booking.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" >
+        <action
+            android:id="@+id/action_BookingFragment_to_selectPaymentFragment"
+            app:destination="@id/selectPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openCameraFragment"
+        android:name="com.example.main.ui.profile.OpenCameraFragment"
+        android:label="fragment_open_camera"
+        tools:layout="@layout/fragment_open_camera" >
+        <action
+            android:id="@+id/action_openCameraFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
 </navigation>
 

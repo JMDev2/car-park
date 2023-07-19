@@ -80,7 +80,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/birthday_input"
+        android:id="@+id/phon_number_input"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/inter"
-        android:hint="Birthday"
+        android:hint="Phone Number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/second_name_input">
 
@@ -107,7 +107,7 @@
         android:fontFamily="@font/inter"
         android:text="To sign up you need to be atleast 18 years old"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday_input" />
+        app:layout_constraintTop_toBottomOf="@+id/phon_number_input" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input"

@@ -46,7 +46,7 @@
                 android:id="@+id/payment_radio_mpesa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true" />
+                 />
 
             <ImageView
                 android:id="@+id/peyment_mpesa_image"
@@ -139,19 +139,19 @@
         android:fontFamily="@font/inter"
         android:layout_marginTop="34dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radio_group" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <!-- Your layout XML file -->
-    <ProgressBar
-        android:id="@+id/roundProgressBar"
-        android:layout_width="179dp"
-        android:layout_height="162dp"
-        android:indeterminateOnly="false"
-        android:progressDrawable="@drawable/progressbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/procced_to_book_mpesa_btn" />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/roundProgressBar"-->
+<!--        android:layout_width="179dp"-->
+<!--        android:layout_height="162dp"-->
+<!--        android:indeterminateOnly="false"-->
+<!--        android:progressDrawable="@drawable/progressbar"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/procced_to_book_mpesa_btn" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

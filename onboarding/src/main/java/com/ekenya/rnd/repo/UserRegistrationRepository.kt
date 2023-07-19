@@ -1,4 +1,4 @@
-package com.ekenya.rnd.common.repo
+package com.ekenya.rnd.repo
 
 import com.ekenya.rnd.common.api.registration.RegistrationImpl
 import com.ekenya.rnd.common.model.User
@@ -13,4 +13,6 @@ class UserRegistrationRepository @Inject constructor(private val api: Registrati
         emit(Resource.loading(null))
         emit(api.registerUser(user))
     }.flowOn(Dispatchers.IO)
+
+
 }

@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.onboarding.R
 import com.ekenya.rnd.onboarding.databinding.FragmentIntroBinding
 
-class IntroFragment : Fragment() {
+class IntroFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentIntroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
