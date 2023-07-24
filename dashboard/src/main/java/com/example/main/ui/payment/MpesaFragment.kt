@@ -67,7 +67,7 @@ class MpesaFragment : BaseDaggerFragment() {
                     binding.toggleSwitch.isChecked = false // Set isChecked to false
                 } else {
                     val formattedInput = "+254$phoneInput" // Prepend "+254" to the user input
-                    viewModel.setUserInput(formattedInput) //setting the input in the viewmodel
+                    viewModel.setPhoneNumberInput(formattedInput) //setting the input in the viewmodel
                     // binding.mesaPhoneNumberInput.tag = userInput
                     Log.d("MpesaFragment", "User Input: $phoneInput")
                 }

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 
 @Module
-class NetworkModule {
+class NetworkModule() {
 
     //provide HttpLogginInterceptor
     @Provides
@@ -61,4 +61,6 @@ class NetworkModule {
     @ModuleScope
     fun provideRegistrationApi(retrofit: Retrofit): RegistrationService =
         retrofit.create(RegistrationService::class.java)
+
+
 }

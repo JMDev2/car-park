@@ -36,6 +36,14 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.googleDaggerVersion
     kapt 'com.google.dagger:dagger-android-processor:' + rootProject.googleDaggerVersion
 
+    //Runtime
+    implementation "androidx.room:room-runtime:2.5.2"
+
+    //Kotlin extensions (Coroutines + Flow)
+    implementation "androidx.room:room-ktx:2.5.2"
+
+    kapt "androidx.room:room-compiler:2.5.2"
+
     //Encryption Lib
 //    debugImplementation 'com.ekenya.android.encryptionlib.debug:encryptionlib:'+rootProject.ekenyeEntryptionLibVersion
 //    releaseImplementation'com.ekenya.android:encryptionlib:'+rootProject.ekenyeEntryptionLibVersion

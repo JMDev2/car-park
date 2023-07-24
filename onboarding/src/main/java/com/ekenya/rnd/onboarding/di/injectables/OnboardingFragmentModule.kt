@@ -2,6 +2,7 @@ package com.ekenya.rnd.onboarding.di.injectables
 
 import androidx.lifecycle.ViewModel
 import com.ekenya.rnd.baseapp.di.ViewModelKey
+import com.ekenya.rnd.onboarding.database.UserViewModel
 import com.ekenya.rnd.onboarding.ui.login.LoginFragment
 import com.ekenya.rnd.onboarding.ui.login.LoginVerificationFragment
 import com.ekenya.rnd.onboarding.ui.login.LoginViewModel
@@ -57,8 +58,6 @@ abstract class OnboardingFragmentModule {
     @ContributesAndroidInjector(modules = [OnboardingSignUpFragmentModule::class])
     abstract fun contributeSignUpVerificationFragment(): SignUpVerificationFragment
 
-    @ContributesAndroidInjector(modules = [OnboardingSignUpFragmentModule::class])
-    abstract fun contributeUserDetailsFragment(): UserDetailsFragment
 
     @ContributesAndroidInjector(modules = [OnboardingSignUpFragmentModule::class])
     abstract fun contributeSignUpFragment(): SignUpFragment
@@ -68,6 +67,17 @@ abstract class OnboardingFragmentModule {
         @IntoMap
         @ViewModelKey(SignUpViewModel::class)
         abstract fun bindSignUpViewModel(viewModel: SignUpViewModel) : ViewModel
+    }
+
+
+    @ContributesAndroidInjector(modules = [OnboardingUserFragmentModule::class])
+    abstract fun contributeUserDetailsFragment(): UserDetailsFragment
+    @Module
+    abstract class OnboardingUserFragmentModule{
+        @Binds
+        @IntoMap
+        @ViewModelKey(UserViewModel::class)
+        abstract fun bindUserViewModel(viewModel: UserViewModel) : ViewModel
     }
 
 

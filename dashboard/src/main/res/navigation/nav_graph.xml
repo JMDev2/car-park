@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_selectPaymentFragment_to_mpesaFragment"
             app:destination="@id/mpesaFragment" />
+        <action
+            android:id="@+id/action_selectPaymentFragment_to_creditCardFragment"
+            app:destination="@id/creditCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/mpesaFragment"
@@ -77,6 +80,9 @@
         <action
             android:id="@+id/action_addPaymentFragment_to_selectPaymentFragment"
             app:destination="@id/selectPaymentFragment" />
+        <action
+            android:id="@+id/action_addPaymentFragment_to_creditCardFragment"
+            app:destination="@id/creditCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/BookingFragment"
@@ -96,6 +102,11 @@
             android:id="@+id/action_openCameraFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/creditCardFragment"
+        android:name="com.example.main.ui.payment.CreditCardFragment"
+        android:label="fragment_credit_card"
+        tools:layout="@layout/fragment_credit_card" />
 
 </navigation>
 

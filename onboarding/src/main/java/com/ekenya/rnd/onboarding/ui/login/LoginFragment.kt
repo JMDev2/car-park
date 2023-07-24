@@ -1,18 +1,33 @@
 package com.ekenya.rnd.onboarding.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.ekenya.rnd.common.Constants.USER_PIN
+import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.utils.toast
 import com.ekenya.rnd.onboarding.R
+import com.ekenya.rnd.onboarding.database.UserViewModel
 import com.ekenya.rnd.onboarding.databinding.FragmentLoginBinding
+import javax.inject.Inject
 
-class LoginFragment : Fragment() {
+
+
+class LoginFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentLoginBinding
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel by lazy {
+        ViewModelProvider(this, factory)[LoginViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +56,12 @@ class LoginFragment : Fragment() {
 
         validateUserInput()
 
+        //navigateToSignup if you dont have an account
+        binding.navigateSignup.setOnClickListener {
+            findNavController().navigate(R.id.userDetailsFragment)
+        }
+
+
 
     }
 
@@ -51,14 +72,30 @@ class LoginFragment : Fragment() {
             if (phoneNumber.isEmpty()) {
                 binding.loginPhoneNumberInput.error = "Please provide a valid phone number"
             } else if (!phoneNumber.matches(Regex("^\\d{10}$"))) {
-                binding.loginPhoneNumberInput.error =
-                    "Invalid phone number. Phone number should be 10 digits long."
+                binding.loginPhoneNumberInput.error = "Invalid phone number. Phone number should be 10 digits long."
             } else {
-                // Input is valid, navigate to the next fragment
-                findNavController().navigate(R.id.loginVerificationFragment)
+                // Input is valid, call the observeUserLogin() function to check for the user
+                observeUserLogin(phoneNumber)
             }
         }
     }
+
+    //observe the user phone number
+    private fun observeUserLogin(phoneNumber: String) {
+        viewModel.getUserByPhoneNumber(phoneNumber).observe(
+            viewLifecycleOwner
+        ) { user ->
+            if (user != null) {
+                USER_PIN = user.password
+                Log.e("USER","user ${user}")
+                findNavController().navigate(R.id.loginVerificationFragment)
+            } else {
+                toast("No matching phone number")
+            }
+        }
+    }
+
+
 
 
 }

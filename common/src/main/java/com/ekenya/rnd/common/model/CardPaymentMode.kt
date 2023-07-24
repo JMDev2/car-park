@@ -3,10 +3,10 @@ package com.ekenya.rnd.common.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class PaymentMode(
+data class CardPaymentMode(
     val name: String?,
     val image: Int,
-    val phoneNumber: String?
+    val cardNumber: String?
     ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -18,19 +18,19 @@ data class PaymentMode(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeInt(image)
-        parcel.writeString(phoneNumber)
+        parcel.writeString(cardNumber)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<PaymentMode> {
-        override fun createFromParcel(parcel: Parcel): PaymentMode {
-            return PaymentMode(parcel)
+    companion object CREATOR : Parcelable.Creator<CardPaymentMode> {
+        override fun createFromParcel(parcel: Parcel): CardPaymentMode {
+            return CardPaymentMode(parcel)
         }
 
-        override fun newArray(size: Int): Array<PaymentMode?> {
+        override fun newArray(size: Int): Array<CardPaymentMode?> {
             return arrayOfNulls(size)
         }
     }

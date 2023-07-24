@@ -3,17 +3,17 @@ package com.example.main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ekenya.rnd.common.model.ParkingResponseItem
-import com.ekenya.rnd.common.model.PaymentMode
+import com.ekenya.rnd.common.model.CardPaymentMode
+import com.ekenya.rnd.common.model.MpesaPaymentMode
 import com.example.main.databinding.ItemPaymentModeLayoutBinding
 import com.example.main.ui.payment.PaymentViewModel
 import com.squareup.picasso.Picasso
 
-class PaymentModeAdapter(private val paymentModes: List<PaymentMode>, private val viewModel: PaymentViewModel) :
+class PaymentModeAdapter(private val mpesaPaymentModes: List<MpesaPaymentMode>, private val viewModel: PaymentViewModel) :
     RecyclerView.Adapter<PaymentModeAdapter.ViewHolder>() {
 
     //itemclick
-    lateinit var onItemClick: ((PaymentMode) -> Unit)
+    lateinit var onItemClick: ((MpesaPaymentMode) -> Unit)
 
 
 
@@ -24,25 +24,26 @@ class PaymentModeAdapter(private val paymentModes: List<PaymentMode>, private va
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val paymentMode = paymentModes[position]
+        val paymentMode = mpesaPaymentModes[position]
         holder.bind(paymentMode)
 
         //click item
         holder.itemView.setOnClickListener {
-            onItemClick.invoke(paymentModes[position])
+            onItemClick.invoke(mpesaPaymentModes[position])
         }
     }
 
     override fun getItemCount(): Int {
-        return paymentModes.size
+        return mpesaPaymentModes.size
     }
 
     inner class ViewHolder(private val binding: ItemPaymentModeLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(paymentMode: PaymentMode) {
-            Picasso.get().load(paymentMode.image).into(binding.peymentMpesaImageLayout)
-            binding.userPhoneNumberTvLayout.text = viewModel.userInput.value
+        fun bind(mpesaPaymentMode: MpesaPaymentMode) {
+            Picasso.get().load(mpesaPaymentMode.image).into(binding.peymentMpesaImageLayout)
+            binding.userPhoneNumberTvLayout.text = viewModel.phoneInput.value
+
         }
     }
 }

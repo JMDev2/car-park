@@ -146,6 +146,7 @@ class ParkingFragment : BaseDaggerFragment() {
             when (slotsResponse.status){
                 Status.SUCCESS ->{
                     //TODO: dismiss the progress bar
+                    binding.progressBar.visibility = View.GONE
                     val slots = slotsResponse.data
 
                     slots?.let {
@@ -158,6 +159,7 @@ class ParkingFragment : BaseDaggerFragment() {
 
                 }
                 Status.LOADING ->{
+                    binding.progressBar.visibility = View.VISIBLE
 
                 }
             }

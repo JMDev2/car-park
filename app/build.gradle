@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdk 33
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
@@ -54,6 +54,16 @@ dependencies {
     //Kotlin dagger
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.googleDaggerVersion
     kapt 'com.google.dagger:dagger-android-processor:' + rootProject.googleDaggerVersion
+
+    //Annotation processor
+    kapt "androidx.room:room-compiler:2.4.0"
+
+
+    //Runtime
+    implementation "androidx.room:room-runtime:2.5.2"
+
+    //Kotlin extensions (Coroutines + Flow)
+    implementation "androidx.room:room-ktx:2.5.2"
 
     //Encryption Lib
 //    debugImplementation 'com.ekenya.android.encryptionlib.debug:encryptionlib:'+rootProject.ekenyeEntryptionLibVersion

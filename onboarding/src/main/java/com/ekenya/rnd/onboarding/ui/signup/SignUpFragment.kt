@@ -43,6 +43,7 @@ class SignUpFragment : BaseDaggerFragment() {
 
 
 
+
     }
 
     private fun validateUserInput() {
@@ -56,7 +57,7 @@ class SignUpFragment : BaseDaggerFragment() {
                     "Invalid phone number. Phone number should be 10 digits long."
             } else {
                 // Input is valid, navigate to the next fragment
-                findNavController().navigate(R.id.signUpVerificationFragment)
+                findNavController().navigate(R.id.userDetailsFragment)
             }
         }
     }

@@ -7,6 +7,7 @@ import com.ekenya.rnd.baseapp.di.ModuleScope
 import com.ekenya.rnd.common.Constants
 import com.ekenya.rnd.common.api.getparkings.ParkingService
 import com.ekenya.rnd.common.api.registration.RegistrationService
+import com.ekenya.rnd.common.utils.NetworkInterceptor
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 
 @Module
@@ -47,6 +49,7 @@ fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterce
         OkHttpClient.Builder()
             .connectTimeout(100, TimeUnit.SECONDS)
             .readTimeout(100, TimeUnit.SECONDS)
+            .addInterceptor(NetworkInterceptor())
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor { chain ->
                 chain.proceed(
@@ -54,6 +57,8 @@ fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterce
                         .build()
                 )
             }.build()
+
+
 
     @Provides
     @ModuleScope

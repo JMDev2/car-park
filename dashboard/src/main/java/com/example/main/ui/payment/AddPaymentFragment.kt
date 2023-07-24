@@ -2,7 +2,6 @@ package com.example.main.ui.payment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
-import com.ekenya.rnd.common.model.PaymentMode
+import com.ekenya.rnd.common.model.CardPaymentMode
+import com.ekenya.rnd.common.model.MpesaPaymentMode
 import com.example.main.R
+import com.example.main.adapter.CardPaymentAdapter
 import com.example.main.adapter.PaymentModeAdapter
 import com.example.main.databinding.FragmentAddPaymentBinding
 import javax.inject.Inject
@@ -21,8 +22,10 @@ import javax.inject.Inject
 
 class AddPaymentFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentAddPaymentBinding
-    private lateinit var paymentModes: List<PaymentMode>
+    private lateinit var mpesaPaymentModes: List<MpesaPaymentMode>
+    private lateinit var cardPaymentModes: List<CardPaymentMode>
     private lateinit var paymentModeAdapter: PaymentModeAdapter
+    private lateinit var cardPaymentAdapter: CardPaymentAdapter
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -59,14 +62,19 @@ class AddPaymentFragment : BaseDaggerFragment() {
 
 
         val bundle = arguments
-        val selectedPaymentMode = bundle?.getParcelable<PaymentMode>("paymentMode")
+        val selectedMpesaPaymentMode = bundle?.getParcelable<MpesaPaymentMode>("paymentMode")
+        val selectCardaPaymentMode = bundle?.getParcelable<CardPaymentMode>("cardPaymentMode")
 
-        selectedPaymentMode?.let {
-            paymentModes = listOf(it)
+        selectedMpesaPaymentMode?.let {
+            mpesaPaymentModes = listOf(it)
             setupRecyclerView()
             handleEmptyRecyclerView()
-
         }
+    //    selectCardaPaymentMode?.let {
+         //@jinakubwaHSC123,   cardPaymentModes = listOf(it)
+       //     setupRecyclerView1()
+
+      //  }
 
         binding.paymentBtn.setOnClickListener {
             findNavController().navigate(R.id.selectPaymentFragment)
@@ -77,12 +85,22 @@ class AddPaymentFragment : BaseDaggerFragment() {
 
     //sets up the recyclerview
     private fun setupRecyclerView() {
-        paymentModeAdapter = PaymentModeAdapter(paymentModes, viewModel)
+        paymentModeAdapter = PaymentModeAdapter(mpesaPaymentModes, viewModel)
         paymentModeAdapter.onItemClick = { paymentMode ->
-            Log.d("namba", "${viewModel.userInput.value}")
+            Log.d("namba", "${viewModel.phoneInput.value}")
             findNavController().navigate(R.id.dashboardMainFragment)
         }
         binding.addPaymentRecyclerview.adapter = paymentModeAdapter
+        binding.addPaymentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun setupRecyclerView1() {
+        cardPaymentAdapter = CardPaymentAdapter(cardPaymentModes, viewModel)
+//        paymentModeAdapter'.onItemClick = { paymentMode ->
+//            Log.d("namba", "${viewModel.phoneInput.value}")
+//            findNavController().navigate(R.id.dashboardMainFragment)
+//        }
+        binding.addPaymentRecyclerview.adapter = cardPaymentAdapter
         binding.addPaymentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
     }
 
@@ -90,7 +108,7 @@ class AddPaymentFragment : BaseDaggerFragment() {
 
     //checks if the rcyclerview is empty
     private fun handleEmptyRecyclerView() {
-        if (paymentModes.isEmpty()) {
+        if (mpesaPaymentModes.isEmpty()) {
             binding.addPaymentRecyclerview.visibility = View.GONE
             binding.constraint.visibility = View.VISIBLE
         } else {

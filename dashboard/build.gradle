@@ -2,6 +2,7 @@ plugins {
     id 'com.android.dynamic-feature'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 android {
     namespace 'com.example.main'
@@ -46,6 +47,20 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.espressoVersion
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //Runtime
+
+    //room
+    implementation "androidx.room:room-runtime:2.5.2"
+
+    //Kotlin extensions (Coroutines + Flow)
+    implementation "androidx.room:room-ktx:2.5.2"
+
+
+    //Runtime
+    api "androidx.room:room-runtime:2.5.2"
+
+    //Kotlin extensions (Coroutines + Flow)
+    api "androidx.room:room-ktx:2.5.2"
 
     //Java
     annotationProcessor "com.google.dagger:dagger-android-processor:" + rootProject.googleDaggerVersion
@@ -53,6 +68,8 @@ dependencies {
     //Kotlin
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.googleDaggerVersion
     kapt 'com.google.dagger:dagger-android-processor:' + rootProject.googleDaggerVersion
+
+    annotationProcessor "androidx.room:room-compiler:2.5.2"
 
 
 

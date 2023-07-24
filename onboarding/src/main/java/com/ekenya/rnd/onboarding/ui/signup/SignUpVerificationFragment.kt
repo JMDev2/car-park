@@ -1,6 +1,7 @@
 package com.ekenya.rnd.onboarding.ui.signup
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.utils.toast
 import com.ekenya.rnd.onboarding.R
 import com.ekenya.rnd.onboarding.databinding.FragmentSignUpVerificationBinding
 
@@ -54,17 +56,23 @@ class SignUpVerificationFragment : BaseDaggerFragment() {
     private fun validateUserInput() {
         binding.signupVerificationContinueBtn.setOnClickListener {
             val verificationCode = binding.signupVerificationInput.editText?.text.toString().trim()
+            Log.d("VerificationCode", "Code: $verificationCode")
 
             if (verificationCode.isEmpty()) {
                 binding.signupVerificationInput.error = "Please provide a verification code"
-            } else if (!verificationCode.matches(Regex("^\\d+$"))) {
+            } else if (!verificationCode.matches(Regex("^\\d{3}$"))) {
                 binding.signupVerificationInput.error = "Invalid verification code. Code should only contain digits."
             } else {
-                // Input is valid, navigate to the next fragment
-                findNavController().navigate(R.id.userDetailsFragment)
+                // Input is valid, navigate to the next fragment if the code is "1000"
+                if (verificationCode == "1000") {
+                    findNavController().navigate(R.id.passwordFragment)
+                } else {
+                    toast("Please insert the correct code")
+                }
             }
         }
     }
+
 
 }
 

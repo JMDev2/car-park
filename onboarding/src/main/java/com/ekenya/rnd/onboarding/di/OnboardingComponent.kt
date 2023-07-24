@@ -6,6 +6,7 @@ import com.ekenya.rnd.baseapp.di.injectables.ViewModelModule
 import com.ekenya.rnd.onboarding.di.injectables.NetworkModule
 import com.ekenya.rnd.onboarding.di.injectables.OnboardingActivityModule
 import com.ekenya.rnd.onboarding.di.injectables.OnboardingFragmentModule
+import com.ekenya.rnd.onboarding.di.injectables.RoomModule
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 
@@ -15,10 +16,10 @@ import dagger.android.support.AndroidSupportInjectionModule
     modules = [
         OnboardingFragmentModule::class,
         OnboardingActivityModule::class,
-        //MainViewModelModule::class,
         AndroidSupportInjectionModule::class,
         ViewModelModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        RoomModule::class
     ]
 )
 

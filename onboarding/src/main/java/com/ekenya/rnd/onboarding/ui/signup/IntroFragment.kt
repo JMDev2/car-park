@@ -33,7 +33,7 @@ class IntroFragment : BaseDaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signupBtn.setOnClickListener {
-            findNavController().navigate(R.id.signUpFragment)
+            findNavController().navigate(R.id.userDetailsFragment)
         }
 
         binding.loginBtn.setOnClickListener {

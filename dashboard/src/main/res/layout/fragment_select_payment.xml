@@ -102,19 +102,28 @@
                 android:layout_height="wrap_content"
                 android:checked="false" />
 
-            <TextView
-                style="@style/text_features"
-                android:id="@+id/peyment_card_text"
-                android:text="Credit Card"
-                android:gravity="center"
-                android:fontFamily="@font/inter"
-                android:textStyle="bold"
-                />
+            <ImageView
+                android:id="@+id/peyment_card_image"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/card_img" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/user_card_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/inter"
+                    android:text="7643 **** 3736"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <!-- Place the payment arrow image here -->
 

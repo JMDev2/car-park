@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+
 }
 
 android {
@@ -91,6 +92,17 @@ dependencies {
 
     //lottie
     api 'com.airbnb.android:lottie:4.2.0'
+
+    // RoomDB
+
+    //Runtime
+    api "androidx.room:room-runtime:2.5.2"
+
+    //Kotlin extensions (Coroutines + Flow)
+    api "androidx.room:room-ktx:2.5.2"
+
+
+
 
 
 }

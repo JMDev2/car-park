@@ -15,11 +15,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
-import com.ekenya.rnd.common.model.User
-import com.ekenya.rnd.common.utils.Status
+import com.ekenya.rnd.common.model.UserDetails
+import com.ekenya.rnd.common.utils.toast
 import com.ekenya.rnd.onboarding.R
+import com.ekenya.rnd.onboarding.database.UserViewModel
 import com.ekenya.rnd.onboarding.databinding.FragmentUserDetailsBinding
-import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
@@ -30,7 +30,7 @@ class UserDetailsFragment : BaseDaggerFragment() {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
     private val viewModel by lazy {
-        ViewModelProvider(this, factory)[SignUpViewModel::class.java]
+        ViewModelProvider(this, factory)[UserViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +61,13 @@ class UserDetailsFragment : BaseDaggerFragment() {
         setupToolbar()
         setupSaveButton()
         setupInputValidation()
-        captureUserInput()
         observeRespose()
+        hashPassword()
+
+        //navigate to login if you have an account
+        binding.navigateLogin.setOnClickListener {
+            findNavController().navigate(R.id.loginFragment)
+        }
     }
 
     private fun setupToolbar() {
@@ -81,9 +86,9 @@ class UserDetailsFragment : BaseDaggerFragment() {
         saveButton.setOnClickListener {
             val user = validateFieldsAndToggleSaveButtonVisibility()
             if (isInputValid()) {
-                viewModel.registerUser(user)
+                viewModel.addUser(user)
                 findNavController().navigate(R.id.introFragment)
-                showToast("Successs")
+                toast("Successs")
             } else {
                 toast("Something went wrong.")
             }
@@ -199,7 +204,7 @@ class UserDetailsFragment : BaseDaggerFragment() {
     }
 
     //checking the user input fields and if valid it displays the button
-    private fun validateFieldsAndToggleSaveButtonVisibility(): User {
+    private fun validateFieldsAndToggleSaveButtonVisibility(): UserDetails {
         val firstName = binding.firstNameInput.editText?.text.toString().trim()
         val lastName = binding.secondNameInput.editText?.text.toString().trim()
         val phoneNumber = binding.phonNumberInput.editText?.text.toString().trim()
@@ -229,7 +234,7 @@ class UserDetailsFragment : BaseDaggerFragment() {
             saveButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D8DADB")) // Set the button's background color to #D8DADB
         }
 
-        return User(
+        return UserDetails(
             email = email,
             firstName = firstName,
             lastName = lastName,
@@ -280,45 +285,26 @@ class UserDetailsFragment : BaseDaggerFragment() {
         return emailRegex.matches(email)
     }
 
-    private fun toast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
 
-    private fun captureUserInput(){
-
-    }
-
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
-
-    private fun observeRespose(){
-        viewModel.observeRegisterUserLiveData().observe(
-            viewLifecycleOwner
-        ){ userresponse ->
-            when(userresponse.status){
-                Status.SUCCESS -> {
-
-                    //TODO: Dismiss the progress bar
-                    val response = userresponse.data
-                    response.let {
-
-                    }
+    private fun observeRespose() {
+        viewModel.allUsers.observe(viewLifecycleOwner) { users ->
+            if (users.isNotEmpty()) {
+                // Users are present, handle the case when users are saved in the database
+                for (user in users) {
+                    Log.d("User Details", "ID: ${user.id}, Email: ${user.email}, First Name: ${user.firstName}, Last Name: ${user.lastName}, Phone Number: ${user.phoneNumber}, Passowrd: ${user.password}")
                 }
-                Status.ERROR ->{
-
-                }
-                Status.LOADING ->{
-
-                }
+            } else {
+                // No users found, handle the case when no users are saved in the database
+                Log.d("User Details", "No users found in the database.")
             }
-
         }
     }
 
-
+    private fun hashPassword() {
+        val plainTextPassword = binding.passwordInput.editText?.text.toString().trim()
+        val hashedPassword = viewModel.getHash(plainTextPassword, "SHA-256")
+        Log.d("viewModel", "Hashed Password: $hashedPassword")
+    }
 
 }
 

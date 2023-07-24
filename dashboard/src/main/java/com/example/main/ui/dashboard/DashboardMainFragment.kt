@@ -177,29 +177,24 @@ class DashboardMainFragment : BaseDaggerFragment(),
     }
 
     private fun showProgressDialog() {
-        LottieDialogFragment.newInstance().show(requireFragmentManager(), "")
+        if (lottieDialogFragment == null) {
+            lottieDialogFragment = LottieDialogFragment.newInstance()
+        }
+        lottieDialogFragment?.show(parentFragmentManager, null)
     }
+
 
 
     //  observe api data
 
     private fun observeParkingData() {
-        val lottieDialogFragment = LottieDialogFragment.newInstance()
-
-        viewModel.observeLoadingState().observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                // Show the progress dialog
-                lottieDialogFragment.setProgressBarVisible(true)
-            } else {
-                // Hide the progress dialog
-                lottieDialogFragment.setProgressBarVisible(false)
-            }
-        }
 
         viewModel.observeParkingsLivedata().observe(viewLifecycleOwner) { parkingResponse ->
             when (parkingResponse.status) {
                 Status.SUCCESS -> {
                     //TODO: Dismiss the progress bar
+                    binding.progressBar.visibility = View.GONE
+
                     val parking = parkingResponse.data
                     Log.d("ParkingData", "observeParking: ${parkingResponse.data}")
 
@@ -213,10 +208,14 @@ class DashboardMainFragment : BaseDaggerFragment(),
 
                 Status.ERROR -> {
                     // Handle error case
+                    binding.progressBar.visibility = View.GONE
+                    binding.errText.visibility = View.VISIBLE
+
                 }
 
                 Status.LOADING -> {
                     // Already handled in the observeLoadingState().observe block
+                    binding.progressBar.visibility = View.VISIBLE
                 }
             }
         }
