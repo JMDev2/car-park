@@ -2,6 +2,7 @@ package com.example.main.ui.booking
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.util.Log
@@ -17,7 +18,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.model.SlotsResponseItem
+import com.ekenya.rnd.common.utils.SharedPreferences
 import com.ekenya.rnd.common.utils.Status
+import com.ekenya.rnd.common.utils.getPhoneNumber
 import com.example.main.R
 import com.example.main.adapter.ParkingAdaptor
 import com.example.main.adapter.SlotsAdapter
@@ -58,6 +61,12 @@ class BookingFragment : BaseDaggerFragment() {
 
 
 
+        // Retrieve the boolean value from SharedPreferences
+//        val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        val isTextViewEmpty = sharedPreferences.getBoolean("isTextViewEmpty", true)
+//
+
+
         binding.toolbar.setNavigationOnClickListener {
            findNavController().popBackStack(R.id.parkingFragment, false)
             //requireActivity().onBackPressed()
@@ -66,6 +75,8 @@ class BookingFragment : BaseDaggerFragment() {
         validateDateTimeInputs()
         receiveSlotParcelable()
         receiveParkingItem()
+
+       // navigateToFragment(isTextViewEmpty)
 
 
         binding.clickOverlay.setOnClickListener {
@@ -78,6 +89,17 @@ class BookingFragment : BaseDaggerFragment() {
                 openTimeToPicker()
         }
     }
+
+    //navigate after observing the shared preference status
+//    private fun navigateToFragment(isTextViewEmpty: Boolean) {
+//        val navController = findNavController()
+//
+//        if (isTextViewEmpty) {
+//            navController.navigate(R.id.selectPaymentFragment)
+//        } else {
+//            navController.navigate(R.id.QRCodeFragment)
+//        }
+//    }
 
     private fun receiveSlotParcelable(){
         val slot = requireArguments().getParcelable<SlotsResponseItem>("slot")
@@ -199,6 +221,8 @@ class BookingFragment : BaseDaggerFragment() {
     //validating date, time inputs
     private fun validateDateTimeInputs() {
         binding.proccedToPayBtn.setOnClickListener {
+            SharedPreferences.setPaymentStatus(requireActivity(), true) //shared pref
+
             val date = binding.bookDateInput.editText?.text.toString().trim()
             val timeFrom = binding.bookTimeFromInput.editText?.text.toString().trim()
             val timeTo = binding.bookTimeToInput.editText?.text.toString().trim()
@@ -210,9 +234,12 @@ class BookingFragment : BaseDaggerFragment() {
             } else if (timeTo.isEmpty()) {
                 binding.bookTimeToInput.error = "Ending time is required"
             } else {
-                // All inputs are validated, save and move to the next fragment
-               // saveDateTimeInputs(date, timeFrom, timeTo)
-                moveToNextFragment()
+
+                if (getPhoneNumber(requireContext()).toString() != ""){ //get the phone number from the shared pref
+                    findNavController().navigate(R.id.QRCodeFragment)
+                }else{
+                    moveToNextFragment()
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.main.ui.payment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -61,9 +62,16 @@ SelectPaymentFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        val isEmpty = binding.userPhoneNumberTv.text.toString().isEmpty()
+//        val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.putBoolean("isTextViewEmpty", isEmpty)
+//        editor.apply()
+
         observeUserInput()
         setupRadioGroup()
         updateButtonVisibility()
+       // setSharedPreference()
 
         binding.proccedToBookMpesaBtn.setOnClickListener {
             val selectedMpesaPaymentMode = MpesaPaymentMode("Mpesa", R.drawable.mpesa, viewModel.phoneInput.toString())
@@ -95,6 +103,14 @@ SelectPaymentFragment : BaseDaggerFragment() {
         }
 
     }
+    //setting the shared prefrence
+//    private fun setSharedPreference(){
+//        val isEmpty = binding.userPhoneNumberTv.text.toString().isEmpty()
+//        val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.putBoolean("isTextViewEmpty", isEmpty)
+//        editor.apply()
+//    }
 
 
 
@@ -106,7 +122,7 @@ SelectPaymentFragment : BaseDaggerFragment() {
         mpesaRadioButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 cardRadioButton.isChecked = false // Uncheck the Card radio button
-                binding.paymentArrowMpesa.isEnabled = true // Enable the arrow button
+              //  binding.paymentArrowMpesa.isEnabled = true // Enable the arrow button
                 selectedMpesaPaymentMode = MpesaPaymentMode("Mpesa",  R.drawable.mpesa, "")
                 Log.d("RadioGroup", "Mpesa is checked")
             }
@@ -124,6 +140,7 @@ SelectPaymentFragment : BaseDaggerFragment() {
 
 
 
+    //reads the stored number from the viewmodel and displays it
     private fun observeUserInput() {
         // Create a CoroutineScope using the viewLifecycleOwner's lifecycle
         val coroutineScope = viewLifecycleOwner.lifecycleScope
@@ -148,6 +165,7 @@ SelectPaymentFragment : BaseDaggerFragment() {
             binding.proccedToBookMpesaBtn.visibility = View.VISIBLE // Show the button
         }
     }
+
 
 
 

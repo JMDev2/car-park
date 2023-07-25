@@ -15,6 +15,7 @@ import com.example.main.ui.payment.AddPaymentFragment
 import com.example.main.ui.payment.CreditCardFragment
 import com.example.main.ui.payment.MpesaFragment
 import com.example.main.ui.payment.PaymentViewModel
+import com.example.main.ui.payment.QRCodeFragment
 import com.example.main.ui.profile.OpenCameraFragment
 import com.example.main.ui.profile.ProfileFragment
 import com.example.main.ui.profile.ProfileViewModel
@@ -103,5 +104,8 @@ abstract class DashboardFragmentModule {
 
     @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
     abstract fun contributeCrediCardFragment(): CreditCardFragment
+
+    @ContributesAndroidInjector(modules = [PaymentViewModelModule::class])
+    abstract fun contributeQrCodeFragment(): QRCodeFragment
 }
 

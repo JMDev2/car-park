@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
+import com.ekenya.rnd.common.utils.setPhoneNumber
 import com.example.main.R
 import com.example.main.databinding.FragmentMpesaBinding
 import javax.inject.Inject
@@ -68,6 +69,7 @@ class MpesaFragment : BaseDaggerFragment() {
                 } else {
                     val formattedInput = "+254$phoneInput" // Prepend "+254" to the user input
                     viewModel.setPhoneNumberInput(formattedInput) //setting the input in the viewmodel
+                    setPhoneNumber(requireContext(), formattedInput) //sets phone number in the shared pref
                     // binding.mesaPhoneNumberInput.tag = userInput
                     Log.d("MpesaFragment", "User Input: $phoneInput")
                 }

@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_mpesaFragment_to_selectPaymentFragment"
             app:destination="@id/selectPaymentFragment" />
+        <action
+            android:id="@+id/action_mpesaFragment_to_QRCodeFragment"
+            app:destination="@id/QRCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookingHistoryFragment"
@@ -107,6 +110,11 @@
         android:name="com.example.main.ui.payment.CreditCardFragment"
         android:label="fragment_credit_card"
         tools:layout="@layout/fragment_credit_card" />
+    <fragment
+        android:id="@+id/QRCodeFragment"
+        android:name="com.example.main.ui.payment.QRCodeFragment"
+        android:label="fragment_q_r_code"
+        tools:layout="@layout/fragment_q_r_code" />
 
 </navigation>
 
