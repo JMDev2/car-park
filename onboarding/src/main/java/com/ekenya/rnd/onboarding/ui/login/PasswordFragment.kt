@@ -1,5 +1,6 @@
 package com.ekenya.rnd.onboarding.ui.login
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,16 +12,28 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.ekenya.rnd.baseapp.MyApp
+import com.ekenya.rnd.baseapp.di.helpers.activities.ActivityHelperKt
+import com.ekenya.rnd.baseapp.di.helpers.activities.AddressableActivity
+import com.ekenya.rnd.baseapp.di.helpers.features.FeatureModule
+import com.ekenya.rnd.baseapp.di.helpers.features.Modules
 import com.ekenya.rnd.common.Constants.USER_PIN
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.utils.toast
 import com.ekenya.rnd.onboarding.R
 import com.ekenya.rnd.onboarding.databinding.FragmentPasswordBinding
+import com.google.android.play.core.splitinstall.SplitInstallManager
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+import com.google.android.play.core.splitinstall.SplitInstallRequest
+import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
+import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import javax.inject.Inject
 
 
 class PasswordFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentPasswordBinding
+
+    private lateinit var myApp: MyApp
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -28,8 +41,17 @@ class PasswordFragment : BaseDaggerFragment() {
         ViewModelProvider(this, factory)[LoginViewModel::class.java]
     }
 
+    //launch the module
+    private val module by lazy {
+        Modules.FeatureDashboard.INSTANCE
+    }
+    private val splitInstallManager: SplitInstallManager by lazy {
+        SplitInstallManagerFactory.create(requireActivity())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        myApp = activity?.application as MyApp
 
     }
 
@@ -58,6 +80,20 @@ class PasswordFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val request = SplitInstallRequest
+            .newBuilder()
+            .addModule(module.name)
+            .build()
+
+        splitInstallManager.startInstall(request)
+            .addOnFailureListener {
+                Log.e(TAG, "onViewCreated: installing module failed")
+            }
+            .addOnSuccessListener {
+                Log.d(TAG, "onViewCreated: module installed successfully")
+            }
+
+
         validateUserInput()
     }
 
@@ -77,6 +113,8 @@ class PasswordFragment : BaseDaggerFragment() {
 
                 if (enteredPassword == storedPassword) {
                     toast("Correct password")
+                    showFeatureModule(Modules.FeatureDashboard.INSTANCE)
+
                 } else {
                     toast("Incorrect password")
                 }
@@ -85,22 +123,75 @@ class PasswordFragment : BaseDaggerFragment() {
         }
     }
 
-    private fun observeUserPassword(password: String) {
-        viewModel.getUserByPhoneNumber(password).observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                val storedPassword = user.password
-                val enteredPassword = password
+//    private fun observeUserPassword(password: String) {
+//        viewModel.getUserByPhoneNumber(password).observe(viewLifecycleOwner) { user ->
+//            if (user != null) {
+//                val storedPassword = user.password
+//                val enteredPassword = password
+//
+//                if (enteredPassword == storedPassword) {
+//                    toast("Correct password")
+//                } else {
+//                    toast("Incorrect password")
+//                }
+//            } else {
+//                toast("No matching phone number")
+//            }
+//        }
+//
+//    }
 
-                if (enteredPassword == storedPassword) {
-                    toast("Correct password")
-                } else {
-                    toast("Incorrect password")
-                }
-            } else {
-                toast("No matching phone number")
+
+    /*
+  responsible for installing and showing the body module once the user is authenticated
+   */
+    private fun showFeatureModule(module: FeatureModule) {
+        try {
+            //Inject
+            myApp.addModuleInjector(module)
+
+            this.startActivity(
+                ActivityHelperKt.intentTo(
+                    requireActivity(),
+                    module as AddressableActivity
+                )
+            )
+            //finish();
+        } catch (e: Exception) {
+            e.message?.let { Log.d("error feature module", it) }
+        }
+    }
+
+    private val listener = SplitInstallStateUpdatedListener { state ->
+        when (state.status()) {
+            SplitInstallSessionStatus.INSTALLED -> {
+                toast("Installed here")
+            }
+
+            SplitInstallSessionStatus.INSTALLING -> {
+                toast("installing here")
+
+            }
+
+            SplitInstallSessionStatus.FAILED -> {
+                toast("failing here")
+
+            }
+
+            else -> {
+                toast("Something went wrong")
             }
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        splitInstallManager.registerListener(listener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        splitInstallManager.unregisterListener(listener)
     }
 
 

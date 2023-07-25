@@ -31,7 +31,7 @@
         style="@style/text_features"
         android:layout_marginTop="19dp"
         android:fontFamily="@font/inter"
-        android:text="Let’s get to know you"
+        android:text="@string/intro_signup_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar" />
@@ -105,7 +105,7 @@
         style="@style/LoginTextDescStyle"
         android:layout_marginTop="1dp"
         android:fontFamily="@font/inter"
-        android:text="To sign up you need to be atleast 18 years old"
+        android:text="@string/text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phon_number_input" />
 
@@ -140,14 +140,14 @@
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/inter"
         android:hint="Password"
-        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_input">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter" />
+            android:fontFamily="@font/inter"
+            android:inputType="textPassword" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -157,7 +157,7 @@
         style="@style/LoginTextDescStyle"
         android:layout_marginTop="1dp"
         android:fontFamily="@font/inter"
-        android:text="Password needs to be atleast 8 characters long"
+        android:text="@string/signup_footer_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_input" />
 
@@ -166,7 +166,7 @@
         style="@style/LoginTextDescStyle"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/inter"
-        android:text="By continuing you agree to our Terms of Service and Privacy Policy"
+        android:text="@string/policy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_text_desc2" />
 

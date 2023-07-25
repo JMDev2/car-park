@@ -7,7 +7,6 @@ import com.ekenya.rnd.onboarding.ui.login.LoginFragment
 import com.ekenya.rnd.onboarding.ui.login.LoginVerificationFragment
 import com.ekenya.rnd.onboarding.ui.login.LoginViewModel
 import com.ekenya.rnd.onboarding.ui.login.PasswordFragment
-import com.ekenya.rnd.onboarding.ui.onboarding.OnboardingFragment
 import com.ekenya.rnd.onboarding.ui.onboarding.OnboardingViewModel
 import com.ekenya.rnd.onboarding.ui.signup.IntroFragment
 import com.ekenya.rnd.onboarding.ui.signup.SignUpFragment
@@ -23,8 +22,7 @@ import dagger.multibindings.IntoMap
 abstract class OnboardingFragmentModule {
 
     //onboarding
-    @ContributesAndroidInjector(modules = [OnboardingMainFragmentModule::class])
-    abstract fun contributeOnboardingFragment(): OnboardingFragment
+
     @Module
     abstract class OnboardingMainFragmentModule {
         @Binds

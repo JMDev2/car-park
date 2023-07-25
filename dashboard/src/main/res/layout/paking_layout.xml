@@ -43,11 +43,13 @@
                 android:id="@+id/parking_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="Highway Mall"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_gravity="start"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/parking_location_tv"

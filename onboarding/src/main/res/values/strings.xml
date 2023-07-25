@@ -3,4 +3,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="intro_text">Effortlessly reserve, park,\nand enjoy simplified parking.</string>
     <string name="create_account">Do no have an account? Create one.</string>
+    <string name="text">To sign up you need to be atleast 18 years old</string>
+    <string name="intro_signup_text">Lets get to know you</string>
+    <string name="signup_footer_text">Password needs to be atleast 8 characters long</string>
+    <string name="policy">By continuing you agree to our Terms of Service and Privacy Policy</string>
+    <string name="login_desc">We’ll text you to confirm if this is your number. Standard data and message rates apply</string>
+    <string name="verifcation_text">Not yet received the code? Resend it in 45 sec</string>
 </resources>

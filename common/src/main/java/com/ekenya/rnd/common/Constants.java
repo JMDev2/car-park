@@ -9,7 +9,7 @@ public class Constants {
      */
     public static String BASE_PACKAGE_NAME = "com.ekenya.rnd";
     public static String MAIN_PACKAGE_NAME = "com.example.main";
-    public static String BASE_URL = "http://192.168.0.17:3000/";
+    public static String BASE_URL = "http://10.20.33.95:3000/";
 
     public static String USER_PIN ="";
 

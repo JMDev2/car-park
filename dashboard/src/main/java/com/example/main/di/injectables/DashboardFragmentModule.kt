@@ -6,6 +6,7 @@ import com.example.main.ui.booking.ActiveBookingsFragment
 import com.example.main.ui.booking.BookingFragment
 import com.example.main.ui.payment.SelectPaymentFragment
 import com.example.main.ui.booking.BookingViewModel
+import com.example.main.ui.booking.CompletedBookingsFragment
 import com.example.main.ui.dashboard.DashboardMainFragment
 import com.example.main.ui.dashboard.MainDashboardViewModel
 import com.example.main.ui.parking.ParkingFragment
@@ -50,8 +51,6 @@ abstract class DashboardFragmentModule {
     }
 
     //parking fragment
-    @ContributesAndroidInjector(modules = [ParkingViewModelModule::class])
-    abstract fun contributeParkingFragment(): ParkingFragment
     @Module
     abstract class ParkingViewModelModule {
         @Binds
@@ -59,14 +58,11 @@ abstract class DashboardFragmentModule {
         @ViewModelKey(ParkingViewModel::class)
         abstract fun bindDashboardViewModel(viewModel: ParkingViewModel): ViewModel
     }
+    @ContributesAndroidInjector(modules = [ParkingViewModelModule::class])
+    abstract fun contributeParkingFragment(): ParkingFragment
+
 
     //booking fragement
-    @ContributesAndroidInjector(modules = [BookingViewModelModule::class])
-    abstract fun contributeBookingFragment(): BookingFragment
-
-    //active bookings
-    @ContributesAndroidInjector(modules = [BookingViewModelModule::class])
-    abstract fun contributeActiveBookingFragment(): ActiveBookingsFragment
 
     @Module
     abstract class BookingViewModelModule {
@@ -75,6 +71,16 @@ abstract class DashboardFragmentModule {
         @ViewModelKey(BookingViewModel::class)
         abstract fun bindBookingViewModel(viewModel: BookingViewModel): ViewModel
     }
+    @ContributesAndroidInjector(modules = [BookingViewModelModule::class])
+    abstract fun contributeBookingFragment(): BookingFragment
+
+    //active bookings
+    @ContributesAndroidInjector(modules = [BookingViewModelModule::class])
+    abstract fun contributeActiveBookingFragment(): ActiveBookingsFragment
+
+    @ContributesAndroidInjector(modules = [BookingViewModelModule::class])
+    abstract fun contributeCompletedBookingFragment(): CompletedBookingsFragment
+
 
     //payment fragments
     @Module
