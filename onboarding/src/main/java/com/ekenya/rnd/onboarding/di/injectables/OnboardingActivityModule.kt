@@ -15,8 +15,6 @@ abstract class OnboardingActivityModule {
     @ContributesAndroidInjector(modules = [OnboardingMainActivityModule::class])
     abstract fun contributeOnboardingActivity(): MainActivity
 
-
-
     @Module
     abstract class OnboardingMainActivityModule{
         @Binds

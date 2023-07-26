@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ekenya.rnd.common.model.UserDetails
 import com.ekenya.rnd.common.model.UserResponse
-import com.ekenya.rnd.repo.UserRegistrationRepository
+import com.ekenya.rnd.onboarding.repo.UserRegistrationRepository
 import com.ekenya.rnd.common.utils.Resource
 import kotlinx.coroutines.launch
 import java.security.MessageDigest

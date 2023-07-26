@@ -1,4 +1,4 @@
-package com.ekenya.rnd.repo
+package com.ekenya.rnd.onboarding.repo
 
 import com.ekenya.rnd.common.api.registration.RegistrationImpl
 import com.ekenya.rnd.common.model.UserDetails

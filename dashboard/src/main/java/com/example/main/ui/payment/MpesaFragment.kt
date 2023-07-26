@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
-import com.ekenya.rnd.common.utils.setPhoneNumber
+import com.ekenya.rnd.common.utils.SharedPreferences.setPhoneNumber
 import com.example.main.R
 import com.example.main.databinding.FragmentMpesaBinding
 import javax.inject.Inject

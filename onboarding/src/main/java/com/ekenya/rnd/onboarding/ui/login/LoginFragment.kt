@@ -2,7 +2,6 @@ package com.ekenya.rnd.onboarding.ui.login
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,8 @@ import com.ekenya.rnd.common.Constants.USER_PIN
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.utils.toast
 import com.ekenya.rnd.onboarding.R
-import com.ekenya.rnd.onboarding.database.UserViewModel
 import com.ekenya.rnd.onboarding.databinding.FragmentLoginBinding
 import javax.inject.Inject
-
-
 
 class LoginFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -31,7 +27,6 @@ class LoginFragment : BaseDaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -60,9 +55,6 @@ class LoginFragment : BaseDaggerFragment() {
         binding.navigateSignup.setOnClickListener {
             findNavController().navigate(R.id.userDetailsFragment)
         }
-
-
-
     }
 
     private fun validateUserInput() {

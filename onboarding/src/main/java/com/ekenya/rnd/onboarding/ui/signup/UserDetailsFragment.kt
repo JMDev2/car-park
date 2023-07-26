@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.widget.doOnTextChanged
@@ -32,7 +31,6 @@ class UserDetailsFragment : BaseDaggerFragment() {
     private val viewModel by lazy {
         ViewModelProvider(this, factory)[UserViewModel::class.java]
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -86,7 +84,7 @@ class UserDetailsFragment : BaseDaggerFragment() {
         saveButton.setOnClickListener {
             val user = validateFieldsAndToggleSaveButtonVisibility()
             if (isInputValid()) {
-                viewModel.addUser(user)
+                viewModel.addUser(user) //add user to the db
                 findNavController().navigate(R.id.introFragment)
                 toast("Successs")
             } else {

@@ -12,7 +12,6 @@ import dagger.Provides
 @Module
 class RoomModule(private val context: Context) {
     // Add Room database-related providers here
-
     @Provides
     @ModuleScope
     fun provideContext(): Context {

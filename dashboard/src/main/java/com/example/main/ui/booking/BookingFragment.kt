@@ -19,8 +19,8 @@ import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.model.SlotsResponseItem
 import com.ekenya.rnd.common.utils.SharedPreferences
+import com.ekenya.rnd.common.utils.SharedPreferences.getPhoneNumber
 import com.ekenya.rnd.common.utils.Status
-import com.ekenya.rnd.common.utils.getPhoneNumber
 import com.example.main.R
 import com.example.main.adapter.ParkingAdaptor
 import com.example.main.adapter.SlotsAdapter
@@ -221,7 +221,7 @@ class BookingFragment : BaseDaggerFragment() {
     //validating date, time inputs
     private fun validateDateTimeInputs() {
         binding.proccedToPayBtn.setOnClickListener {
-            SharedPreferences.setPaymentStatus(requireActivity(), true) //shared pref
+
 
             val date = binding.bookDateInput.editText?.text.toString().trim()
             val timeFrom = binding.bookTimeFromInput.editText?.text.toString().trim()

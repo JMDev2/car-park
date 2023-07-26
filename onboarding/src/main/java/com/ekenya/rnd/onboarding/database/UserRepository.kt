@@ -16,9 +16,5 @@ class UserRepository @Inject constructor(private val userDao: UserDao) {
         return userDao.getUserByPhoneNumber(phoneNumber)
     }
 
-//    suspend fun getUserPasswordByPhoneNumber(phoneNumber: String): String? {
-//        val password = userDao.getPasswordByPhoneNumber(phoneNumber)
-//        return password
-//    }
 
 }

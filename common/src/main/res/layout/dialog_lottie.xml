@@ -5,11 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieProgressBar"
+        android:id="@+id/lottieAnimation"
         android:layout_width="161dp"
         android:layout_height="173dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/progress_bar" />
+        app:lottie_rawRes="@raw/success"/>
 
 </RelativeLayout>

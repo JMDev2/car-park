@@ -16,11 +16,4 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
         }
     }
 
-    //get passowrd by user phone number
-//    fun getUserPasswordByPhoneNumber(phoneNumber: String): LiveData<String?> {
-//        return liveData {
-//            val password = userRepository.getUserPasswordByPhoneNumber(phoneNumber)
-//            emit(password)
-//        }
-//    }
 }

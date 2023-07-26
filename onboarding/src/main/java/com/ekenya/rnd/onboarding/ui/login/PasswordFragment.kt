@@ -123,24 +123,6 @@ class PasswordFragment : BaseDaggerFragment() {
         }
     }
 
-//    private fun observeUserPassword(password: String) {
-//        viewModel.getUserByPhoneNumber(password).observe(viewLifecycleOwner) { user ->
-//            if (user != null) {
-//                val storedPassword = user.password
-//                val enteredPassword = password
-//
-//                if (enteredPassword == storedPassword) {
-//                    toast("Correct password")
-//                } else {
-//                    toast("Incorrect password")
-//                }
-//            } else {
-//                toast("No matching phone number")
-//            }
-//        }
-//
-//    }
-
 
     /*
   responsible for installing and showing the body module once the user is authenticated

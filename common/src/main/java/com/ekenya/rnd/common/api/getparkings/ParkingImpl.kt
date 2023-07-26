@@ -17,18 +17,6 @@ class ParkingImpl @Inject constructor(private val api: ParkingService) {
     }
 
     /*
-    a single parking
-     */
-//    suspend fun getParkingItem() : Resource<ParkingResponseItem?>{
-//        val response = api.getParkingItem()
-//        return if (response.isSuccessful){
-//            Resource.success(response.body())
-//        }else{
-//            Resource.error("No response found", null)
-//        }
-//    }
-
-    /*
     get the slots
      */
     suspend fun getSlots() : Resource<SlotsResponse?>{

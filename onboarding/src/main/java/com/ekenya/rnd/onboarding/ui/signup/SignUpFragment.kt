@@ -41,15 +41,11 @@ class SignUpFragment : BaseDaggerFragment() {
 
         validateUserInput()
 
-
-
-
     }
 
     private fun validateUserInput() {
         binding.signupContinueBtn.setOnClickListener {
             val phoneNumber = binding.signupPhoneNumberInput.editText?.text.toString().trim()
-
             if (phoneNumber.isEmpty()) {
                 binding.signupPhoneNumberInput.error = "Please provide a valid phone number"
             } else if (!phoneNumber.matches(Regex("^\\d{10}$"))) {

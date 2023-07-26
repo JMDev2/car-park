@@ -16,14 +16,12 @@ import java.util.concurrent.TimeUnit
 @Module
 class NetworkModule() {
 
-    //provide HttpLogginInterceptor
     @Provides
     @ModuleScope
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    //provide GsonConverterFactory
     @ModuleScope
     @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory{

@@ -7,29 +7,24 @@ import androidx.navigation.fragment.NavHostFragment
 
 import com.ekenya.rnd.common.abstractions.BaseActivity
 import com.ekenya.rnd.common.utils.SharedPreferences
-import com.ekenya.rnd.common.utils.setPhoneNumber
+import com.ekenya.rnd.common.utils.SharedPreferences.setPhoneNumber
 import com.example.main.R
 import com.example.main.databinding.ActivityMainBinding
 
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
 
-//    val navController by lazy {
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_ContainerView) as NavHostFragment
-//        navHostFragment.navController
-//    }
+    val navController by lazy {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_ContainerView) as NavHostFragment
+        navHostFragment.navController
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-    val navHostFragment =
-        supportFragmentManager.findFragmentById(R.id.fragment_ContainerView) as NavHostFragment
-    navController = navHostFragment.navController
 
-    val sharedPrefs = SharedPreferences.getPaymentStatus(this)
 
     setPhoneNumber(this, "")
 

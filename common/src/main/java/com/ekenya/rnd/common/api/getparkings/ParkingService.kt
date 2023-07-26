@@ -8,19 +8,12 @@ import retrofit2.http.GET
 
 interface ParkingService {
 
-    /*
-    get all the parkings
-     */
+
+   // get all the parkings
     @GET("parkings")
     suspend fun getParkings(
     ): Response<ParkingResponse>
 
-    /*
-    item specific
-     */
-//    @GET("parkings")
-//    suspend fun getParkingItem(
-//    ) : Response<ParkingResponseItem>
 
     @GET("slots")
     suspend fun getParkingSlot(
