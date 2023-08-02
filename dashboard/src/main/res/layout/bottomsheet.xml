@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_cover"
+    android:elevation="8dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginTop="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/select_camera_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/camera" />
+
+
+        <TextView
+            android:id="@+id/camera_tv"
+            style="@style/CameraTextViewStyle"
+            android:text="Open Camera"
+            app:layout_constraintEnd_toEndOf="@+id/select_camera_img"
+            app:layout_constraintStart_toStartOf="@+id/select_camera_img"
+            app:layout_constraintTop_toBottomOf="@+id/select_camera_img" />
+
+        <ImageView
+            android:id="@+id/galery_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/galery" />
+
+        <TextView
+            android:id="@+id/galery_tv"
+            style="@style/CameraTextViewStyle"
+            android:layout_marginBottom="15dp"
+            android:text="Choose from Galery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/galery_img"
+            app:layout_constraintStart_toStartOf="@+id/galery_img"
+            app:layout_constraintTop_toBottomOf="@+id/galery_img" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

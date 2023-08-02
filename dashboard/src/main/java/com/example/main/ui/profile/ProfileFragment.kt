@@ -1,30 +1,48 @@
 package com.example.main.ui.profile
 
+import android.Manifest
+import android.app.Activity
+import android.content.ContentValues
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.ekenya.rnd.common.Constants.CAMERA_PERMISSION_CODE
+import com.ekenya.rnd.common.Constants.REQUEST_IMAGE_PICK
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ImageData
 import com.example.main.R
 import com.example.main.databinding.FragmentProfileBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class ProfileFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentProfileBinding
-    companion object {
-        const val REQUEST_IMAGE_CAPTURE = 1
-    }
+    private lateinit var dialog: BottomSheetDialog
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private var imageUri: Uri? = null
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +56,8 @@ class ProfileFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         // Retrieve the image URI from the arguments
         val imageUriString = arguments?.getString("imageUri")
 
@@ -47,11 +67,16 @@ class ProfileFragment : BaseDaggerFragment() {
            binding.profileImage.setImageURI(imageUri)
         }
 
+        binding.chageProfilePictureTv.setOnClickListener {
+            showBottomsheet()
+        }
+
         setupFieldValidations()
         setupToolbar()
         setupSaveButton()
         setupInputValidation()
-        showSelectImageDialog()
+
+
     }
 
     private fun setupToolbar() {
@@ -193,7 +218,6 @@ class ProfileFragment : BaseDaggerFragment() {
         }
     }
 
-
     // Set up field validations and toggle save button visibility
     private fun setupFieldValidations() {
         binding.profileFirstNameInput.editText?.doOnTextChanged { _, _, _, _ ->
@@ -237,12 +261,97 @@ class ProfileFragment : BaseDaggerFragment() {
 
 
 
-    private fun showSelectImageDialog() {
-        binding.chageProfilePictureTv.setOnClickListener {
-            val openCameraFragment = OpenCameraFragment()
-            val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.container, openCameraFragment)
-            transaction.commit()
+
+    private fun showBottomsheet(){
+        val dialoView = layoutInflater.inflate(R.layout.bottomsheet, null)
+        dialog = BottomSheetDialog(requireContext(),com.ekenya.rnd.baseapp.R.style.BottomSheetDialogTheme)
+        dialog.setContentView(dialoView)
+        dialog.show()
+
+       val selectImageFromCamera = dialoView.findViewById<ImageView>(R.id.select_camera_img)
+        val selectImageFromGallery = dialoView.findViewById<ImageView>(R.id.galery_img)
+
+        selectImageFromCamera.setOnClickListener {
+            requestCameraPermission()
+        }
+
+
+
+        selectImageFromGallery.setOnClickListener {
+            pickImageFromGalerry()
+        }
+
+    }
+
+
+    // check for the camera permissions
+    private fun requestCameraPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_CODE
+            )
+        } else {
+            // Permission is already granted, proceed with opening the camera
+            openCamera()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, proceed with opening the camera
+                openCamera()
+            } else {
+                // Permission denied, handle this situation (e.g., show a message)
+            }
+        }
+    }
+
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+//            val imageUri: Uri? = data?.data
+//            if (imageUri != null) {
+//                // Create a bundle to pass the image URI
+//                binding.profileImage.setImageURI(imageUri)
+//            }
+//        }
+//    }
+
+
+
+    private fun openCamera(){
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+    }
+
+    private fun pickImageFromGalerry(){
+        // Create an intent to pick an image from the gallery
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK) {
+            // Image picked successfully, get the image URI
+            val imageUri: Uri? = data?.data
+
+            if (imageUri != null) {
+                // Create a bundle to pass the image URI
+                binding.profileImage.setImageURI(imageUri)
+            }
         }
     }
 }

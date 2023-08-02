@@ -27,8 +27,6 @@ fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterce
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-
-
     @Provides
     @ModuleScope
     fun provideSharedPreferences(application: Application): SharedPreferences {
@@ -57,7 +55,6 @@ fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterce
                         .build()
                 )
             }.build()
-
 
 
     @Provides

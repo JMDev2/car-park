@@ -37,7 +37,7 @@ class MainFragment : BaseDaggerFragment() {
    installs the onboarding module
     */
     private val module by lazy {
-        Modules.FeatureOnboarding.INSTANCE
+        Modules.FeatureDashboard.INSTANCE
     }
 
     private val splitInstallManager: SplitInstallManager by lazy {

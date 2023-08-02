@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 
 class ExitFragment : BaseDaggerFragment() {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(

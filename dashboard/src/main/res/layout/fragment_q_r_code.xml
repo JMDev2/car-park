@@ -21,8 +21,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:visibility="invisible"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- CardView containing the QR code ImageView -->
@@ -30,6 +30,7 @@
             android:id="@+id/cardview"
             android:layout_width="280dp"
             android:layout_height="280dp"
+            app:cardBackgroundColor="#FFF1E9"
             android:layout_marginBottom="120dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

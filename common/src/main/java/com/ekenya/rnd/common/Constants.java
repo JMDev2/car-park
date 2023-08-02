@@ -9,8 +9,12 @@ public class Constants {
      */
     public static String BASE_PACKAGE_NAME = "com.ekenya.rnd";
     public static String MAIN_PACKAGE_NAME = "com.example.main";
-    public static String BASE_URL = "http://10.20.33.95:3000/";
+    public static String BASE_URL = "https://cba6407c-2f2a-46cb-ad75-d7c874908db4.mock.pstmn.io/";
 
     public static String USER_PIN ="";
+
+    public static Integer REQUEST_IMAGE_CAPTURE = 1;
+    public static Integer REQUEST_IMAGE_PICK = 1;
+    public static Integer CAMERA_PERMISSION_CODE = 101;
 
 }

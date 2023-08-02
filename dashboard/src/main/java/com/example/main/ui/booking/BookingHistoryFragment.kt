@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import com.example.main.R
-import com.example.main.databinding.FragmentBookingBinding
+import com.example.main.adapter.TabLayoutViewpagerAdapter
 import com.example.main.databinding.FragmentBookingHistoryBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

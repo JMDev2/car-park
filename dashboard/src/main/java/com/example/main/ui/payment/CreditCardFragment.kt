@@ -25,7 +25,6 @@ class CreditCardFragment : BaseDaggerFragment() {
         ViewModelProvider(requireActivity(), factory)[PaymentViewModel::class.java]
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,7 +52,6 @@ class CreditCardFragment : BaseDaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmNumberNumberBtn.setOnClickListener {
-
             val cardInput = binding.cardNumberInput.editText?.text.toString().trim()
             if (cardInput.isEmpty() || cardInput.matches(Regex("^\\d{12}$")).not()) {
                 binding.cardNumberInput.error = "Provide a valid phone number"

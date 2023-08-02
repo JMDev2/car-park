@@ -16,8 +16,6 @@ abstract class DashboardActivityModule {
     @ContributesAndroidInjector(modules = [MainDashboardActivityModule::class])
     abstract fun contributeDashboardActivity(): MainActivity
 
-
-
     @Module
     abstract class MainDashboardActivityModule{
         @Binds

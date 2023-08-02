@@ -62,16 +62,9 @@ SelectPaymentFragment : BaseDaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val isEmpty = binding.userPhoneNumberTv.text.toString().isEmpty()
-//        val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-//        val editor = sharedPreferences.edit()
-//        editor.putBoolean("isTextViewEmpty", isEmpty)
-//        editor.apply()
-
         observeUserInput()
         setupRadioGroup()
         updateButtonVisibility()
-       // setSharedPreference()
 
         binding.proccedToBookMpesaBtn.setOnClickListener {
             val selectedMpesaPaymentMode = MpesaPaymentMode("Mpesa", R.drawable.mpesa, viewModel.phoneInput.toString())

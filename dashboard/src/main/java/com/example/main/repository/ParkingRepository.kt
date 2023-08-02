@@ -9,21 +9,13 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class ParkingRepository @Inject constructor(private val api: ParkingImpl){
-
     suspend fun getParkings() = flow {
         emit(Resource.loading(null))
         emit(api.getAllParkings())
     }.flowOn(Dispatchers.IO)
 
 
-//    suspend fun getParkingItem() = flow {
-//        emit(Resource.loading(null))
-//        emit(api.getParkingItem())
-//    }.flowOn(Dispatchers.IO)
-
-    /*
-    get slots
-     */
+   // get slots
     suspend fun getTheSlots() = flow {
         emit(Resource.loading(null))
         emit(api.getSlots())

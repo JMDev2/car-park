@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 class PaymentViewModel @Inject constructor(): ViewModel() {
     //tODO add the viewmodel code
-
     private val _phoneInput = MutableStateFlow<String>("")
     val phoneInput: StateFlow<String> = _phoneInput
 

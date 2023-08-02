@@ -14,25 +14,4 @@ import javax.inject.Inject
 
 class BookingViewModel @Inject constructor(private val repository: ParkingRepository) : ViewModel()  {
     //TODO: enter viewmodel cod here
-
-//    private var parkingSlotLiveData = MutableLiveData<Resource<SlotsResponse?>>()
-//
-//    init {
-//
-//        getParkingSlots()
-//    }
-//
-//
-//    /*
-//    get all parkings
-//     */
-//    fun getParkingSlots() = viewModelScope.launch {
-//        repository.getTheSlots().collect(){
-//            parkingSlotLiveData.postValue(it)
-//        }
-//    }
-//
-//    fun observeSlotsLivedata(): LiveData<Resource<SlotsResponse?>> {
-//        return parkingSlotLiveData
-//    }
 }

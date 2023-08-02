@@ -2,11 +2,10 @@ package com.example.main.ui
 
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-
 import com.ekenya.rnd.common.abstractions.BaseActivity
-import com.ekenya.rnd.common.utils.SharedPreferences
+import com.ekenya.rnd.common.utils.SharedPreferences.setDateTimeFrom
+import com.ekenya.rnd.common.utils.SharedPreferences.setDateTimeTo
 import com.ekenya.rnd.common.utils.SharedPreferences.setPhoneNumber
 import com.example.main.R
 import com.example.main.databinding.ActivityMainBinding
@@ -27,6 +26,9 @@ class MainActivity : BaseActivity() {
 
 
     setPhoneNumber(this, "")
+
+        setDateTimeFrom(this,"")
+        setDateTimeTo(this, "")
 
 
     // change status bar color

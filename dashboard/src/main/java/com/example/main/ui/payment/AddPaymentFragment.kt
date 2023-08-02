@@ -63,24 +63,18 @@ class AddPaymentFragment : BaseDaggerFragment() {
 
         val bundle = arguments
         val selectedMpesaPaymentMode = bundle?.getParcelable<MpesaPaymentMode>("paymentMode")
-        val selectCardaPaymentMode = bundle?.getParcelable<CardPaymentMode>("cardPaymentMode")
+//        val selectCardaPaymentMode = bundle?.getParcelable<CardPaymentMode>("cardPaymentMode")
 
         selectedMpesaPaymentMode?.let {
             mpesaPaymentModes = listOf(it)
             setupRecyclerView()
             handleEmptyRecyclerView()
         }
-    //    selectCardaPaymentMode?.let {
-         //@jinakubwaHSC123,   cardPaymentModes = listOf(it)
-       //     setupRecyclerView1()
-
-      //  }
 
         binding.paymentBtn.setOnClickListener {
             findNavController().navigate(R.id.selectPaymentFragment)
         }
 
-        //onItemClick()
     }
 
     //sets up the recyclerview
@@ -94,16 +88,15 @@ class AddPaymentFragment : BaseDaggerFragment() {
         binding.addPaymentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun setupRecyclerView1() {
-        cardPaymentAdapter = CardPaymentAdapter(cardPaymentModes, viewModel)
-//        paymentModeAdapter'.onItemClick = { paymentMode ->
-//            Log.d("namba", "${viewModel.phoneInput.value}")
-//            findNavController().navigate(R.id.dashboardMainFragment)
-//        }
-        binding.addPaymentRecyclerview.adapter = cardPaymentAdapter
-        binding.addPaymentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-    }
-
+//    private fun setupRecyclerView1() {
+//        cardPaymentAdapter = CardPaymentAdapter(cardPaymentModes, viewModel)
+////        paymentModeAdapter'.onItemClick = { paymentMode ->
+////            Log.d("namba", "${viewModel.phoneInput.value}")
+////            findNavController().navigate(R.id.dashboardMainFragment)
+////        }
+//        binding.addPaymentRecyclerview.adapter = cardPaymentAdapter
+//        binding.addPaymentRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+//    }
 
 
     //checks if the rcyclerview is empty

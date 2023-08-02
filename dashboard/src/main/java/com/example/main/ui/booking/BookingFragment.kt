@@ -2,7 +2,6 @@ package com.example.main.ui.booking
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.util.Log
@@ -10,34 +9,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.ekenya.rnd.common.abstractions.BaseDaggerFragment
 import com.ekenya.rnd.common.model.ParkingResponseItem
 import com.ekenya.rnd.common.model.SlotsResponseItem
-import com.ekenya.rnd.common.utils.SharedPreferences
 import com.ekenya.rnd.common.utils.SharedPreferences.getPhoneNumber
-import com.ekenya.rnd.common.utils.Status
+import com.ekenya.rnd.common.utils.SharedPreferences.setDateTimeFrom
+import com.ekenya.rnd.common.utils.SharedPreferences.setDateTimeTo
 import com.example.main.R
-import com.example.main.adapter.ParkingAdaptor
-import com.example.main.adapter.SlotsAdapter
 import com.example.main.databinding.FragmentBookingBinding
 import com.example.main.ui.MainActivity
-import com.example.main.ui.dashboard.MainDashboardViewModel
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 class BookingFragment : BaseDaggerFragment() {
     private lateinit var binding: FragmentBookingBinding
     private var isDatePickerOpen = false
+
 
 
     override fun onCreateView(
@@ -60,13 +50,6 @@ class BookingFragment : BaseDaggerFragment() {
         (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-
-        // Retrieve the boolean value from SharedPreferences
-//        val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-//        val isTextViewEmpty = sharedPreferences.getBoolean("isTextViewEmpty", true)
-//
-
-
         binding.toolbar.setNavigationOnClickListener {
            findNavController().popBackStack(R.id.parkingFragment, false)
             //requireActivity().onBackPressed()
@@ -75,9 +58,7 @@ class BookingFragment : BaseDaggerFragment() {
         validateDateTimeInputs()
         receiveSlotParcelable()
         receiveParkingItem()
-
-       // navigateToFragment(isTextViewEmpty)
-
+       // calculateTime()
 
         binding.clickOverlay.setOnClickListener {
             toggleDatePicker()
@@ -89,17 +70,6 @@ class BookingFragment : BaseDaggerFragment() {
                 openTimeToPicker()
         }
     }
-
-    //navigate after observing the shared preference status
-//    private fun navigateToFragment(isTextViewEmpty: Boolean) {
-//        val navController = findNavController()
-//
-//        if (isTextViewEmpty) {
-//            navController.navigate(R.id.selectPaymentFragment)
-//        } else {
-//            navController.navigate(R.id.QRCodeFragment)
-//        }
-//    }
 
     private fun receiveSlotParcelable(){
         val slot = requireArguments().getParcelable<SlotsResponseItem>("slot")
@@ -180,9 +150,10 @@ class BookingFragment : BaseDaggerFragment() {
             if (hourOfDay < minHour || hourOfDay > maxHour) {
                 Toast.makeText(requireContext(), "Please select a valid time", Toast.LENGTH_SHORT).show()
             } else {
-                val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
-                binding.bookTimeFromInput.editText?.setText(selectedTime)
-                Log.d("BookingFragment", "time from: $selectedTime")
+               val selectedTimeFrom = String.format("%02d:%02d", hourOfDay, minute)
+                binding.bookTimeFromInput.editText?.setText(selectedTimeFrom)
+                setDateTimeFrom(requireContext(), selectedTimeFrom)
+                Log.d("BookingFragment", "time from: $selectedTimeFrom")
             }
         }, currentHour, currentMinute, true)
 
@@ -204,9 +175,10 @@ class BookingFragment : BaseDaggerFragment() {
                 if (hourOfDay < minHour || hourOfDay > maxHour) {
                     Toast.makeText(requireContext(), "Selected time should not be less than 2 hours", Toast.LENGTH_SHORT).show()
                 } else {
-                    val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
-                    binding.bookTimeToInput.editText?.setText(selectedTime)
-                    Log.d("BookingFragment", "Time to: $selectedTime")
+                    val selectedTimeTo = String.format("%02d:%02d", hourOfDay, minute)
+                    binding.bookTimeToInput.editText?.setText(selectedTimeTo)
+                    setDateTimeTo(requireContext(), selectedTimeTo)
+                    Log.d("BookingFragment", "Time to: $selectedTimeTo")
                 }
             },
             currentHour,
@@ -221,8 +193,6 @@ class BookingFragment : BaseDaggerFragment() {
     //validating date, time inputs
     private fun validateDateTimeInputs() {
         binding.proccedToPayBtn.setOnClickListener {
-
-
             val date = binding.bookDateInput.editText?.text.toString().trim()
             val timeFrom = binding.bookTimeFromInput.editText?.text.toString().trim()
             val timeTo = binding.bookTimeToInput.editText?.text.toString().trim()
@@ -253,6 +223,10 @@ class BookingFragment : BaseDaggerFragment() {
         // Move to the next fragment using Navigation Component or any other navigation mechanism
         findNavController().navigate(R.id.selectPaymentFragment)
     }
+
+
+
+
 
 
 }

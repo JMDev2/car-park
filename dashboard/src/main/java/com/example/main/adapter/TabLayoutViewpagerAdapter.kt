@@ -1,9 +1,11 @@
-package com.example.main.ui.booking
+package com.example.main.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.main.ui.booking.ActiveBookingsFragment
+import com.example.main.ui.booking.CompletedBookingsFragment
 
 class TabLayoutViewpagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
